@@ -1,0 +1,69 @@
+import MaxContainer from "../common/maxcontainer";
+
+const Overview = () => {
+    const Cards = [
+        {
+            title: "All payment gateway",
+            value: "9",
+            increament: true
+        },
+        {
+            title: "Total clicks on payment gateway",
+            value: "1250",
+            increament: false
+        },
+        {
+            title: "Total number of transactions",
+            value: "432520",
+            increament: true
+        },
+        {
+            title: "Total number of pending transactions",
+            value: "86",
+            increament: true
+        },
+        {
+            title: "Total number of failed transactions",
+            value: "10",
+            increament: false
+        },
+        {
+            title: "Total number of successful transactions",
+            value: "309783",
+            increament: true
+        }
+    ]
+    return (
+        <section className="pt-[10rem]">
+            <MaxContainer>
+                <div className="container">
+                    <div className="mt-[2rem]">
+                        <h1 className="header_i">Overview</h1>
+                        <p className="text-[#535862] font-[400]">Simplify payment options for your business with cluster</p>
+                    </div>
+                    <div className="grid grid-cols-3 mt-[3rem] gap-[2rem]">
+                        {Cards.map((card, index) => (
+                            <Card key={index} {...card} />
+                        ))}
+                    </div>
+                </div>
+            </MaxContainer>
+        </section>
+    );
+}
+
+const Card = ({ title, value, increament }) => {
+    return (
+        <div className="bg-[#fff] border-[#E9EAEB] border rounded-[1rem] p-[2rem] shadow-[0px_1px_2px_0px_#0A0D120D]">
+            <h2 className="text-[#181D27] text-[1.65rem] mb-[2rem] font-[600]">{title}</h2>
+            <div className="flex items-center justify-between">
+                <p className="text-[#181D27] text-[3.3rem] font-[600]">
+                    {Number(value).toLocaleString()}
+                </p>
+                {increament ? <img src={'/home/increase.svg'} className="w-[10rem] h-auto" alt="increase" /> : <img src={'/home/decrease.svg'} className="w-[10rem] h-auto" alt="decrease" />}
+            </div>
+        </div>
+    );
+}
+
+export default Overview;
