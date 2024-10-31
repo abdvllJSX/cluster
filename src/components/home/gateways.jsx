@@ -147,8 +147,8 @@ const GatewayCard = ({ gateway }) => {
                     </div>
                 </div>
                 <div className="flex justify-between sm:w-full w-[60%] gap-[2rem]">
-                    <div className="flex justify-between w-full items-center">
-                        <div className="w-[20%] sm:w-[60%]">
+                    <div className="sm:flex sm:justify-between sm:w-full w-[20%] sm:items-center">
+                        <div className="sm:w-[70%] w-[100%]">
                             <div className="pb-[1.5rem] border-b h-[6rem] border-[#9B9B9B]">
                                 <p className="gateway_card_p">API uptime:</p>
                                 <p className="gateway_card_p_value">{`${gateway.apiUpTime}%`}</p>
@@ -158,8 +158,8 @@ const GatewayCard = ({ gateway }) => {
                                 <p className="gateway_card_p_value">{`${gateway.apiResponseTime}ms`}</p>
                             </div>
                         </div>
-                        <Button 
-                            variant="outline" 
+                        <Button
+                            variant="outline"
                             className="bg-white hidden sm:flex text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[2rem] py-[1.8rem] border-[#FF9100]"
                         >
                             <Link to={gateway.link}>
