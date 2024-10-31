@@ -1,5 +1,7 @@
 import MaxContainer from "../common/maxcontainer";
-
+import { Plus } from "lucide-react";
+import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 const Overview = () => {
     const Cards = [
         {
@@ -34,14 +36,22 @@ const Overview = () => {
         }
     ]
     return (
-        <section className="pt-[10rem]">
+        <section className="pt-[10rem] sm:pt-[9rem]">
             <MaxContainer>
                 <div className="container">
-                    <div className="mt-[2rem]">
-                        <h1 className="header_i">Overview</h1>
-                        <p className="text-[#535862] font-[400]">Simplify payment options for your business with cluster</p>
+                    <div className="flex sm:flex-col justify-between items-center">
+                        <div className="mt-[2rem] sm:mt-[0] sm:mb-[1.5rem]">
+                            <h1 className="header_i sm:mb-[.8rem]">Overview</h1>
+                            <p className="text-[#535862] font-[400]">Simplify payment options for your business with cluster</p>
+                        </div>
+
+                        <Button
+                            asChild
+                            className="bg-[#FF9100] sm:self-center  sm:w-full px-[2rem] py-[2rem] rounded-[1rem] text-[1.4rem] font-[600] text-white">
+                            <Link to={'/add-gateway'}><Plus className="w-[2rem]" /> Add payment gateway</Link>
+                        </Button>
                     </div>
-                    <div className="grid grid-cols-3 mt-[3rem] gap-[2rem]">
+                    <div className="grid sm:grid-cols-1 grid-cols-3 mt-[3rem] gap-[2rem]">
                         {Cards.map((card, index) => (
                             <Card key={index} {...card} />
                         ))}
