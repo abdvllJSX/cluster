@@ -160,10 +160,10 @@ const GatewayCard = ({ gateway }) => {
                         </div>
                         <Button
                             variant="outline"
-                            className="bg-white hidden sm:flex text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[2rem] py-[1.8rem] border-[#FF9100]"
+                            className="bg-white hidden sm:flex text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[2rem] py-[1.5rem] border-[#FF9100]"
                         >
                             <Link to={gateway.link}>
-                                <p className="text-[#FF9100]">View all</p>
+                                <p className="text-[#FF9100] text-[1.2rem]">View all</p>
                             </Link>
                         </Button>
                     </div>
