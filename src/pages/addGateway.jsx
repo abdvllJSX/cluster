@@ -1,6 +1,6 @@
 import Navbar from "../components/common/navbar";
 import MaxContainer from "../components/common/maxcontainer";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbList } from "../components/ui/breadcrumb";
+import BreadcrumbNav from "../components/common/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 
@@ -29,26 +29,18 @@ const AddGateway = () => {
             link: "https://gt.com",
         }
     ]
+
+    const breadcrumbItems = [
+        { path: '/', label: 'Overview' },
+        { path: '/add-gateway', label: 'Add Payment Gateway' }
+    ];
+
     return (
         <section className="">
             <Navbar />
             <MaxContainer>
                 <div className="container pt-[12rem] pb-[15rem] sm:pt-[9rem]">
-                    <Breadcrumb className="sm:hidden">
-                        <BreadcrumbList>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link to={'/'} className="text-[#414651] text-[1.65rem] sm:text-[1.4rem] ">Overview</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbSeparator className="[&>svg]:w-[2rem] text-[#181D27] mx-[1rem] [&>svg]:h-auto" />
-                            <BreadcrumbItem>
-                                <BreadcrumbLink asChild>
-                                    <Link to={'/add-gateway'} className="text-[#000000] text-[1.65rem] sm:text-[1.4rem] ">Add Payment Gateway</Link>
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                        </BreadcrumbList>
-                    </Breadcrumb>
+                    <BreadcrumbNav items={breadcrumbItems} />
                     <h1 className="header_i sm:text-[2.3rem] mt-[3rem]">Add Payment Gateway</h1>
                     <div className="mt-[3rem] sm:mt-[2rem]">
                         <div className="relative">
@@ -61,7 +53,7 @@ const AddGateway = () => {
                         </div>
                         <div className="grid grid-cols-1 mt-[4.5rem] sm:mt-[3rem] gap-[5rem]">
                             {gatewayList.map((gateway, index) => (
-                                <GatewayCard key={index} {...gateway} />
+                                <GatewayCard key={index} {...gateway} index={index} />
                             ))}
                         </div>
                     </div>
@@ -71,13 +63,14 @@ const AddGateway = () => {
     );
 }
 
-const GatewayCard = ({ name, image, link, withtext, imageSize }) => {
+const GatewayCard = ({ name, image, link, withtext, imageSize, index }) => {
     return (
         <div className="pb-[2rem] border-b border-gray-300">
-            <div className="flex gap-[1rem] mb-[1.2rem] items-center">
-                <img src={image} className={`${imageSize ?? 'w-[3rem]'}`} alt={name} />
-                {!withtext && <p className="text-[#000000] text-[2rem] font-[600]">{name}</p>}
-            </div>
+            <Link to={`/add-gateway/${index}`}>
+                <div className="flex gap-[1rem] mb-[1.2rem] items-center">
+                    <img src={image} className={`${imageSize ?? 'w-[3rem]'}`} alt={name} />
+                    {!withtext && <p className="text-[#000000] text-[2rem] font-[600]">{name}</p>}
+                </div></Link>
             <Link to={link} className="text-[#2A3362] text-[1.65rem] font-[400]">{link}</Link>
         </div>
     );
