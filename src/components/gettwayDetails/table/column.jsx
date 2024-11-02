@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import useFormatToNaira from "@/hooks/formatToNaira"
-import { Check, CircleAlert } from "lucide-react"
+import { Check, X } from "lucide-react"
 
 const formatToNaira = useFormatToNaira()
 export const columns = [
@@ -78,7 +78,7 @@ export const columns = [
     header: "Status",
     cell: ({ row }) => (
       <div className={`px-[1rem] flex items-center w-fit py-[.5rem] rounded-[2rem] ${row.original.status == "Confirmed" ? "bg-[#ECFDF3] text-[#027A48]" : "bg-[#FEF3F2] text-[#B42318]"} gap-[.5rem]`}>
-        {row.original.status == "Confirmed" ? <Check size={16} className="text-[#12B76A]" strokeWidth={2} /> : <CircleAlert size={20} className="w-[1.5rem] h-[1.5rem] text-[#B42318]" />}
+        {row.original.status == "Confirmed" ? <Check size={16} className="text-[#12B76A]" strokeWidth={2} /> : <X size={16} className="w-[1.5rem] h-[1.5rem] text-[#F04438]" />}
         <p className="text-[1.5rem] font-[400]">{row.original.status}</p>
       </div>
     ),

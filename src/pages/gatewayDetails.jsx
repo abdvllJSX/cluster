@@ -9,6 +9,16 @@ import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import DataTable from "../components/gettwayDetails/table/data-table";
 import { columns } from "../components/gettwayDetails/table/column";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "../components/ui/dialog"
 const GatewayDetails = () => {
     const data = [
         {
@@ -48,7 +58,7 @@ const GatewayDetails = () => {
             paymentTarget: "Wallet",
             totalAmount: "5000.00",
             paidAmount: "0",
-            status: "Confirmed"
+            status: "Cancelled"
         },
         {
             transactionRef: "#TRXPLN5MHVDVI7YUYR8",
@@ -146,18 +156,38 @@ const GatewayDetails = () => {
             <MaxContainer>
                 <Navbar />
                 <div className="container pt-[10rem] sm:pt-[9rem]">
-                    <div className="flex items-center justify-between mb-[4rem]">
-                        <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
-                        <div className="flex items-center gap-[2rem]">
-                            <Button variant={'outline'} className="text-[1.4rem] border-[#AF47D2] rounded-[.5rem] px-[2rem] py-[1.5rem] text-[#AF47D2]">
-                                Remove payment gateway
-                            </Button>
-                            <Button variant={'outline'} className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.5rem] border-[#AF47D2] text-[#AF47D2]">
-                                Edit payment gateway
-                            </Button>
+                    <Dialog>
+                        <div className="flex items-center justify-between mt-[2rem] mb-[4rem]">
+                            <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
+                            <div className="flex items-center gap-[2rem]">
+                                <DialogTrigger asChild>
+                                        <Button variant={'outline'} className="text-[1.4rem] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white rounded-[.5rem] px-[2rem] py-[1.7rem] text-[#AF47D2]">
+                                        Remove payment gateway
+                                    </Button>
+                                </DialogTrigger>
+                                <Button variant={'outline'}  className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
+                                    Edit payment gateway
+                                </Button>
+                            </div>
                         </div>
-
-                    </div>
+                        <DialogContent className="rounded-[1rem] p-[2rem]">
+                            <DialogHeader className="text-start">
+                                <img src="/common/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
+                                <DialogTitle className="text-[1.5rem]">Remove payment gateway!</DialogTitle>
+                                <DialogDescription className="text-[1.3rem]">Are you sure you want to remove paystack from the list of payment gateway?.</DialogDescription>
+                            </DialogHeader>
+                            <div className="flex mt-[2rem] items-center justify-end gap-[1rem]">
+                                <DialogClose asChild>
+                                    <Button variant={'outline'} className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.8rem] border-[#D5D7DA] text-[#414651]">
+                                        Cancel
+                                    </Button>
+                                </DialogClose>
+                                <Button className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.8rem] bg-[#D62F4B] border-[#D5D7DA] text-white">
+                                    Yes, remove gateway
+                                </Button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
                     <div className="flex gap-[2rem] items-center">
                         <img
                             src={findGateway()?.image}
@@ -178,7 +208,7 @@ const GatewayDetails = () => {
                     <div className="mt-[3rem] pb-[10rem]">
                         <div className="flex justify-between items-center">
                             <p className="text-[#181D27] text-[1.65rem] font-[600]"><span className="font-[400]">API uptime for the last 90 days:</span> {`${99.999}%`} </p>
-                            <Link to={'/'} className="text-[#FF9100] text-[1.65rem] font-[400]">
+                            <Link to={`/gateway-details/${id}/config-details`} className="text-[#FF9100] text-[1.65rem] font-[400]">
                                 See configuration details
                             </Link>
                         </div>
