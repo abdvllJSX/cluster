@@ -22,7 +22,7 @@ import {
 const GatewayDetails = () => {
     const data = [
         {
-            transactionRef: "#TRXPLN5MHVDVI7YUYR8",
+            trxID: "TRXPLN5MHVDVI7YUYR8",
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
@@ -35,7 +35,7 @@ const GatewayDetails = () => {
             status: "Confirmed"
         },
         {
-            transactionRef: "#TRXPLN5MHVDVI7YUYR8",
+            trxID: "TRXPLN5MHVDVI7YUYR8",
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
@@ -48,7 +48,7 @@ const GatewayDetails = () => {
             status: "Confirmed"
         },
         {
-            transactionRef: "#TRXPLN5MHVDVI7YUYR8",
+            trxID: "TRXPLN5MHVDVI7YUYR8",
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
@@ -61,7 +61,7 @@ const GatewayDetails = () => {
             status: "Cancelled"
         },
         {
-            transactionRef: "#TRXPLN5MHVDVI7YUYR8",
+            trxID: "TRXPLN5MHVDVI7YUYR8",
             customer: {
                 name: "Oluwatobi Akanni",
                 email: "oluwatobi@example.com",
@@ -74,7 +74,7 @@ const GatewayDetails = () => {
             status: "Confirmed"
         },
         {
-            transactionRef: "#TRXPLN5MHVDVI7YUYR8",
+            trxID: "TRXPLN5MHVDVI7YUYR8",
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
@@ -165,8 +165,10 @@ const GatewayDetails = () => {
                                         Remove payment gateway
                                     </Button>
                                 </DialogTrigger>
-                                <Button variant={'outline'}  className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
-                                    Edit payment gateway
+                                <Button variant={'outline'} asChild  className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
+                                    <Link to={`/gateway-details/${id}/edit`}>
+                                        Edit payment gateway
+                                    </Link>
                                 </Button>
                             </div>
                         </div>

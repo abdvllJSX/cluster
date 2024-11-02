@@ -48,11 +48,30 @@ const ConfigDetails = () => {
         { label: id, path: `/gateway-details/${id}` },
         { label: 'See full details', path: `/gateway-details/${id}/config-details`, active: true },
     ];
+
+    const content = [
+        {
+            title: "Description",
+            value: <p className="text-[#414651] max-w-[51rem] text-[1.6rem] font-[400]">Modern online and offline payments for Africa · Simple, easy payments · Trusted by 200,000 + businesses · Powering growth for amazing businesses · Backed by notable investors as well as some of the best payments companies on the planet.</p>  ,
+        },
+        {
+            title: "API response time:",
+            value: <p className="max-w-[53rem] text-[#000000] font-[600]">278ms</p>,
+        },
+        {
+            title: "Payment gateway link:",
+            value: <Link to={'#'} className="text-[#0000FF] text-[1.6rem] max-w-[53rem]">https://paystack.com</Link>,
+        },
+        {
+            title: "Status:",
+            value: <p className="px-[1.5rem] py-[.1rem] text-[1.4rem] bg-[#ECFDF3] text-[#027A48] rounded-[2rem]">Active</p>,
+        }
+    ]
     return (
         <section>
             <Navbar />
             <MaxContainer>
-                <div className="container pt-[10rem] sm:pt-[9rem]">
+                <div className="container py-[10rem] sm:py-[9rem]">
                     <Dialog>
                         <div className="flex items-center justify-between mt-[2rem] mb-[4rem]">
                             <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
@@ -110,15 +129,24 @@ const ConfigDetails = () => {
                         </p>
                     </div>
 
-                    <div className="">
-                        <div className="">
-
-                        </div>
+                    <div className="mt-[3rem] border-t border-[#E0E0E0]">
+                        {content.map((item, index) => (
+                            <Content key={index} content={item} />
+                        ))}
                     </div>
                 </div>
             </MaxContainer>
         </section>
     );
+}
+
+const Content = ({ content }) => {
+    return (
+        <div className="flex gap-[5rem] py-[2rem] border-b border-[#E0E0E0]">
+            <p className="text-[#717680] w-[18rem] text-[1.65rem] font-[400]">{content.title}</p>
+            {content.value}
+        </div>
+    )
 }
 
 export default ConfigDetails;

@@ -3,7 +3,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../../../components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 const DataTable = ({ data, columns }) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
     const table = useReactTable({
         data,
         columns,
@@ -23,7 +27,7 @@ const DataTable = ({ data, columns }) => {
                 </TableHeader>
                 <TableBody>
                     {table.getRowModel().rows.map((row) => (
-                        <TableRow key={row.id} className="border-b hover:bg-[#EFDAF6] cursor-pointer text-[#535862] text-[1.7rem] font-[400]  border-[#E0E0E0]">
+                        <TableRow key={row.id} onClick={() => navigate(`/gateway-details/${id}/${row.original.trxID}`)} className="border-b hover:bg-[#EFDAF6] cursor-pointer text-[#535862] text-[1.7rem] font-[400]  border-[#E0E0E0]">
                             {row.getVisibleCells().map((cell) => (
                                 <TableCell className="py-[3rem]" key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                             ))}

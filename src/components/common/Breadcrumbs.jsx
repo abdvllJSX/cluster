@@ -12,7 +12,7 @@ const Breadcrumbs = ({ items, className }) => {
                             <BreadcrumbLink asChild>
                                 <Link 
                                     to={item.path} 
-                                    className={`text-[${item.active ? '#000000' : '#414651'}] text-[1.65rem] sm:text-[1.4rem]`}
+                                    className={`text-[${item.active ? '#000000' : '#717680'}] font-[500] text-[1.65rem] sm:text-[1.4rem]`}
                                 >
                                     {item.label}
                                 </Link>

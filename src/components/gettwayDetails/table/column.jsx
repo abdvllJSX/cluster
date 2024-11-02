@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
 import useFormatToNaira from "@/hooks/formatToNaira"
-import { Check, X } from "lucide-react"
+import { StatusIndicator } from "../../common/statusIndicator"
 
 const formatToNaira = useFormatToNaira()
 export const columns = [
@@ -32,8 +32,11 @@ export const columns = [
     ),
   },
   {
-    accessorKey: "transactionRef",
+    accessorKey: "trxID",
     header: "Transaction Ref",
+    cell: ({ row }) => (
+      <p className="text-[1.7rem] text-[#181D27] font-[400]">{`#${row.original.trxID}`}</p>
+    ),
   },
   {
     accessorKey: "customer",
@@ -77,10 +80,7 @@ export const columns = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className={`px-[1rem] flex items-center w-fit py-[.5rem] rounded-[2rem] ${row.original.status == "Confirmed" ? "bg-[#ECFDF3] text-[#027A48]" : "bg-[#FEF3F2] text-[#B42318]"} gap-[.5rem]`}>
-        {row.original.status == "Confirmed" ? <Check size={16} className="text-[#12B76A]" strokeWidth={2} /> : <X size={16} className="w-[1.5rem] h-[1.5rem] text-[#F04438]" />}
-        <p className="text-[1.5rem] font-[400]">{row.original.status}</p>
-      </div>
+      <StatusIndicator status={row.original.status} />
     ),
   },
   {
