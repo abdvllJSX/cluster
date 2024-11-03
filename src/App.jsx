@@ -7,7 +7,9 @@ import ConfigDetails from './pages/configDetails'
 import TransactionDetails from './pages/transactionDetails'
 import TransactionAttempt from './pages/transactionAttempt'
 import EditGateway from './pages/editGateway'
-
+import Profile from './pages/profile'
+import EditProfile from './pages/editProfile'
+import Signup from './pages/auth/signup'
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,9 @@ function App() {
         <Route path="/gateway-details/:id/:trxID" element={<TransactionDetails />} />
         <Route path="/gateway-details/:id/:trxID/attempts" element={<TransactionAttempt />} />
         <Route path="/gateway-details/:id/edit" element={<EditGateway />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   )
