@@ -10,6 +10,7 @@ import EditGateway from './pages/editGateway'
 import Profile from './pages/profile'
 import EditProfile from './pages/editProfile'
 import Signup from './pages/auth/signup'
+import Login from './pages/auth/login'
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

@@ -47,21 +47,23 @@ const Signup = () => {
         <section className="">
             <MaxContainer>
                 <div className="flex">
-                    <div className="pl-[3rem] min-h-[100vh] lg:min-h-[60rem] border flex-1 pt-[3rem]">
+                    <div className="pl-[3rem] min-h-[100vh] lg:min-h-[60rem] flex-1 pt-[3rem]">
                         <img src="/nav/cluster_logo.svg" alt="cluster" className="w-[14rem]" />
                         <div className="mx-auto flex flex-col w-[50rem] justify-center py-[5rem]">
                             <h1 className="text-[4rem] text-center font-[600]">Sign Up</h1>
                             <p className="text-[1.6rem] font-[400] text-center mt-[2.4rem]">Simplify payment options for your business with Cluster</p>
                             <div className="mt-[3.2rem]">
                                 <div className="relative w-[48rem] h-[.7rem] overflow-hidden rounded-[.4rem] bg-[#F5F5F5]">
-                                    <div 
-                                        style={{width: `calc(100% * ${currentStep} / 3)`}} 
-                                        className="absolute inset-0 bg-[#AF47D2]"
+                                    <div
+                                        style={{ width: `calc(100% * ${currentStep} / 3)` }}
+                                        className="absolute transition-all ease-linear inset-0 bg-[#AF47D2]"
                                     ></div>
                                 </div>
                                 <p className="mt-[.8rem] text-[1.4rem] font-[400]">Step {currentStep}/3</p>
                             </div>
-                            {renderStep()}
+                            <div className="h-[38rem]">
+                                {renderStep()}
+                            </div>
                             <p className="text-center text-[#535862]">Already have an account? <Link to="/login" className="text-[#AF47D2]">Log in</Link></p>
                         </div>
                         <div className="flex justify-between mb-[5rem] text-[#535862] font-[400] pr-[3.5rem]">
