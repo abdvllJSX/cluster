@@ -35,13 +35,8 @@ const ResetPassword = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Button variant={'ghost'} asChild className="ml-auto mt-[1.5rem] w-fit flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
-                                <Link to={''}>
-                                    Forgot password
-                                </Link>
-                            </Button>
                             <Button className="bg-[#FF9100] text-[1.4rem] w-full mt-[2rem] py-[1.8rem] rounded-[.6rem]">Send reset link</Button>
-                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Remember your password? <Link to={''} className="text-[#AF47D2]">Sign up</Link></p>
+                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Remember your password? <Link to={'/login'} className="text-[#AF47D2]">Log in</Link></p>
                         </div>
                     </div>
                     <div className="flex justify-between">
