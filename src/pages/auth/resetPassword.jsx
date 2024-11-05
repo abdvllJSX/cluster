@@ -8,7 +8,7 @@ import { Eye } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Mail } from "lucide-react";
 
-const Login = () => {
+const ResetPassword = () => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [formData, setFormData] = useState({
         password: "",
@@ -21,10 +21,10 @@ const Login = () => {
                     <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] mx-auto">
-                            <h1 className="font-[700] text-center text-[4rem] mb-[2rem]">Log in to your account</h1>
-                            <p className="text-center text-[#535862]">Welcome back! Please enter your details.</p>
-                            <div className="mt-[2rem] flex flex-col gap-[2.5rem]">
-                                <div className="">
+                            <h1 className="font-[700] text-center text-[4rem] mb-[1rem]">Reset password</h1>
+                            <p className="text-center text-[#535862]">Enter your email address to reset password.</p>
+                            <div className="mt-[3rem] flex flex-col gap-[2.5rem]">
+                                <div className="flex flex-col gap-[.5rem]">
                                     <Label className="text-[1.6rem] text-[#000000] font-[400]">Email</Label>
                                     <div className="relative">
                                         <Input
@@ -34,33 +34,14 @@ const Login = () => {
                                         <Mail className="w-[2rem] h-[2rem] absolute left-[1.3rem] top-1/2 transform -translate-y-1/2 text-gray-500" strokeWidth={2} />
                                     </div>
                                 </div>
-                                <div className="">
-                                    <Label className="text-[1.6rem] text-[#000000] font-[400]">Password</Label>
-                                    <div className="relative">
-                                        <Input
-                                            type={showConfirmPassword ? "text" : "password"}
-                                            placeholder="Enter your password"
-                                            className="border-[#E0E0E0] pl-[1.2rem] placeholder:text-[#979797] mt-[.5rem] rounded-[.7rem] py-[2rem] text-[1.6rem] font-[400] pr-[4rem]"
-                                            value={formData.confirmPassword}
-                                            onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                                        >
-                                            {showConfirmPassword ? <EyeOff size={20} className="w-[2.3rem] h-[2.3rem]" strokeWidth={2} /> : <Eye size={20} className="w-[2.3rem] h-[2.3rem]" strokeWidth={2} />}
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                             <Button variant={'ghost'} asChild className="ml-auto mt-[1.5rem] w-fit flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
                                 <Link to={''}>
                                     Forgot password
                                 </Link>
                             </Button>
-                            <Button className="bg-[#FF9100] text-[1.4rem] w-full mt-[2rem] py-[1.8rem] rounded-[.6rem]">Log in</Button>
-                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Don’t have an account? <Link to={''} className="text-[#AF47D2]">Sign up</Link></p>
+                            <Button className="bg-[#FF9100] text-[1.4rem] w-full mt-[2rem] py-[1.8rem] rounded-[.6rem]">Send reset link</Button>
+                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Remember your password? <Link to={''} className="text-[#AF47D2]">Sign up</Link></p>
                         </div>
                     </div>
                     <div className="flex justify-between">
@@ -74,4 +55,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default ResetPassword;
