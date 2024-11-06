@@ -18,7 +18,7 @@ const DataTable = ({ data, columns }) => {
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow className="text-[1.4rem] font-[500]  text-[#535862]" key={headerGroup.id}>
+                        <TableRow className="text-[1.4rem] font-[500] sm:bg-[#FAFAFA] text-[#535862]" key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
                                 <TableHead className="py-[1.5rem]" key={header.id}>{flexRender(header.column.columnDef.header, header.getContext())}</TableHead>
                             ))}

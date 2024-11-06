@@ -2,9 +2,10 @@ import MaxContainer from "../components/common/maxcontainer";
 import { useParams } from "react-router-dom";
 import NavBar from "../components/common/navbar";
 import Breadcrumbs from "../components/common/Breadcrumbs";
-import { Button} from "../components/ui/button";
+import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
 import { StatusIndicator } from "../components/common/statusIndicator";
+import { ChevronLeft } from "lucide-react";
 
 const TransactionDetails = () => {
     const { id, trxID } = useParams();
@@ -83,22 +84,32 @@ const TransactionDetails = () => {
             <NavBar />
             <MaxContainer>
                 <div className="container py-[10rem]">
-                    <div className="flex justify-between items-center mt-[2rem]">
+                    <Button asChild className="hidden sm:flex mb-[2rem] sm:w-fit sm:text-[#000000] p-[0] text-[1.4rem] font-[500] gap-[.5rem]" variant={'ghost'}>
+                        <Link to={`/gateway-details/${id}`}>
+                            <ChevronLeft className="w-[2rem] h-auto" />
+                            Transaction details
+                        </Link>
+                    </Button>
+                    <div className="flex justify-between sm:hidden items-center mt-[2rem]">
                         <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
                         <Button variant={'outline'} asChild className="px-[2rem] py-[1.7rem] rounded-[0.5rem] text-[#AF47D2] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white font-[600] text-[1.6rem]">
                             <Link to={`/gateway-details/${id}/${trxID}/attempts`}>View all attempts</Link>
                         </Button>
                     </div>
-                    <div className="mt-[5rem]">
-                        <h1 className="text-[2.8rem] font-[600] text-[#000000]">Transaction Details</h1>
+                    <div className="mt-[5rem] sm:mt-[0]">
+                        <h1 className="text-[2.8rem] sm:text-[2rem] font-[600] text-[#000000]">Transaction Details</h1>
+                        <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
+                        <Button variant={'outline'} asChild className="px-[2rem] sm:w-full hidden sm:flex my-[2rem] py-[1.7rem] rounded-[0.5rem] text-[#AF47D2] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white font-[600] text-[1.6rem]">
+                            <Link to={`/gateway-details/${id}/${trxID}/attempts`}>View all attempts</Link>
+                        </Button>
+                        <div className="grid w-[90%] mt-[4rem] sm:mt-[2rem] grid-cols-2 sm:grid-cols-1 gap-[2rem]">
 
-                        <div className="grid w-[90%] mt-[4rem] grid-cols-2 gap-[2rem]">
-                            <div className="flex flex-col gap-[3rem]">
+                            <div className="flex flex-col sm:gap-[2.5rem] gap-[3rem]">
                                 {content.slice(0, 9).map((item, index) => (
                                     <Content content={item} key={index} />
                                 ))}
                             </div>
-                            <div className="flex flex-col gap-[2rem]">
+                            <div className="flex flex-col sm:gap-[2.5rem] gap-[2rem]">
                                 {content.slice(9).map((item, index) => (
                                     <Content content={item} key={index} />
                                 ))}
@@ -111,7 +122,7 @@ const TransactionDetails = () => {
     );
 }
 
-const Content = ({content}) => {
+const Content = ({ content }) => {
     return (
         <div className="flex flex-col gap-[1rem]">
             <p className="text-[1.4rem] font-[400] text-[#535862]">{content.title}</p>
@@ -124,5 +135,5 @@ const Content = ({content}) => {
             }
         </div>
     );
-}   
+}
 export default TransactionDetails;

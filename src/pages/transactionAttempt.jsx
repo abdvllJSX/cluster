@@ -1,7 +1,9 @@
 import MaxContainer from "../components/common/maxcontainer";
 import NavBar from "../components/common/navbar";
 import Breadcrumbs from "../components/common/Breadcrumbs";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
+import { Button } from "../components/ui/button";
 import { StatusIndicator } from "../components/common/statusIndicator";
 import useFormatToNaira from "../hooks/formatToNaira";
 import { useState } from "react";
@@ -81,13 +83,19 @@ const TransactionAttempt = () => {
             <NavBar />
             <MaxContainer>
                 <div className="container py-[10rem]">
-                    <div className="mt-[3rem]">
-                        <Breadcrumbs items={breadcrumbItems} />
+                    <Button asChild className="hidden sm:flex sm:w-fit sm:text-[#000000] p-[0] text-[1.4rem] font-[500] gap-[.5rem]" variant={'ghost'}>
+                        <Link to={`/gateway-details/${id}/${trxID}`}>
+                            <ChevronLeft className="w-[2rem] h-auto" />
+                            Transaction details
+                        </Link>
+                    </Button>
+                    <div className="mt-[3rem] sm:mt-[0]">
+                        <Breadcrumbs className={'sm:hidden'} items={breadcrumbItems} />
                     </div>
-                    <h1 className="text-[3rem] mb-[4rem] mt-[5.5rem] font-[600] text-[#000000]">{`Attempts (${attempts.length})`}</h1>
+                    <h1 className="text-[3rem] sm:text-[2rem] sm:mb-[2rem] sm:mt-[3rem] mb-[4rem] mt-[5.5rem] font-[600] text-[#000000]">{`Attempts (${attempts.length})`}</h1>
 
-                    <div className="flex gap-[5rem] justify-between">
-                        <div className="flex flex-1 flex-col gap-[2rem]">
+                    <div className="flex sm:flex-col gap-[5rem] justify-between">
+                        <div className="flex flex-1 flex-col gap-[2rem] sm:gap-[2rem]">
                             {attempts.map((attempt, index) => (
                                 <AttemptCard 
                                     key={index} 

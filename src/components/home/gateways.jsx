@@ -98,7 +98,7 @@ const Gateways = () => {
     return (
         <section className="mt-[3rem]">
             <MaxContainer>
-                <div className="container">
+                <div className="container pb-[8rem]">
                     <div className="flex sm:flex-col items-center justify-between">
                         <h1 className="header_i sm:self-start sm:mb-[1.5rem] sm:text-[2rem]">Manage Payment Gateways</h1>
                         <div className="flex items-center sm:justify-between sm:w-full gap-[1rem]">

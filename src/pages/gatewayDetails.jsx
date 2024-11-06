@@ -9,6 +9,7 @@ import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import DataTable from "../components/gettwayDetails/table/data-table";
 import { columns } from "../components/gettwayDetails/table/column";
+import { ChevronLeft } from "lucide-react";
 import {
     Dialog,
     DialogClose,
@@ -156,41 +157,59 @@ const GatewayDetails = () => {
             <MaxContainer>
                 <Navbar />
                 <div className="container pt-[10rem] sm:pt-[9rem]">
+                    <Button variant={'ghost'} asChild className="p-[0] hidden w-fit sm:flex mb-[3.5rem] text-[#000000]">
+                        <Link to={'/'}>
+                            <ChevronLeft size={20} className="text-[1.8rem]" />
+                            <p className="text-[1.5rem]">{findGateway()?.name}</p>
+                        </Link>
+                    </Button>
+                    <div className="sm:flex hidden gap-[2rem] sm:gap-[1rem] items-center">
+                        <img
+                            src={findGateway()?.image}
+                            alt={findGateway()?.name}
+                            className={findGateway()?.imageSize}
+                        />
+                        {!findGateway()?.withtext && (
+                            <p className="text-[2rem] font-[600] text-[#414651]">
+                                {findGateway()?.name}
+                            </p>
+                        )}
+                    </div>
                     <Dialog>
-                        <div className="flex items-center justify-between mt-[2rem] mb-[4rem]">
+                        <div className="flex items-center sm:w-full justify-between mt-[2rem] mb-[4rem]">
                             <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
-                            <div className="flex items-center gap-[2rem]">
+                            <div className="flex sm:flex-col sm:mt-[1rem] sm:w-full items-center gap-[2rem]">
                                 <DialogTrigger asChild>
-                                        <Button variant={'outline'} className="text-[1.4rem] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white rounded-[.5rem] px-[2rem] py-[1.7rem] text-[#AF47D2]">
+                                    <Button variant={'outline'} className="text-[1.4rem] sm:w-full border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white rounded-[.5rem] px-[2rem] py-[1.7rem] text-[#AF47D2]">
                                         Remove payment gateway
                                     </Button>
                                 </DialogTrigger>
-                                <Button variant={'outline'} asChild  className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
+                                <Button variant={'outline'} asChild className="text-[1.4rem] sm:w-full rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
                                     <Link to={`/gateway-details/${id}/edit`}>
                                         Edit payment gateway
                                     </Link>
                                 </Button>
                             </div>
                         </div>
-                        <DialogContent className="rounded-[1rem] p-[2rem]">
+                        <DialogContent className="rounded-[1rem] sm:mt-[20vh] sm:rounded-[.8rem] p-[2rem]">
                             <DialogHeader className="text-start">
                                 <img src="/common/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
                                 <DialogTitle className="text-[1.5rem]">Remove payment gateway!</DialogTitle>
                                 <DialogDescription className="text-[1.3rem]">Are you sure you want to remove paystack from the list of payment gateway?.</DialogDescription>
                             </DialogHeader>
-                            <div className="flex mt-[2rem] items-center justify-end gap-[1rem]">
+                            <div className="flex sm:flex-col-reverse sm:items-start sm:gap-[1.5rem] sm:w-full mt-[2rem] items-center justify-end gap-[1rem]">
                                 <DialogClose asChild>
-                                    <Button variant={'outline'} className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.8rem] border-[#D5D7DA] text-[#414651]">
+                                    <Button variant={'outline'} className="text-[1.4rem] rounded-[.5rem] sm:w-full px-[2rem] py-[1.8rem] border-[#D5D7DA] text-[#414651]">
                                         Cancel
                                     </Button>
                                 </DialogClose>
-                                <Button className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.8rem] bg-[#D62F4B] border-[#D5D7DA] text-white">
+                                <Button className="text-[1.4rem] rounded-[.5rem] px-[2rem] py-[1.8rem] sm:w-full bg-[#D62F4B] border-[#D5D7DA] text-white">
                                     Yes, remove gateway
                                 </Button>
                             </div>
                         </DialogContent>
                     </Dialog>
-                    <div className="flex gap-[2rem] items-center">
+                    <div className="flex sm:hidden gap-[2rem] items-center">
                         <img
                             src={findGateway()?.image}
                             alt={findGateway()?.name}
@@ -207,8 +226,8 @@ const GatewayDetails = () => {
                             <Card key={index} {...card} />
                         ))}
                     </div>
-                    <div className="mt-[3rem] pb-[10rem]">
-                        <div className="flex justify-between items-center">
+                    <div className="mt-[3rem] pb-[10rem]  sm:pb-[0]">
+                        <div className="flex sm:flex-col sm:w-full sm:items-start sm:gap-[1rem] justify-between items-center">
                             <p className="text-[#181D27] text-[1.65rem] font-[600]"><span className="font-[400]">API uptime for the last 90 days:</span> {`${99.999}%`} </p>
                             <Link to={`/gateway-details/${id}/config-details`} className="text-[#FF9100] text-[1.65rem] font-[400]">
                                 See configuration details
@@ -216,14 +235,15 @@ const GatewayDetails = () => {
                         </div>
                         <div style={{ width: `${99.999}%` }} className="w-full mt-[2rem] h-[4rem] bg-[#27C079]"></div>
 
-                        <p className="text-[#181D27] text-[1.65rem] font-[400] mt-[2rem]">
+                        <p className="text-[#181D27] text-[1.65rem] sm:text-[1.2rem] font-[500] mt-[2rem]">
                             API status:
-                            <span className=""> <span className="text-[2rem]">·</span> Operational</span>
-                            <span className=""> <span className="text-[2rem]">·</span> Partial degradation</span>
-                            <span className=""> <span className="text-[2rem]">·</span> Severe degradation</span>
+                            <span className="sm:block my-[.5rem] hidden"></span>
+                            <span className=""> <span className="text-[2rem] sm:text-[1.2rem]">·</span> Operational</span>
+                            <span className=""> <span className="text-[2rem] sm:text-[1.2rem]">·</span> Partial degradation</span>
+                            <span className=""> <span className="text-[2rem] sm:text-[1.2rem]">·</span> Severe degradation</span>
                         </p>
 
-                        <div className="flex items-center mt-[3rem] mb-[4rem] sm:justify-between sm:w-full gap-[1rem]">
+                        <div className="flex items-center mt-[3rem] mb-[4rem] sm:mb-[2rem] sm:justify-between sm:w-full gap-[1rem] sm:gap-[.5rem]">
                             <Button
                                 variant="ghost"
                                 className="bg-white text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[0.5rem] py-[1.8rem] border-[#D5D7DA]">
@@ -235,12 +255,17 @@ const GatewayDetails = () => {
                                 <Input
                                     type="text"
                                     placeholder="Search"
-                                    className="pl-[3.5rem] placeholder:font-[400]  rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
+                                    className="pl-[3.5rem] placeholder:font-[400] rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
                                 />
                             </div>
                         </div>
-                        <DataTable data={data} columns={columns} />
+                        <div className="sm:hidden">
+                            <DataTable data={data} columns={columns} />
+                        </div>
                     </div>
+                </div>
+                <div className="sm:block hidden sm:pb-[5rem]">
+                    <DataTable data={data} columns={columns} />
                 </div>
             </MaxContainer>
         </section>

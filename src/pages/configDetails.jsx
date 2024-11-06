@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
 import Breadcrumbs from "../components/common/Breadcrumbs";
+import { ChevronLeft } from "lucide-react";
 import {
     Dialog,
     DialogClose,
@@ -17,7 +18,7 @@ import { Link } from "react-router-dom";
 const ConfigDetails = () => {
     const { id } = useParams();
     const findGateway = () => {
-        return gatewayList.find(gateway => gateway.name === id);
+        return gatewayList.find(gateway => gateway.name.toLowerCase() === id);
     }
     const gatewayList = [
         {
@@ -52,7 +53,7 @@ const ConfigDetails = () => {
     const content = [
         {
             title: "Description",
-            value: <p className="text-[#414651] max-w-[51rem] text-[1.6rem] font-[400]">Modern online and offline payments for Africa · Simple, easy payments · Trusted by 200,000 + businesses · Powering growth for amazing businesses · Backed by notable investors as well as some of the best payments companies on the planet.</p>  ,
+            value: <p className="text-[#414651] max-w-[51rem] text-[1.6rem] font-[400]">Modern online and offline payments for Africa · Simple, easy payments · Trusted by 200,000 + businesses · Powering growth for amazing businesses · Backed by notable investors as well as some of the best payments companies on the planet.</p>,
         },
         {
             title: "API response time:",
@@ -70,18 +71,36 @@ const ConfigDetails = () => {
     return (
         <section>
             <Navbar />
-            <MaxContainer>
-                <div className="container py-[10rem] sm:py-[9rem]">
+            <MaxContainer>\
+                <div className="container py-[10rem] sm:pt-[7rem]">
+                    <Button variant={'ghost'} asChild className="p-[0] hidden w-fit sm:flex mb-[3.5rem] sm:mb-[2.5rem] text-[#000000]">
+                        <Link to={`/gateway-details/${id}`}>
+                            <ChevronLeft size={20} className="text-[1.8rem]" />
+                            <p className="text-[1.5rem]">{id}</p>
+                        </Link>
+                    </Button>
+                    <div className="flex sm:mb-[2rem] gap-[2rem] sm:gap-[1rem] items-center">
+                        <img
+                            src={findGateway()?.image}
+                            alt={findGateway()?.name}
+                            className={findGateway()?.imageSize}
+                        />
+                        {!findGateway()?.withtext && (
+                            <p className="text-[2rem] font-[600] text-[#414651]">
+                                {findGateway()?.name}
+                            </p>
+                        )}
+                    </div>
                     <Dialog>
-                        <div className="flex items-center justify-between mt-[2rem] mb-[4rem]">
+                        <div className="flex  items-center justify-between mt-[2rem] mb-[4rem]">
                             <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
-                            <div className="flex items-center gap-[2rem]">
+                            <div className="flex sm:flex-col sm:w-full items-center gap-[2rem]">
                                 <DialogTrigger asChild>
-                                    <Button variant={'outline'} className="text-[1.4rem] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white rounded-[.5rem] px-[2rem] py-[1.7rem] text-[#AF47D2]">
+                                    <Button variant={'outline'} className="text-[1.4rem] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white rounded-[.5rem] px-[2rem] sm:w-full py-[1.7rem] text-[#AF47D2]">
                                         Remove payment gateway
                                     </Button>
                                 </DialogTrigger>
-                                <Button variant={'outline'} asChild className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
+                                <Button variant={'outline'} asChild className="text-[1.4rem] rounded-[.5rem] hover:bg-[#AF47D2] hover:text-white px-[2rem] sm:w-full py-[1.7rem] border-[#AF47D2] text-[#AF47D2]">
                                     <Link to={`/gateway-details/${id}/config-details`}>
                                         Edit payment gateway
                                     </Link>
@@ -106,7 +125,7 @@ const ConfigDetails = () => {
                             </div>
                         </DialogContent>
                     </Dialog>
-                    <div className="flex gap-[2rem] items-center">
+                    <div className="flex sm:hidden  gap-[2rem] items-center">
                         <img
                             src={findGateway()?.image}
                             alt={findGateway()?.name}
@@ -121,8 +140,9 @@ const ConfigDetails = () => {
                     <div className="mt-[3.5rem]">
                         <p className="text-[#181D27] text-[1.65rem] font-[600]"><span className="font-[400]">API uptime for the last 90 days:</span> {`${99.999}%`} </p>
                         <div style={{ width: `${99.999}%` }} className="w-full mt-[2rem] h-[4rem] bg-[#27C079]"></div>
-                        <p className="text-[#181D27] text-[1.65rem] font-[400] mt-[2rem]">
+                        <p className="text-[#181D27] text-[1.65rem] sm:text-[1.2rem] font-[400] mt-[2rem]">
                             API status:
+                            <span className="hidden sm:block"></span>
                             <span className=""> <span className="text-[2rem]">·</span> Operational</span>
                             <span className=""> <span className="text-[2rem]">·</span> Partial degradation</span>
                             <span className=""> <span className="text-[2rem]">·</span> Severe degradation</span>
@@ -142,7 +162,7 @@ const ConfigDetails = () => {
 
 const Content = ({ content }) => {
     return (
-        <div className="flex gap-[5rem] py-[2rem] border-b border-[#E0E0E0]">
+        <div className={`flex gap-[5rem] py-[2rem] border-b border-[#E0E0E0] ${content.title === "Description" ? "sm:flex-col sm:gap-[1rem]" : ""}`}>
             <p className="text-[#717680] w-[18rem] text-[1.65rem] font-[400]">{content.title}</p>
             {content.value}
         </div>

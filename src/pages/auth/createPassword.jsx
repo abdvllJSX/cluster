@@ -6,7 +6,6 @@ import { EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import { Mail } from "lucide-react";
 
 const CreatePassword = () => {
     const [showPassword, setShowPassword] = useState(false);

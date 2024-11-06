@@ -35,18 +35,18 @@ export const columns = [
     accessorKey: "trxID",
     header: "Transaction Ref",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] text-[#181D27] font-[400]">{`#${row.original.trxID}`}</p>
+      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`#${row.original.trxID}`}</p>
     ),
   },
   {
     accessorKey: "customer",
     header: "Customer",
     cell: ({ row }) => (
-      <div className="flex items-center text-black gap-[1rem]">
+      <div className="flex items-center sm:w-[20rem] text-black gap-[1rem]">
         <img src={'/common/Avatar.png'} alt="customer" className="w-[4rem] h-[4rem] rounded-[50%]" />
         <div className="flex flex-col gap-[.5rem]">
-          <p className="text-[1.7rem]  text-black mb-[.2rem] font-[400]">{row.original.customer.name}</p>
-          <p className="text-[1.3rem] text-[#535862] font-[400]">{row.original.customer.email}</p>
+          <p className="text-[1.7rem] sm:text-[1.4rem]  text-black mb-[.2rem] font-[400]">{row.original.customer.name}</p>
+          <p className="text-[1.3rem] sm:text-[1.1rem] text-[#535862] font-[400]">{row.original.customer.email}</p>
         </div>
       </div>
     ),
@@ -54,26 +54,29 @@ export const columns = [
   {
     accessorKey: "gatewayRef",
     header: "Gateway Ref",
+    cell: ({ row }) => (
+      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`#${row.original.gatewayRef}`}</p>
+    ),
   },
   {
     accessorKey: "paymentTarget",
     header: "Payment Target",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] text-[#181D27] font-[400]">{row.original.paymentTarget}</p>
+      <p className="text-[1.7rem] text-[#181D27] sm:w-[12rem] font-[400]">{row.original.paymentTarget}</p>
     ),
   },
   {
     accessorKey: "totalAmount",
     header: "Total Amount",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] text-[#000000] font-[400]">{formatToNaira(row.original.totalAmount)}</p>
+      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">{formatToNaira(row.original.totalAmount)}</p>
     ),
   },
   {
     accessorKey: "paidAmount",
     header: "Paid Amount",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] text-[#000000] font-[400]">{formatToNaira(row.original.paidAmount)}</p>
+      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">{formatToNaira(row.original.paidAmount)}</p>
     ),
   },
   {

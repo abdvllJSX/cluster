@@ -4,6 +4,8 @@ import Breadcrumbs from "../components/common/Breadcrumbs";
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
 import { Button } from '../components/ui/button'
+import { ChevronLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const EditProfile = () => {
     const breadcrumbItems = [
@@ -27,17 +29,23 @@ const EditProfile = () => {
             <Navbar />
             <MaxContainer>
                 <div className="container py-[10rem]">
-                    <div className="mt-[3rem] flex justify-between items-center">
+                    <div className="mt-[3rem] sm:hidden flex justify-between items-center">
                         <Breadcrumbs items={breadcrumbItems} />
                     </div>
-                    <h1 className="text-[3rem] font-[600] text-[#000000] my-[4rem]">Edit profile</h1>
-                    <div className="flex gap-[3rem]">
+                    <Button variant={'ghost'} asChild className="hidden sm:flex px-0 self-start w-fit mb-[4rem] text-black">
+                        <Link to={'/profile'}>
+                            <ChevronLeft size={20} className="text-[1.8rem]" />
+                            <p className="text-[1.8rem]">Edit profile</p>
+                        </Link>
+                    </Button>
+                    <h1 className="text-[3rem] font-[600] sm:text-[2.2rem] text-[#000000] my-[4rem] sm:my-[1rem]">Edit profile</h1>
+                    <div className="flex  gap-[3rem]">
                         <img src="/nav/quotient.svg" alt="quotient" className="w-[9rem]" />
 
-                        <div className="border border-[#E0E0E0] rounded-[1rem] py-[1rem] px-[6rem]">
-                            <img src="/cloud.svg" alt="cloud" className="w-[5rem] mx-auto" />
+                        <div className="border border-[#E0E0E0] rounded-[1rem] py-[1rem] sm:px-[2rem] px-[6rem]">
+                            <img src="/cloud.svg" alt="cloud" className="w-[5rem] sm:w-[6rem] mx-auto" />
                             <div className="max-w-[30rem] text-center">
-                                <p className="text-[1.7rem] font-[400] text-[#535862]"><span className="text-[#6941C6] font-[600]">Click to upload</span> or drag and drop SVG, PNG, JPG or GIF (max. 800x400px)</p>
+                                <p className="text-[1.7rem] sm:text-[1.3rem] font-[400] text-[#535862]"><span className="text-[#6941C6] font-[600]">Click to upload</span> or drag and drop SVG, PNG, JPG or GIF (max. 800x400px)</p>
                             </div>
                         </div>
                     </div>

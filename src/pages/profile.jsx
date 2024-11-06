@@ -4,6 +4,7 @@ import Breadcrumbs from "../components/common/Breadcrumbs";
 import { useParams } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Link } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
 
 const Profile = () => {
     const { id, trxID } = useParams();
@@ -25,19 +26,29 @@ const Profile = () => {
             <Navbar />
             <MaxContainer>
                 <div className="container py-[10rem]">
-                    <div className="mt-[2rem] flex justify-between items-center">
-                        <Breadcrumbs items={breadcrumbItems} />
-                        <Button variant="outline" asChild className="px-[2rem] rounded-[.5rem] text-[1.4rem] py-[1.5rem] text-[#AF47D2] border-[#AF47D2]">
+                    <Button variant={'ghost'} asChild className="p-[0] hidden w-fit sm:flex mb-[3.5rem] text-[#000000]">
+                        <Link to={'/'}>
+                            <ChevronLeft size={20} className="text-[1.8rem]" />
+                            <p className="text-[1.8rem]">Profile</p>
+                        </Link>
+                    </Button>
+
+                    <h1 className="text-[2.5rem] hidden sm:block font-[600]">Profile</h1>
+                    <div className="mt-[2rem] sm:mt-[1rem] flex justify-between items-center">
+                        <div className="sm:hidden">
+                            <Breadcrumbs items={breadcrumbItems} />
+                        </div>
+                        <Button variant="outline" asChild className="px-[2rem] sm:w-full rounded-[.5rem] text-[1.4rem] sm:text-[1.6rem] sm:py-[1.8rem] py-[1.5rem] text-[#AF47D2] border-[#AF47D2]">
                             <Link to={'/profile/edit'}>
                                 Edit profile
                             </Link>
                         </Button>
                     </div>
                     <div className="my-[4rem]">
-                        <h1 className="text-[3rem] font-[600] text-[#000000]">Profile</h1>
+                        <h1 className="text-[3rem] sm:hidden font-[600] text-[#000000]">Profile</h1>
                         <div className="mt-[3rem]">
-                            <div className="flex items-center gap-[1rem]">
-                                <img src="/nav/quotient.svg" alt="profile" className="w-[8rem] h-auto" />
+                            <div className="flex items-center gap-[1rem] sm:gap-[2rem]">
+                                <img src="/nav/quotient.svg" alt="profile" className="w-[8rem] sm:w-[6rem] h-auto" />
                                 <div className="">
                                     <h3 className="text-[2rem] font-[600] text-[#000000]">DataSquid</h3>
                                     <p className="font-[400] text-[#535862]">dataquid@gmail.com</p>
@@ -59,7 +70,7 @@ const Profile = () => {
                                         Personal info
                                     </p>
                                 </div>
-                                <div className="flex flex-col w-[50%] gap-[3rem] mt-[1rem]">
+                                <div className="flex flex-col w-[50%] sm:w-full gap-[3rem] mt-[1rem]">
                                     <div className="flex w-[100%] items-center gap-[1rem]">
                                         <p className="text-[#535862] w-[28rem]">First name</p>
                                         <p className="text-[#000000] font-[600]">Richard</p>
@@ -74,7 +85,7 @@ const Profile = () => {
                                     </div>
                                 </div>
 
-                                <Button asChild className="px-[3rem] mt-[5rem] rounded-[.5rem] text-[1.4rem] py-[2rem] text-white bg-[#FF9100]">
+                                <Button asChild className="px-[3rem] mt-[5rem] sm:w-full rounded-[.5rem] text-[1.4rem] py-[2rem] text-white bg-[#FF9100]">
                                     <Link to={'/profile/#'}>
                                         Reset password
                                     </Link>

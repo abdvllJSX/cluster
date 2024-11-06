@@ -28,7 +28,7 @@ const Navbar = () => {
                     </Link>
                     <Link to={'/profile'}>
                         <div className="flex items-center gap-[1rem]">
-                            <p className="font-[500]">DataSquid</p>
+                            <p className="font-[500] text-[#000000]">DataSquid</p>
                             <img src="/nav/quotient.svg" className="w-[4rem] h-auto" alt="chevron_down" />
                         </div>
                     </Link>

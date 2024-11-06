@@ -17,12 +17,12 @@ const Login = () => {
     return (
         <section>
             <MaxContainer>
-                <div className="w-[100%] h-[100vh] px-[5rem]">
+                <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
                     <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     <div className="w-[100%] h-[75%] grid place-items-center">
-                        <div className="w-[50rem] mx-auto">
-                            <h1 className="font-[700] text-center text-[4rem] mb-[2rem]">Log in to your account</h1>
-                            <p className="text-center text-[#535862]">Welcome back! Please enter your details.</p>
+                        <div className="w-[50rem] sm:w-[100%] mx-auto sm:self-start sm:mt-[4rem] sm:justify-self-start">
+                            <h1 className="font-[700] sm:text-start text-center text-[4rem] sm:text-[2.2rem] sm:mb-[1rem] mb-[2rem]">Log in to your account</h1>
+                            <p className="text-center sm:text-start text-[#535862]">Welcome back! Please enter your details.</p>
                             <div className="mt-[2rem] flex flex-col gap-[2.5rem]">
                                 <div className="">
                                     <Label className="text-[1.6rem] text-[#000000] font-[400]">Email</Label>
@@ -54,13 +54,19 @@ const Login = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Button variant={'ghost'} asChild className="ml-auto mt-[1.5rem] w-fit flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
+                            <Button variant={'ghost'} asChild className="ml-auto sm:hidden mt-[1.5rem] w-fit flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
                                 <Link to={'/reset-password'}>
                                     Forgot password
                                 </Link>
                             </Button>
                             <Button className="bg-[#FF9100] text-[1.4rem] w-full mt-[2rem] py-[1.8rem] rounded-[.6rem]">Log in</Button>
+                            <Button variant={'ghost'} asChild className="mx-auto hidden mt-[1.5rem] w-fit sm:flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
+                                <Link to={'/reset-password'}>
+                                    Forgot password
+                                </Link>
+                            </Button>
                             <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Don’t have an account? <Link to={'/signup'} className="text-[#AF47D2]">Sign up</Link></p>
+
                         </div>
                     </div>
                     <div className="flex justify-between">
