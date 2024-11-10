@@ -18,12 +18,12 @@ const CreatePassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if (formData.password.length < 8) {
             setError("Password must be at least 8 characters long");
             return;
         }
-        
+
         if (formData.password !== formData.confirmPassword) {
             setError("Passwords do not match");
             return;
@@ -38,7 +38,7 @@ const CreatePassword = () => {
         <section>
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem]">
-                    <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] mx-auto">
                             <h1 className="font-[700] text-center text-[4rem] mb-[2rem]">Create new password</h1>

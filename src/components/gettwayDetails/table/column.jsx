@@ -43,7 +43,7 @@ export const columns = [
     header: "Customer",
     cell: ({ row }) => (
       <div className="flex items-center sm:w-[20rem] text-black gap-[1rem]">
-        <img src={'/common/Avatar.png'} alt="customer" className="w-[4rem] h-[4rem] rounded-[50%]" />
+        <img src={'/img/Avatar.png'} alt="customer" className="w-[4rem] h-[4rem] rounded-[50%]" />
         <div className="flex flex-col gap-[.5rem]">
           <p className="text-[1.7rem] sm:text-[1.4rem]  text-black mb-[.2rem] font-[400]">{row.original.customer.name}</p>
           <p className="text-[1.3rem] sm:text-[1.1rem] text-[#535862] font-[400]">{row.original.customer.email}</p>
@@ -92,4 +92,4 @@ export const columns = [
       <Button variant="ghost" className="text-[1.6rem] font-[600] text-[#FF9100]">Details</Button>
     ),
   }
-] 
+]

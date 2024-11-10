@@ -24,12 +24,12 @@ const Navbar = () => {
             <MaxContainer>
                 <div className="container flex justify-between items-center">
                     <Link to={'/'}>
-                        <img src="/nav/cluster_logo.svg" className="w-[13rem] sm:w-[10rem] h-auto" alt="logo" />
+                        <img src="/img/cluster_logo.svg" className="w-[13rem] sm:w-[10rem] h-auto" alt="logo" />
                     </Link>
                     <Link to={'/profile'}>
                         <div className="flex items-center gap-[1rem]">
                             <p className="font-[500] text-[#000000]">DataSquid</p>
-                            <img src="/nav/quotient.svg" className="w-[4rem] h-auto" alt="chevron_down" />
+                            <img src="/img/quotient.svg" className="w-[4rem] h-auto" alt="chevron_down" />
                         </div>
                     </Link>
                 </div>

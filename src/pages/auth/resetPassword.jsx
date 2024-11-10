@@ -18,7 +18,7 @@ const ResetPassword = () => {
         <section>
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
-                    <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] sm:self-start sm:mt-[5rem] mx-auto">
                             <h1 className="font-[700] text-center sm:text-start text-[4rem] sm:text-[2rem] mb-[1rem]">Reset password</h1>

@@ -50,7 +50,7 @@ const Signup = () => {
             <MaxContainer>
                 <div className="flex sm:flex-col sm:w-[90%] sm:mx-auto">
                     <div style={{ height: 'min(100vh, 70rem)' }} className="pl-[3rem] sm:h-[100vh] sm:pl-[0] h-[100%] sm:w-full flex flex-col flex-1 pt-[3rem]">
-                        <img src="/nav/cluster_logo.svg" alt="cluster" className="w-[14rem]" />
+                        <img src="/img/cluster_logo.svg" alt="cluster" className="w-[14rem]" />
                         <div className="mx-auto sm:mx-[0] flex self-center justify-self-center sm:mt-[4rem] flex-col w-[50rem] sm:w-full justify-center">
                             <h1 className="text-[4rem] sm:text-[3rem] text-center sm:text-start font-[600]">Sign Up</h1>
                             <p className="text-[1.6rem] font-[400] sm:mt-[1.8rem] sm:text-start text-center mt-[2.4rem]">Simplify payment options for your business with Cluster</p>

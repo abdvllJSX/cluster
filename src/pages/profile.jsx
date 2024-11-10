@@ -48,7 +48,7 @@ const Profile = () => {
                         <h1 className="text-[3rem] sm:hidden font-[600] text-[#000000]">Profile</h1>
                         <div className="mt-[3rem]">
                             <div className="flex items-center gap-[1rem] sm:gap-[2rem]">
-                                <img src="/nav/quotient.svg" alt="profile" className="w-[8rem] sm:w-[6rem] h-auto" />
+                                <img src="/img/quotient.svg" alt="profile" className="w-[8rem] sm:w-[6rem] h-auto" />
                                 <div className="">
                                     <h3 className="text-[2rem] font-[600] text-[#000000]">DataSquid</h3>
                                     <p className="font-[400] text-[#535862]">dataquid@gmail.com</p>

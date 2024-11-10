@@ -9,7 +9,7 @@ const Gateways = () => {
     const paymentGateways = [
         {
             name: "Paystack",
-            image: "/common/paystack.svg",
+            image: "/img/paystack.svg",
             link: 'https://paystack.com',
             status: [
                 {
@@ -30,7 +30,7 @@ const Gateways = () => {
         },
         {
             name: "flutterwave",
-            image: "/common/flutter_wave.svg",
+            image: "/img/flutter_wave.svg",
             link: 'https://flutterwave.com',
             status: [
                 {
@@ -53,7 +53,7 @@ const Gateways = () => {
         },
         {
             name: "ALAT",
-            image: "/common/alat.svg",
+            image: "/img/alat.svg",
             link: 'https://online.alat.ng',
             status: [
                 {
@@ -74,7 +74,7 @@ const Gateways = () => {
         },
         {
             name: "GTBank",
-            image: "/common/gt.png",
+            image: "/img/gt.png",
             link: 'https://gtbank.com',
             status: [
                 {

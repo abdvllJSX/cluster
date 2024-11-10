@@ -27,7 +27,7 @@ const GatewayDetails = () => {
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
-                image: "/common/Avatar.png"
+                image: "/img/Avatar.png"
             },
             gatewayRef: "#ngisgd78hhdjb867",
             paymentTarget: "Wallet",
@@ -40,7 +40,7 @@ const GatewayDetails = () => {
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
-                image: "/common/Avatar.png"
+                image: "/img/Avatar.png"
             },
             gatewayRef: "#ngisgd78hhdjb867",
             paymentTarget: "Wallet",
@@ -53,7 +53,7 @@ const GatewayDetails = () => {
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
-                image: "/common/Avatar.png"
+                image: "/img/Avatar.png"
             },
             gatewayRef: "#ngisgd78hhdjb867",
             paymentTarget: "Wallet",
@@ -66,7 +66,7 @@ const GatewayDetails = () => {
             customer: {
                 name: "Oluwatobi Akanni",
                 email: "oluwatobi@example.com",
-                image: "/common/Avatar.png"
+                image: "/img/Avatar.png"
             },
             gatewayRef: "#ngisgd78hhdjb867",
             paymentTarget: "Wallet",
@@ -79,7 +79,7 @@ const GatewayDetails = () => {
             customer: {
                 name: "John Doe",
                 email: "john.doe@example.com",
-                image: "/common/Avatar.png"
+                image: "/img/Avatar.png"
             },
             gatewayRef: "#ngisgd78hhdjb867",
             paymentTarget: "Wallet",
@@ -97,24 +97,24 @@ const GatewayDetails = () => {
     const gatewayList = [
         {
             name: "Paystack",
-            image: "/common/paystack.svg",
+            image: "/img/paystack.svg",
             link: "https://paystack.com",
         },
         {
             name: "Flutterwave",
-            image: "/common/flutter_wave.svg",
+            image: "/img/flutter_wave.svg",
             imageSize: "w-[15rem] h-auto",
             link: "https://flutterwave.com",
             withtext: true,
         },
         {
             name: 'Alat',
-            image: "/common/alat.svg",
+            image: "/img/alat.svg",
             link: "https://alat.com",
         },
         {
             name: "GtBank",
-            image: "/common/gt.png",
+            image: "/img/gt.png",
             link: "https://gt.com",
         }
     ]
@@ -193,7 +193,7 @@ const GatewayDetails = () => {
                         </div>
                         <DialogContent className="rounded-[1rem] sm:mt-[20vh] sm:rounded-[.8rem] p-[2rem]">
                             <DialogHeader className="text-start">
-                                <img src="/common/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
+                                <img src="/img/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
                                 <DialogTitle className="text-[1.5rem]">Remove payment gateway!</DialogTitle>
                                 <DialogDescription className="text-[1.3rem]">Are you sure you want to remove paystack from the list of payment gateway?.</DialogDescription>
                             </DialogHeader>
@@ -281,7 +281,7 @@ const Card = ({ title, value, increament }) => {
                 <p className="text-[#181D27] text-[3.3rem] font-[600]">
                     {Number(value).toLocaleString()}
                 </p>
-                {increament ? <img src={'/home/increase.svg'} className="w-[10rem] h-auto" alt="increase" /> : <img src={'/home/decrease.svg'} className="w-[10rem] h-auto" alt="decrease" />}
+                {increament ? <img src={'/img/increase.svg'} className="w-[10rem] h-auto" alt="increase" /> : <img src={'/img/decrease.svg'} className="w-[10rem] h-auto" alt="decrease" />}
             </div>
         </div>
     );

@@ -18,10 +18,10 @@ const Login = () => {
         <section>
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
-                    <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] mx-auto sm:self-start sm:mt-[4rem] sm:justify-self-start">
-                            <h1 className="font-[700] sm:text-start text-center text-[4rem] sm:text-[2.2rem] sm:mb-[1rem] mb-[2rem]">Log in to your account</h1>
+                            <h1 className="font-[700] sm:text-start text-center text-[4rem] sm:text-[2.2rem] sm:mb-[1rem] mb-[2rem]">Log in to your accounts</h1>
                             <p className="text-center sm:text-start text-[#535862]">Welcome back! Please enter your details.</p>
                             <div className="mt-[2rem] flex flex-col gap-[2.5rem]">
                                 <div className="">

@@ -40,10 +40,10 @@ const EditProfile = () => {
                     </Button>
                     <h1 className="text-[3rem] font-[600] sm:text-[2.2rem] text-[#000000] my-[4rem] sm:my-[1rem]">Edit profile</h1>
                     <div className="flex  gap-[3rem]">
-                        <img src="/nav/quotient.svg" alt="quotient" className="w-[9rem]" />
+                        <img src="/img/quotient.svg" alt="quotient" className="w-[9rem]" />
 
                         <div className="border border-[#E0E0E0] rounded-[1rem] py-[1rem] sm:px-[2rem] px-[6rem]">
-                            <img src="/cloud.svg" alt="cloud" className="w-[5rem] sm:w-[6rem] mx-auto" />
+                            <img src="/img/cloud.svg" alt="cloud" className="w-[5rem] sm:w-[6rem] mx-auto" />
                             <div className="max-w-[30rem] text-center">
                                 <p className="text-[1.7rem] sm:text-[1.3rem] font-[400] text-[#535862]"><span className="text-[#6941C6] font-[600]">Click to upload</span> or drag and drop SVG, PNG, JPG or GIF (max. 800x400px)</p>
                             </div>

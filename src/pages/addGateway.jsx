@@ -8,24 +8,24 @@ const AddGateway = () => {
     const gatewayList = [
         {
             name: "Paystack",
-            image: "/common/paystack.svg",
+            image: "/img/paystack.svg",
             link: "https://paystack.com",
         },
         {
             name: "Flutterwave",
-            image: "/common/flutter_wave.svg",
+            image: "/img/flutter_wave.svg",
             imageSize: "w-[15rem] h-auto",
             link: "https://flutterwave.com",
             withtext: true,
         },
         {
             name: 'Alat',
-            image: "/common/alat.svg",
+            image: "/img/alat.svg",
             link: "https://alat.com",
         },
         {
             name: "GtBank",
-            image: "/common/gt.png",
+            image: "/img/gt.png",
             link: "https://gt.com",
         }
     ]
@@ -47,7 +47,7 @@ const AddGateway = () => {
                             <Search className="absolute w-[1.5rem] left-4 top-1/2 -translate-y-1/2 h-auto text-gray-500" />
                             <input
                                 type="text"
-                                placeholder="Search payment gateway"
+                                placeholder="Search payment gateways"
                                 className="max-w-[40rem] sm:w-full w-[40rem] text-[1.5rem] placeholder:text-[#717680] placeholder:font-[400] pl-12 pr-4 py-[1rem] rounded-[1rem] border border-gray-300 focus:outline-none focus:ring-none focus:border-blue-500 shadow-[0px_1px_2px_0px_#0A0D120D]"
                             />
                         </div>

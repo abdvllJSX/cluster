@@ -70,7 +70,7 @@ const Card = ({ title, value, increament }) => {
                 <p className="text-[#181D27] text-[3.3rem] font-[600]">
                     {Number(value).toLocaleString()}
                 </p>
-                {increament ? <img src={'/home/increase.svg'} className="w-[10rem] h-auto" alt="increase" /> : <img src={'/home/decrease.svg'} className="w-[10rem] h-auto" alt="decrease" />}
+                {increament ? <img src={'/img/increase.svg'} className="w-[10rem] h-auto" alt="increase" /> : <img src={'/img/decrease.svg'} className="w-[10rem] h-auto" alt="decrease" />}
             </div>
         </div>
     );

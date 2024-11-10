@@ -17,7 +17,7 @@ export default {
         'sm': { 'max': '640px' }
       },
       backgroundImage: {
-        'auth-bg': "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.96%, #000000 108%), url('/auth/auth_image.jpeg')",
+        'auth-bg': "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.96%, #000000 108%), url('/img/auth_image.jpeg')",
       }
     }
   },

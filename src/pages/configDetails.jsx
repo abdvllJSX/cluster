@@ -23,24 +23,24 @@ const ConfigDetails = () => {
     const gatewayList = [
         {
             name: "Paystack",
-            image: "/common/paystack.svg",
+            image: "/img/paystack.svg",
             link: "https://paystack.com",
         },
         {
             name: "Flutterwave",
-            image: "/common/flutter_wave.svg",
+            image: "/img/flutter_wave.svg",
             imageSize: "w-[15rem] h-auto",
             link: "https://flutterwave.com",
             withtext: true,
         },
         {
             name: 'Alat',
-            image: "/common/alat.svg",
+            image: "/img/alat.svg",
             link: "https://alat.com",
         },
         {
             name: "GtBank",
-            image: "/common/gt.png",
+            image: "/img/gt.png",
             link: "https://gt.com",
         }
     ]
@@ -109,7 +109,7 @@ const ConfigDetails = () => {
                         </div>
                         <DialogContent className="rounded-[1rem] p-[2rem]">
                             <DialogHeader className="text-start">
-                                <img src="/common/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
+                                <img src="/img/warn.svg" alt="warning" className="w-[4rem] mb-[1rem] h-auto" />
                                 <DialogTitle className="text-[1.5rem]">Remove payment gateway!</DialogTitle>
                                 <DialogDescription className="text-[1.3rem]">Are you sure you want to remove paystack from the list of payment gateway?.</DialogDescription>
                             </DialogHeader>
