@@ -47,7 +47,7 @@ const AddGateway = () => {
                             <Search className="absolute w-[1.5rem] left-4 top-1/2 -translate-y-1/2 h-auto text-gray-500" />
                             <input
                                 type="text"
-                                placeholder="Search payment gateways"
+                                placeholder="Search payment gateway"
                                 className="max-w-[40rem] sm:w-full w-[40rem] text-[1.5rem] placeholder:text-[#717680] placeholder:font-[400] pl-12 pr-4 py-[1rem] rounded-[1rem] border border-gray-300 focus:outline-none focus:ring-none focus:border-blue-500 shadow-[0px_1px_2px_0px_#0A0D120D]"
                             />
                         </div>
