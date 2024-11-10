@@ -7,5 +7,5 @@ export default () => {
     v: VERSIONS.V1,
   });
   log.info("Generating health message");
-  return { data: "Results africa web is running fine" };
+  return { data: "Cluster web is running fine" };
 };

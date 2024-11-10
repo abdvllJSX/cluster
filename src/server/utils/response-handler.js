@@ -43,7 +43,7 @@ const setCookies = (reply, tokens) => {
   });
 
   if (authToken) {
-    reply.setCookie("results-africa-auth-token", authToken, {
+    reply.setCookie("cluster-auth-token", authToken, {
       ...COOKIE_CONFIG,
       maxAge: SESSION.TOKEN_EXPIRY,
       path: "/v1/api",
@@ -51,7 +51,7 @@ const setCookies = (reply, tokens) => {
   }
 
   if (refreshToken) {
-    reply.setCookie("results-africa-refresh-token", refreshToken, {
+    reply.setCookie("cluster-refresh-token", refreshToken, {
       ...COOKIE_CONFIG,
       maxAge: SESSION.REFRESH_EXPIRY,
       path: "/v1/api/auth",
@@ -70,12 +70,12 @@ const removeCookies = (reply) => {
       expires: pastDay,
       path: "/",
     })
-    .setCookie("results-africa-auth-token", "no-token", {
+    .setCookie("cluster-auth-token", "no-token", {
       ...COOKIE_CONFIG,
       expires: pastDay,
       path: "/v1/api",
     })
-    .setCookie("results-africa-refresh-token", "no-token", {
+    .setCookie("cluster-refresh-token", "no-token", {
       ...COOKIE_CONFIG,
       expires: pastDay,
       path: "/v1/api/auth",
