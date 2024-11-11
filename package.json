@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "serve": "node index",
-    "serve:dev": "nodemon index"
+    "serve:dev": "nodemon index",
+    "style": "prettier --write ."
   },
   "dependencies": {
     "@fastify/compress": "^8.0.1",
@@ -24,6 +25,7 @@
     "@fastify/swagger": "^9.2.0",
     "@fastify/swagger-ui": "^5.1.0",
     "@fastify/view": "^10.0.1",
+    "@heroicons/react": "^2.1.5",
     "@logtail/pino": "^0.5.2",
     "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -31,6 +33,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.1",
+    "@tanstack/react-query": "^5.59.20",
     "@tanstack/react-table": "^8.20.5",
     "@types/axios": "^0.14.4",
     "@types/react-router-dom": "^5.3.3",
@@ -38,6 +41,7 @@
     "ajv-formats": "^3.0.1",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
+    "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "fastify": "^5.1.0",
@@ -59,6 +63,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^22.8.4",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -69,6 +74,7 @@
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
     "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
     "tailwindcss": "^3.4.14",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",

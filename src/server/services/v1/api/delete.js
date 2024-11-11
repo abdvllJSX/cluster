@@ -15,7 +15,7 @@ export default async ({ endpoint, id, query, token }) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const url = [SERVICE.BASE_URL, `/${VERSIONS.V1}`, endpoint].join("");
+  const url = [SERVICE.BASE_URL, `/extensions/cluster/api`, endpoint].join("");
 
   log.info({ query, url }, "Calling service");
   return apiDelete(url, query, headers);

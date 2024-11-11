@@ -10,6 +10,7 @@ export default (fastify) => {
     (router, _, next) => {
       // Register v1 routes
       v1Routes(router, fastify);
+
       next();
     },
     { prefix: VERSIONS.V1 },

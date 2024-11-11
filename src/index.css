@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/switzer');
+@import url("https://fonts.cdnfonts.com/css/switzer");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -40,7 +40,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Switzer', sans-serif;
+  font-family: "Switzer", sans-serif;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -84,9 +84,9 @@ p {
 }
 
 .gateway_card_p {
-  @apply text-[1.3rem] max-w-[12rem] text-[#414651] font-[400]
+  @apply text-[1.3rem] max-w-[12rem] text-[#414651] font-[400];
 }
 
 .gateway_card_p_value {
-  @apply text-[2rem] text-[#000000] font-[600]
+  @apply text-[2rem] text-[#000000] font-[600];
 }

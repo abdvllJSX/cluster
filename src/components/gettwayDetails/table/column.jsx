@@ -1,13 +1,13 @@
-import { createColumnHelper } from "@tanstack/react-table"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Button } from "@/components/ui/button"
-import useFormatToNaira from "@/hooks/formatToNaira"
-import { StatusIndicator } from "../../common/statusIndicator"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import useFormatToNaira from "@/hooks/formatToNaira";
 
-const formatToNaira = useFormatToNaira()
+import { StatusIndicator } from "../../common/statusIndicator";
+
+const formatToNaira = useFormatToNaira();
 export const columns = [
   {
-    id: 'select',
+    id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -43,10 +43,18 @@ export const columns = [
     header: "Customer",
     cell: ({ row }) => (
       <div className="flex items-center sm:w-[20rem] text-black gap-[1rem]">
-        <img src={'/img/Avatar.png'} alt="customer" className="w-[4rem] h-[4rem] rounded-[50%]" />
+        <img
+          src={"/img/Avatar.png"}
+          alt="customer"
+          className="w-[4rem] h-[4rem] rounded-[50%]"
+        />
         <div className="flex flex-col gap-[.5rem]">
-          <p className="text-[1.7rem] sm:text-[1.4rem]  text-black mb-[.2rem] font-[400]">{row.original.customer.name}</p>
-          <p className="text-[1.3rem] sm:text-[1.1rem] text-[#535862] font-[400]">{row.original.customer.email}</p>
+          <p className="text-[1.7rem] sm:text-[1.4rem]  text-black mb-[.2rem] font-[400]">
+            {row.original.customer.name}
+          </p>
+          <p className="text-[1.3rem] sm:text-[1.1rem] text-[#535862] font-[400]">
+            {row.original.customer.email}
+          </p>
         </div>
       </div>
     ),
@@ -62,34 +70,43 @@ export const columns = [
     accessorKey: "paymentTarget",
     header: "Payment Target",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] text-[#181D27] sm:w-[12rem] font-[400]">{row.original.paymentTarget}</p>
+      <p className="text-[1.7rem] text-[#181D27] sm:w-[12rem] font-[400]">
+        {row.original.paymentTarget}
+      </p>
     ),
   },
   {
     accessorKey: "totalAmount",
     header: "Total Amount",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">{formatToNaira(row.original.totalAmount)}</p>
+      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">
+        {formatToNaira(row.original.totalAmount)}
+      </p>
     ),
   },
   {
     accessorKey: "paidAmount",
     header: "Paid Amount",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">{formatToNaira(row.original.paidAmount)}</p>
+      <p className="text-[1.7rem] sm:w-[10rem] text-[#000000] font-[400]">
+        {formatToNaira(row.original.paidAmount)}
+      </p>
     ),
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <StatusIndicator status={row.original.status} />
-    ),
+    cell: ({ row }) => <StatusIndicator status={row.original.status} />,
   },
   {
-    id: 'actions',
+    id: "actions",
     cell: ({ row }) => (
-      <Button variant="ghost" className="text-[1.6rem] font-[600] text-[#FF9100]">Details</Button>
+      <Button
+        variant="ghost"
+        className="text-[1.6rem] font-[600] text-[#FF9100]"
+      >
+        Details
+      </Button>
     ),
-  }
-]
+  },
+];

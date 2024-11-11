@@ -22,9 +22,7 @@ export function parseRequest() {
       let sessionId;
       if (cookies) {
         sessionId = cookies["x-session-id"];
-        sig =
-          cookies["cluster-auth-token"] ??
-          cookies["cluster-refresh-token"];
+        sig = cookies["cluster-auth-token"];
         if (
           !sig &&
           isAPIRequest(url) &&
@@ -73,7 +71,11 @@ export function parseCSP() {
         "script-src": ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
         "script-src-elem": ["'self'", "'unsafe-inline'", SERVER.URL],
         "style-src": ["'self'", "'unsafe-inline'"],
-        "style-src-elem": ["'self'", "'unsafe-inline'", "https://fonts.cdnfonts.com"],
+        "style-src-elem": [
+          "'self'",
+          "'unsafe-inline'",
+          "https://fonts.cdnfonts.com",
+        ],
         "worker-src": ["'self'", "'unsafe-eval'", "'unsafe-inline'", "blob:"],
       };
 

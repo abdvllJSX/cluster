@@ -1,54 +1,51 @@
 import axios from "axios";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { ReasonPhrases } from "http-status-codes";
+
+import { CLUSTER_TOKEN } from "../utils/config.js";
 
 const handleErrorResponse = (error) => {
   if (error.response) {
     const { data } = error.response;
-    const { statusCode, message, code, status } = JSON.parse(data ?? "{}");
+    const { message, status } = JSON.parse(data ?? "{}");
     return {
-      code,
       message,
       status,
-      statusCode,
     };
   }
 
   if (error.request) {
     return {
-      code: StatusCodes.BAD_GATEWAY,
       message: error.message,
       status: ReasonPhrases.BAD_GATEWAY,
-      statusCode: StatusCodes.BAD_GATEWAY,
     };
   }
 
   return {
-    code: StatusCodes.INTERNAL_SERVER_ERROR,
     message: error.message,
     status: ReasonPhrases.INTERNAL_SERVER_ERROR,
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
   };
 };
 
 const handleOkResponse = (response) => {
   const payload = JSON.parse(!!response?.data ? response.data : "{}");
   if (payload.data) {
-    const { statusCode, code, message, status, data, meta } = payload;
+    const { message, status, data } = payload;
     return {
-      code,
       data,
       message,
-      meta,
       status,
-      statusCode,
     };
   }
 
-  return payload;
+  return {
+    message: payload.message,
+    status: payload.status,
+  };
 };
 
 const HEADERS = {
-  "User-Agent": "axios",
+  "Content-Type": "application/json",
+  HTTP_AUTHORIZATION_TOKEN: CLUSTER_TOKEN,
 };
 
 const OPTIONS = {

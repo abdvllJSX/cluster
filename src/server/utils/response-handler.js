@@ -1,13 +1,17 @@
 import { DateTime } from "luxon";
 
-import { COOKIE_CONFIG, SESSION } from "./config.js";
+import { COOKIE_CONFIG } from "./config.js";
 
 export default (request, reply, response) => {
-  const { code, data, statusCode } = response;
+  const { data, redirect } = response;
   const { id } = request;
 
+  if (redirect) {
+    return reply.redirect(redirect);
+  }
+
   const { render = false, ...payload } = data ?? {};
-  const { authToken, refreshToken, sessionId } = payload ?? {};
+  const { sessionToken } = payload ?? {};
   const isAuth = isAuthRequest(request.url);
 
   if (render) {
@@ -16,45 +20,26 @@ export default (request, reply, response) => {
     return reply.view(page, { ...locals });
   }
 
-  if (authToken || refreshToken) {
-    delete response.data.authToken;
-    delete response.data.refreshToken;
-    // delete response.data.sessionId;
-    reply = setCookies(reply, { authToken, refreshToken, sessionId });
+  if (sessionToken) {
+    delete response.data.sessionToken;
+    reply = setCookies(reply, { sessionToken });
   }
 
-  if (isAuth && !authToken && !refreshToken) {
+  if (isAuth && !sessionToken) {
     reply = removeCookies(reply);
   }
 
-  return reply
-    .code(statusCode ?? code)
-    .header("x-request-id", id)
-    .send(response);
+  return reply.header("x-request-id", id).send(response);
 };
 
 const setCookies = (reply, tokens) => {
-  const { authToken, refreshToken, sessionId } = tokens;
+  const { sessionToken } = tokens;
 
-  reply.setCookie("x-session-id", sessionId, {
-    ...COOKIE_CONFIG,
-    maxAge: SESSION.TOKEN_EXPIRY,
-    path: "/",
-  });
-
-  if (authToken) {
-    reply.setCookie("cluster-auth-token", authToken, {
+  if (sessionToken) {
+    reply.setCookie("cluster-auth-token", sessionToken, {
       ...COOKIE_CONFIG,
-      maxAge: SESSION.TOKEN_EXPIRY,
+      // maxAge: SESSION.TOKEN_EXPIRY,
       path: "/v1/api",
-    });
-  }
-
-  if (refreshToken) {
-    reply.setCookie("cluster-refresh-token", refreshToken, {
-      ...COOKIE_CONFIG,
-      maxAge: SESSION.REFRESH_EXPIRY,
-      path: "/v1/api/auth",
     });
   }
 
@@ -64,32 +49,21 @@ const setCookies = (reply, tokens) => {
 const removeCookies = (reply) => {
   const pastDay = new Date(DateTime.now().minus({ days: 7 }).toISO());
 
-  return reply
-    .setCookie("x-session-id", "no-token", {
-      ...COOKIE_CONFIG,
-      expires: pastDay,
-      path: "/",
-    })
-    .setCookie("cluster-auth-token", "no-token", {
-      ...COOKIE_CONFIG,
-      expires: pastDay,
-      path: "/v1/api",
-    })
-    .setCookie("cluster-refresh-token", "no-token", {
-      ...COOKIE_CONFIG,
-      expires: pastDay,
-      path: "/v1/api/auth",
-    });
+  return reply.setCookie("cluster-auth-token", "no-token", {
+    ...COOKIE_CONFIG,
+    expires: pastDay,
+    path: "/v1/api",
+  });
 };
 
 export const isAuthRequest = (url) => {
   const endpoint = url.split("?")[0];
-  return endpoint.includes("/auth");
+  return endpoint.includes("/authenticate");
 };
 
 export const isLoginRequest = (url) => {
   const endpoint = url.split("?")[0];
-  return endpoint.includes("/auth/login");
+  return endpoint.includes("/authenticate");
 };
 
 export const isVerifyRequest = (url) => {

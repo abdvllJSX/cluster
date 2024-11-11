@@ -1,7 +1,7 @@
 import { loggerInfra } from "../../../infra/logger.js";
 import { SERVICE } from "../../../utils/config.js";
 import { VERSIONS } from "../../../utils/constants.js";
-import { apiPost, apiUpload } from "../../../utils/http-client.js";
+import { apiPost } from "../../../utils/http-client.js";
 
 export default async ({ body, endpoint, id, token }) => {
   const log = loggerInfra.child({ service: "api/post", v: VERSIONS.V1 });
@@ -15,7 +15,7 @@ export default async ({ body, endpoint, id, token }) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const url = [SERVICE.BASE_URL, `/${VERSIONS.V1}`, endpoint].join("");
+  const url = [SERVICE.BASE_URL, `/extensions/cluster/api`, endpoint].join("");
 
   log.info({ body, url }, "Calling service");
   return apiPost(url, body, headers);

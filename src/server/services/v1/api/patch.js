@@ -15,7 +15,7 @@ export default async ({ body, endpoint, id, token }) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const url = [SERVICE.BASE_URL, `/${VERSIONS.V1}`, endpoint].join("");
+  const url = [SERVICE.BASE_URL, `/extensions/cluster/api`, endpoint].join("");
 
   log.info({ body, url }, "Calling service");
   return apiPatch(url, body, headers);
