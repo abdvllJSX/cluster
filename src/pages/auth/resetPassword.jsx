@@ -2,9 +2,7 @@ import MaxContainer from "../../components/common/maxcontainer";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { useState } from "react";
-import { EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Eye } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Mail } from "lucide-react";
 
@@ -18,7 +16,9 @@ const ResetPassword = () => {
         <section>
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
-                    <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    <Link to={'/'}>
+                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    </Link>
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] sm:self-start sm:mt-[5rem] mx-auto">
                             <h1 className="font-[700] text-center sm:text-start text-[4rem] sm:text-[2rem] mb-[1rem]">Reset password</h1>
@@ -36,7 +36,7 @@ const ResetPassword = () => {
                                 </div>
                             </div>
                             <Button className="bg-[#FF9100] text-[1.4rem] w-full mt-[2rem] py-[1.8rem] rounded-[.6rem]">Send reset link</Button>
-                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Remember your password? <Link to={'/login'} className="text-[#AF47D2]">Log in</Link></p>
+                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Remember your password? <Link to={'/onboarding/login'} className="text-[#AF47D2]">Log in</Link></p>
                         </div>
                     </div>
                     <div className="flex justify-between">

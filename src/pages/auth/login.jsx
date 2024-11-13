@@ -18,7 +18,9 @@ const Login = () => {
         <section>
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
-                    <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    <Link to={'/'}>
+                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                    </Link>
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] mx-auto sm:self-start sm:mt-[4rem] sm:justify-self-start">
                             <h1 className="font-[700] sm:text-start text-center text-[4rem] sm:text-[2.2rem] sm:mb-[1rem] mb-[2rem]">Log in to your account</h1>
@@ -55,7 +57,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <Button variant={'ghost'} asChild className="ml-auto sm:hidden mt-[1.5rem] w-fit flex text-[1.4rem] font-[600] text-[#FF9100] rounded-[1rem] py-[2rem]">
-                                <Link to={'/reset-password'}>
+                                <Link to={'/onboarding/reset-password'}>
                                     Forgot password
                                 </Link>
                             </Button>
@@ -65,7 +67,7 @@ const Login = () => {
                                     Forgot password
                                 </Link>
                             </Button>
-                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Don’t have an account? <Link to={'/signup'} className="text-[#AF47D2]">Sign up</Link></p>
+                            <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">Don’t have an account? <Link to={'/onboarding/signup'} className="text-[#AF47D2]">Sign up</Link></p>
 
                         </div>
                     </div>

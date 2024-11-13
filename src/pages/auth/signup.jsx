@@ -50,7 +50,9 @@ const Signup = () => {
             <MaxContainer>
                 <div className="flex sm:flex-col sm:w-[90%] sm:mx-auto">
                     <div style={{ height: 'min(100vh, 70rem)' }} className="pl-[3rem] sm:h-[100vh] sm:pl-[0] h-[100%] sm:w-full flex flex-col flex-1 pt-[3rem]">
-                        <img src="/nav/cluster_logo.svg" alt="cluster" className="w-[14rem]" />
+                        <Link to={'/'}>
+                            <img src="/nav/cluster_logo.svg" alt="cluster" className="w-[14rem]" />
+                        </Link>
                         <div className="mx-auto sm:mx-[0] flex self-center justify-self-center sm:mt-[4rem] flex-col w-[50rem] sm:w-full justify-center">
                             <h1 className="text-[4rem] sm:text-[3rem] text-center sm:text-start font-[600]">Sign Up</h1>
                             <p className="text-[1.6rem] font-[400] sm:mt-[1.8rem] sm:text-start text-center mt-[2.4rem]">Simplify payment options for your business with Cluster</p>
@@ -64,7 +66,7 @@ const Signup = () => {
                                 <p className="mt-[.8rem] text-[1.4rem] font-[400]">Step {currentStep}/3</p>
                             </div>
                             {renderStep()}
-                            <p className="text-center text-[#535862]">Already have an account? <Link to="/login" className="text-[#AF47D2]">Log in</Link></p>
+                            <p className="text-center text-[#535862]">Already have an account? <Link to="/onboarding/login" className="text-[#AF47D2]">Log in</Link></p>
                         </div>
 
                         <div className="flex justify-between mt-[7rem] sm:absolute sm:bottom-[2rem] sm:w-full sm:justify-center text-[#535862] font-[400] pr-[3.5rem] sm:pr-[2rem]">
@@ -80,8 +82,8 @@ const Signup = () => {
                                 <div className="flex justify-between pr-[5rem] gap-[2rem]">
                                     <p className="">Skin Essence </p>
                                     <div className="flex gap-[2rem]">
-                                            <Button className="bg-transparent border w-[5rem] h-[5rem] hover:bg-white hover:text-black rounded-full border-[#FFFFFF80]"><ArrowLeft size={20} strokeWidth={0.75} /></Button>
-                                            <Button className="bg-transparent border w-[5rem] h-[5rem] rounded-full hover:bg-white hover:text-black border-[#FFFFFF80]"><ArrowRight size={20} strokeWidth={0.75} /></Button>
+                                        <Button className="bg-transparent border w-[5rem] h-[5rem] hover:bg-white hover:text-black rounded-full border-[#FFFFFF80]"><ArrowLeft size={20} strokeWidth={0.75} /></Button>
+                                        <Button className="bg-transparent border w-[5rem] h-[5rem] rounded-full hover:bg-white hover:text-black border-[#FFFFFF80]"><ArrowRight size={20} strokeWidth={0.75} /></Button>
                                     </div>
                                 </div>
                             </div>

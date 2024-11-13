@@ -18,6 +18,8 @@ export default {
       },
       backgroundImage: {
         'auth-bg': "linear-gradient(180deg, rgba(0, 0, 0, 0) 35.96%, #000000 108%), url('/auth/auth_image.jpeg')",
+        'card_gradient': 'linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), linear-gradient(0deg, #AF47D2, #AF47D2)',
+        'banner': "url('/landing/line_pattern_1.png'), linear-gradient(0deg, #000000, #000000)"
       }
     }
   },

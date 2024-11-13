@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/home'
+import Dashboard from './pages/dashboard'
 import AddGateway from './pages/addGateway'
 import GatewayConfig from './pages/gatewayconfig'
 import GatewayDetails from './pages/gatewayDetails'
@@ -13,11 +13,18 @@ import Signup from './pages/auth/signup'
 import Login from './pages/auth/login'
 import ResetPassword from './pages/auth/resetPassword'
 import CreatePassword from './pages/auth/createPassword'
+import Home from './pages/landing/home'
+import WhyCluster from './pages/landing/whyCluster'
+import Partners from './pages/landing/partners'
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/whycluster" element={<WhyCluster />} />
+        <Route path="/partners" element={<Partners />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-gateway" element={<AddGateway />} />
         <Route path="/add-gateway/:id" element={<GatewayConfig />} />
         <Route path="/gateway-details/:id" element={<GatewayDetails />} />
@@ -27,10 +34,10 @@ function App() {
         <Route path="/gateway-details/:id/edit" element={<EditGateway />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/edit" element={<EditProfile />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/create-password' element={<CreatePassword />} />
+        <Route path="/onboarding/signup" element={<Signup />} />
+        <Route path='/onboarding/login' element={<Login />} />
+        <Route path='/onboarding/reset-password' element={<ResetPassword />} />
+        <Route path='/onboarding/create-password' element={<CreatePassword />} />
       </Routes>
     </BrowserRouter>
   )
