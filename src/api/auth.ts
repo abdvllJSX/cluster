@@ -18,6 +18,6 @@ export const apiRequestResetPassword = (body: iResetPasswordRequestPayload) =>
 
 export const apiCreatePassword = (body: iCreatePasswordPayload) =>
   apiPost("/v1/api/verify_recovery_token", {
-    verification_token: body.verificationToken,
+    recovery_token: body.recoveryToken,
     new_password: body.password,
   });
