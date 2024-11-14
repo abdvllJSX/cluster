@@ -60,7 +60,7 @@ const Home = () => {
         <>
             <Navbar />
             <Hero />
-            <section className="flex flex-col gap-[13rem] py-[2rem]">
+            <section className="flex flex-col gap-[13rem] sm:gap-[7rem] py-[2rem]">
                 {useCase.map((item, index) => <PlaceTextBesideImage {...item} key={index} id={index} />)}
             </section>
             <FeedBack />

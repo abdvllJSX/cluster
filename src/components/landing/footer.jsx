@@ -5,11 +5,11 @@ const Footer = () => {
     return (
         <footer className="">
             <MaxContainer>
-                <div className="container py-[5rem] pt-[7rem]">
-                    <div className="flex justify-between w-[85%] mb-[8rem]">
+                <div className="container py-[5rem] sm:pt-[4rem] pt-[7rem]">
+                    <div className="flex sm:flex-col sm:gap-[2.2rem] justify-between w-[85%] sm:w-full mb-[8rem] sm:mb-[5rem]">
                         <div className="">
-                            <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] mb-[2rem]" />
-                            <p className="w-[20rem] text-[#535862] font-[600]">A product of <br></br>
+                            <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] sm:w-[11rem] mb-[2rem]" />
+                            <p className="w-[20rem] text-[#535862] sm:text-[1.6rem] font-[600]">A product of <br></br>
                                 I-Bitron Technologies Ltd</p>
                         </div>
                         <div className="">
@@ -63,13 +63,13 @@ const Footer = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="flex justify-between">
-                        <p className="text-[1.4rem] font-[400] text-[#717680]">© 2024 Cluster.  All rights reserved.</p>
-                        <div className="flex items-center gap-[3rem]">
-                            <p className="text-[1.4rem]">
+                    <div className="flex sm:flex-col-reverse justify-between">
+                        <p className="text-[1.4rem] sm:text-[1.6rem] font-[400] text-[#717680]">© 2024 Cluster.  All rights reserved.</p>
+                        <div className="flex items-center sm:gap-[1.5rem] sm:mb-[1rem] gap-[3rem]">
+                            <p className="text-[1.4rem] sm:text-[1.6rem]">
                                 <Link className="text-[#717680] font-[400]" to={'#'}>Privacy</Link>
                             </p>
-                            <p className="text-[1.4rem]">
+                            <p className="text-[1.4rem] sm:text-[1.6rem]">
                                 <Link className="text-[#717680] font-[400]" to={'#'}>Terms & Condition</Link>
                             </p>
                         </div>
