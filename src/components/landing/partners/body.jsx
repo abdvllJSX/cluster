@@ -40,8 +40,8 @@ const Body = () => {
     return (
         <section className="">
             <MaxContainer>
-                <div className="container pt-[7rem] pb-[5rem]">
-                    <div className="mt-[3rem] grid grid-cols-3 gap-[3rem]">
+                <div className="container pt-[7rem] sm:pt-[2rem] sm:pb-[3rem] pb-[5rem]">
+                    <div className="mt-[3rem] grid grid-cols-3 sm:grid-cols-1 gap-[3rem]">
                        { content.map((item, index) => <Content {...item} key={index} />) }
                     </div>
                 </div>

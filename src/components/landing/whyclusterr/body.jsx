@@ -37,10 +37,10 @@ const Body = () => {
     return (
         <section className="">
             <MaxContainer>
-                <div className="container pt-[7rem] pb-[5rem]">
-                    <h2 className="text-center text-[3.5rem] font-[600]">Transform Your Payment Experience</h2>
+                <div className="container pt-[7rem] sm:pt-[4rem] sm:pb-[0] pb-[5rem]">
+                    <h2 className="text-center text-[3.5rem] sm:text-[2.5rem] sm:leading-[3rem] sm:mb-[1rem] font-[600]">Transform Your Payment Experience</h2>
                     <p className="text-center max-w-[80rem] mx-auto">Our payment gateway management services are designed to empower businesses of all sizes. With our cutting-edge technology, exceptional support, and commitment to security, we provide everything you need to streamline payments, enhance customer satisfaction, and grow your business with confidence.</p>
-                    <div className="mt-[3rem] grid grid-cols-3 gap-[2rem] gap-y-[4rem]">
+                    <div className="mt-[3rem] grid grid-cols-3 sm:grid-cols-1 gap-[2rem] gap-y-[4rem]">
                        { content.map((item, index) => <Content {...item} key={index} />) }
                     </div>
                 </div>

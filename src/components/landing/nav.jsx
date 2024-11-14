@@ -44,15 +44,15 @@ const Navbar = () => {
     ]
 
     return (
-        <nav className={`fixed top-[0] left-0 right-0 pt-[3rem] sm:pt-[2rem] pb-[2rem] transition-colors sm:bg-white  sm:z-[15] duration-300 ${isScrolled ? 'bg-white' : 'bg-transparent sm:bg-white'}`}>
+        <nav className={`fixed top-[0] left-0 right-0 pt-[3rem] sm:pt-[2rem] pb-[2rem] sm:py-[1.5rem] transition-colors sm:z-[15] duration-300 ${isScrolled ? 'bg-white sm:shadow' : 'bg-transparent'}`}>
             <MaxContainer>
                 <div className="container flex items-center justify-between">
                     <Link to={'/'}>
-                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] sm:bg-white h-[4rem]" />
+                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[4rem]" />
                     </Link>
 
-                    <ul className={`flex sm:flex-col sm:fixed sm:top-0 sm:left-0 border sm:right-0 sm:bg-white sm:pt-[9rem] sm:pb-[3rem] sm:items-start sm:px-[2rem] ${open ? 'sm:translate-y-0' : 'sm:translate-y-[-100%]'} transition-all duration-300 items-center gap-4 
-                    sm:shadow-md`}>
+                    <ul className={`flex sm:flex-col sm:fixed sm:top-0 sm:left-0 sm:right-0 sm:bg-white sm:pt-[9rem] sm:pb-[3rem] sm:items-start sm:px-[2rem] ${open ? 'sm:translate-y-0' : 'sm:translate-y-[-100%]'} transition-all duration-300 items-center gap-4 
+                    sm:shadow-lg`}>
                         {navLinks.map((link, index) => (
                             <>
                                 <NavItem key={index} name={link.name} path={link.path} />
@@ -60,10 +60,10 @@ const Navbar = () => {
                         ))}
 
                         <li className="hidden sm:block w-full mt-[1.5rem]">
-                            <Button className="text-white rounded-[.5rem] bg-[#FF9100] w-full font-[600]  py-[1.8rem] px-[1.3rem] text-[1.3rem]" asChild><Link to={'/onboarding/signup'}>Sign Up</Link></Button>
+                            <Button className="text-white rounded-[.5rem] bg-[#FF9100] w-full font-[600] py-[2rem] px-[1.3rem] text-[1.5rem]" asChild><Link to={'/onboarding/signup'}>Sign Up</Link></Button>
                         </li>
-                        <li className="hidden sm:block mt-[1rem] w-full">
-                            <Button className="bg-transparent rounded-[.5rem] w-full border py-[1.8rem] shadow-sm border-[#D5D7DA] text-black font-[600] text-[1.3rem]" asChild variant={'ghost'}><Link to={'/onboarding/login'}>Log in</Link></Button>
+                        <li className="hidden sm:block mt-[.8rem] w-full">
+                            <Button className="bg-transparent rounded-[.5rem] w-full border py-[2rem] shadow-sm border-[#D5D7DA] text-black font-[600] text-[1.5rem]" asChild variant={'ghost'}><Link to={'/onboarding/login'}>Log in</Link></Button>
                         </li>
                     </ul>
 
@@ -84,7 +84,7 @@ export default Navbar;
 const NavItem = ({ name, path }) => {
     return (
         <li>
-            <Button className="bg-transparent text-[1.3rem] font-[600] text-black" variant={'ghost'} asChild><Link to={path}>{name}</Link></Button>
+            <Button className="bg-transparent text-[1.3rem] sm:text-[1.5rem] font-[600] text-black" variant={'ghost'} asChild><Link to={path}>{name}</Link></Button>
         </li>
     );
 }

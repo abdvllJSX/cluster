@@ -50,7 +50,7 @@ const Hero = () => {
                             <Button className="bg-transparent font-[600] text-[1.4rem] sm:w-full border-[.165rem] border-[#D5D7DA] text-[#AF47D2] rounded-[.5rem] py-[1.7rem] px-[1.7rem]" variant={'ghost'}>Contact Support</Button>
                         </div>
                         <div className="mt-[3rem]">
-                            <p className="text-[1.5rem] sm:mb-[1rem] sm:text-[1.8rem] font-[400] mb-[.7rem]">Connected Gateways</p>
+                            <p className="text-[1.5rem] sm:text-[1.6rem] font-[400] mb-[.7rem]">Connected Gateways</p>
                             <div className="flex sm:flex-wrap items-center gap-[1.5rem]">
                                 { brands.map((brand, index) => (<img src={brand.path} alt={brand.name} className={brand.style} key={index} />)) }
                             </div>

@@ -33,9 +33,9 @@ const FeedBack = () => {
     return (
         <section className="mt-[10rem] sm:mt-[5rem]">
             <MaxContainer>
-                <div className="container">
+                <div className="container sm:w-full">
                     <h2 className="text-[4rem] sm:text-[3rem] w-[35rem] font-[600]">What businesses are saying</h2>
-                    <div className="mt-[3rem] flex sm:hidden overflow-x-scroll justify-between">
+                    <div className="mt-[3rem] flex sm:gap-[2rem] sm:w-full overflow-x-scroll justify-between">
                         {
                             cards.map((card, index) => <Card {...card} key={index} />)
                         }
@@ -48,12 +48,11 @@ const FeedBack = () => {
 
 const Card = ({ content, image, name, cardStyle, contentStyle, nameStyle }) => {
     return (
-        <div className={`w-[32%] sm:w-[100rem] h-[40rem] border ${cardStyle} rounded-[.8rem] flex flex-col p-[1.5rem]`}>
+        <div className={`w-[32%] sm:w-[40rem] h-[40rem] sm:h-[32rem] border ${cardStyle} rounded-[.8rem] flex flex-col p-[1.5rem]`}>
             <p className={`font-[500] ${contentStyle} text-[2rem]`}>{content}</p>
-
             <div className="mt-auto">
-                <img src={image} alt="ceo" className="w-[6.5rem] h-[6.5rem]" />
-                <h3 className={`text-[1.5rem] ${nameStyle} font-[600]`}>{name}</h3>
+                <img src={image} alt="ceo" className="w-[6.5rem] sm:w-[4rem] sm:h-[4rem] h-[6.5rem]" />
+                <h3 className={`text-[1.5rem] sm:w-[30rem] ${nameStyle} font-[600]`}>{name}</h3>
                 <p className="text-[1.3rem] text-[#AF47D2]">ThePlace</p>
             </div>
         </div>
