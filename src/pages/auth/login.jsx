@@ -1,10 +1,11 @@
 import { ALERT_STATES } from "@/lib/utils";
 import {
-  ArrowPathIcon,
-  EnvelopeIcon,
-  EyeIcon,
-  EyeSlashIcon,
+    ArrowPathIcon,
+    EnvelopeIcon,
+    EyeIcon,
+    EyeSlashIcon,
 } from "@heroicons/react/24/outline/index.js";
+import { Mail, Eye, EyeOff } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,7 +28,7 @@ const Login = () => {
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
                     <Link to={'/'}>
-                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                        <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     </Link>
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] mx-auto sm:self-start sm:mt-[4rem] sm:justify-self-start">
@@ -82,12 +83,12 @@ const Login = () => {
                     <div className="flex justify-between">
                         <p className="">©cluster Inc.</p>
 
-            <p className="">help@cluster.com</p>
-          </div>
-        </div>
-      </MaxContainer>
-    </section>
-  );
+                        <p className="">help@cluster.com</p>
+                    </div>
+                </div>
+            </MaxContainer>
+        </section>
+    );
 };
 
 export default Login;

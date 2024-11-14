@@ -48,7 +48,7 @@ const Navbar = () => {
             <MaxContainer>
                 <div className="container flex items-center justify-between">
                     <Link to={'/'}>
-                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[4rem]" />
+                        <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[4rem]" />
                     </Link>
 
                     <ul className={`flex sm:flex-col sm:fixed sm:top-0 sm:left-0 sm:right-0 sm:bg-white sm:pt-[9rem] sm:pb-[3rem] sm:items-start sm:px-[2rem] ${open ? 'sm:translate-y-0' : 'sm:translate-y-[-100%]'} transition-all duration-300 items-center gap-4 
