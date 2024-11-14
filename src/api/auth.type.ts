@@ -17,6 +17,6 @@ export interface iResetPasswordRequestPayload {
 }
 
 export interface iCreatePasswordPayload {
-  verificationToken: string;
+  recoveryToken: string;
   password: string;
 }

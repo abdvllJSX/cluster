@@ -60,9 +60,9 @@ const CreatePassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      const verificationToken = searchParams.get("token");
+      const recoveryToken = searchParams.get("token");
       await createPasswordMutation({
-        verificationToken,
+        recoveryToken,
         password: formData.password,
       });
     }
