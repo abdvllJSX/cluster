@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="container py-[5rem] sm:pt-[4rem] pt-[7rem]">
                     <div className="flex sm:flex-col sm:gap-[2.2rem] justify-between w-[85%] sm:w-full mb-[8rem] sm:mb-[5rem]">
                         <div className="">
-                            <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] sm:w-[11rem] mb-[2rem]" />
+                            <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] sm:w-[11rem] mb-[2rem]" />
                             <p className="w-[20rem] text-[#535862] sm:text-[1.6rem] font-[600]">A product of <br></br>
                                 I-Bitron Technologies Ltd</p>
                         </div>
