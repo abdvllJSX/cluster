@@ -188,7 +188,7 @@ const CreatePassword = () => {
               </form>
               <p className="text-[1.4rem] font-[600] text-center mt-[3rem] text-[#535862]">
                 Remember your password?{" "}
-                <Link to="/login" className="text-[#AF47D2]">
+                <Link to="/onboarding/login" className="text-[#AF47D2]">
                   Login
                 </Link>
               </p>
