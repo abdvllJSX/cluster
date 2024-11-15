@@ -8,6 +8,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
+import MaxContainer from "../../components/common/maxcontainer";
+import { Mail } from "lucide-react";
 import { Label } from "../../components/ui/label";
 
 const ResetPassword = () => {
@@ -21,7 +23,7 @@ const ResetPassword = () => {
             <MaxContainer>
                 <div className="w-[100%] h-[100vh] px-[5rem] sm:px-[2rem]">
                     <Link to={'/'}>
-                        <img src="/nav/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
+                        <img src="/img/cluster_logo.svg" alt="logo" className="w-[10rem] h-[10rem]" />
                     </Link>
                     <div className="w-[100%] h-[75%] grid place-items-center">
                         <div className="w-[50rem] sm:w-[100%] sm:self-start sm:mt-[5rem] mx-auto">
