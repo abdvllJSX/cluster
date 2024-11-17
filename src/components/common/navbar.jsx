@@ -26,7 +26,7 @@ const Navbar = () => {
     >
       <MaxContainer>
         <div className="container flex justify-between items-center">
-          <Link to={"/"}>
+          <Link to={"/dashboard"}>
             <img
               src="/img/cluster_logo.svg"
               className="w-[13rem] sm:w-[10rem] h-auto"

@@ -64,13 +64,15 @@ const Signup = () => {
         <div className="flex sm:flex-col sm:w-[90%] sm:mx-auto">
           <div
             style={{ height: "min(100vh, 70rem)" }}
-            className="pl-[3rem] sm:h-[100vh] sm:pl-[0] h-[100%] sm:w-full flex flex-col flex-1 pt-[3rem]"
+            className="pl-[5rem] sm:h-[100vh] sm:pl-[0] h-[100%] sm:w-full flex flex-col flex-1 pt-[3rem]"
           >
-            <img
-              src="/img/cluster_logo.svg"
-              alt="cluster"
-              className="w-[14rem]"
-            />
+            <Link to={'/'}>
+              <img
+                src="/img/cluster_logo.svg"
+                alt="cluster"
+                className="w-[10rem]"
+              />
+            </Link>
             <div className="mx-auto sm:mx-[0] flex self-center justify-self-center sm:mt-[4rem] flex-col w-[50rem] sm:w-full justify-center">
               <h1 className="text-[4rem] sm:text-[3rem] text-center sm:text-start font-[600]">
                 Sign Up
@@ -86,7 +88,7 @@ const Signup = () => {
                   ></div>
                 </div>
                 <p className="mt-[.8rem] text-[1.4rem] font-[400]">
-                  Step {currentStep}/4
+                  Step {currentStep} / 4
                 </p>
               </div>
               {renderStep()}

@@ -4,37 +4,37 @@ import { Button } from "../../ui/button";
 const Hero = () => {
     const brands = [
         {
-            path: '/landing/_paystack.png',
+            path: '/img/_paystack.png',
             style: 'w-[9rem] sm:w-[11rem]',
             name: 'paystack'
         },
         {
-            path: '/landing/_moniepoint.png',
+            path: '/img/_moniepoint.png',
             style: 'w-[7rem] sm:w-[11rem]',
             name: 'moniepoint'
         },
         {
-            path: '/landing/_opay.png',
+            path: '/img/_opay.png',
             style: 'w-[7rem] sm:w-[6rem]',
             name: 'opay'
         },
         {
-            path: '/landing/_nomba.png',
+            path: '/img/_nomba.png',
             style: 'w-[8rem] sm:w-[10rem]',
             name: 'nomba'
         },
         {
-            path: '/landing/_squad.png',
+            path: '/img/_squad.png',
             style: 'w-[8rem] sm:w-[6rem]',
             name: 'squad'
         },
         {
-            path: '/landing/_fern.png',
+            path: '/img/_fern.png',
             style: 'w-[8rem] sm:w-[6rem]',
             name: 'fern'
         },
         {
-            path: '/landing/_remita.png',
+            path: '/img/_remita.png',
             style: 'w-[8rem] sm:w-[6rem]',
             name: 'remita'
         },
@@ -56,7 +56,7 @@ const Hero = () => {
                             </div>
                         </div>
                     </div>
-                    <img src="/landing/_hero_image.png" alt="hero" className="w-[45%] h-[48rem] sm:w-full sm:h-auto sm:mt-[5rem] object-contain" />
+                    <img src="/img/_hero_image.png" alt="hero" className="w-[45%] h-[48rem] sm:w-full sm:h-auto sm:mt-[5rem] object-contain" />
                 </div>
             </MaxContainer>
         </section>

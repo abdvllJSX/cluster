@@ -3,34 +3,34 @@ import MaxContainer from "../../common/maxcontainer";
 const Body = () => {
     const content = [
         {
-            image: '/landing/__paystack.svg',
+            image: '/img/__paystack.svg',
             header: 'Paystack',
             imagestyle: 'w-[3rem] h-[3rem]',
             paragraph: 'Trusted by 200,000+ businesses, Thousands of organizations of all sizes trust Paystack to grow their business.',
         },
         {
-            image: '/landing/__moniepoint.svg',
+            image: '/img/__moniepoint.svg',
             header: 'Moniepoint',
             paragraph: 'Collect payments, access loans and manage operations with a business banking solution that meets all your needs.',
         },
         {
-            image: '/landing/__opay.svg',
+            image: '/img/__opay.svg',
             header: 'Opay',
             paragraph: 'OPay  solutions make payments easier, transfers free, savings more rewarding and gives you cashback on airtime.',
         },
         {
-            image: '/landing/_nomba.png',
+            image: '/img/_nomba.png',
             header: 'Nomba',
             paragraph: 'With Nomba, you can accept payments faster and easier with our reliable POS terminals or via QR.',
         },
         {
-            image: '/landing/_squad.png',
+            image: '/img/_squad.png',
             header: 'Squad',
             imagestyle:  'w-[10rem]', 
             paragraph: 'Squad is a powerful payment platform that is designed to meet the needs of businesses of all sizes.',
         },
         {
-            image: '/landing/_fern.png',
+            image: '/img/_fern.png',
             header: 'Fern',
             imagestyle:  'w-[12rem]', 
             paragraph: 'With the FERN payment gateway, merchants can conveniently accept payments, control finances, and track transactions.',

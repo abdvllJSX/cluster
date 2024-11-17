@@ -15,7 +15,7 @@ const Home = () => {
                 'Multiple Payment Options',
                 '24/7 Uptime and Reliability'
             ],
-            image: '/landing/stay_connected.png',
+            image: '/img/stay_connected.png',
         },
         {
             header: 'Phenomenal sales conversion rate',
@@ -26,7 +26,7 @@ const Home = () => {
                 'Enhanced Customer Trust',
                 'Faster Payment Processing'
             ],
-            image: '/landing/phenomenal_sales.png',
+            image: '/img/phenomenal_sales.png',
 
         },
         {
@@ -39,7 +39,7 @@ const Home = () => {
                 'Customizable Performance Alerts',
                 'Comprehensive Analytics Dashboard:',
             ],
-            image: '/landing/robust_payment.png',
+            image: '/img/robust_payment.png',
 
         },
         {
@@ -51,7 +51,7 @@ const Home = () => {
                 'Seamless Failover System',
                 'Enhanced Customer Experience',
             ],
-            image: '/landing/intelligent_gateway.png',
+            image: '/img/intelligent_gateway.png',
 
         },
 

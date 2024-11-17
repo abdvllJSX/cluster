@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import RouteGuard from "./components/common/routeGuard";
 import AddGateway from "./pages/addGateway";
 import CreatePassword from "./pages/auth/createPassword";
 import Login from "./pages/auth/login";
@@ -21,6 +21,7 @@ import TransactionDetails from "./pages/transactionDetails";
 
 const queryClient = new QueryClient();
 function App() {
+  const isAuthenticated = !!localStorage.getItem("ctx");
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -28,25 +29,25 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/whycluster" element={<WhyCluster />} />
           <Route path="/partners" element={<Partners />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/add-gateway" element={<AddGateway />} />
-          <Route path="/add-gateway/:id" element={<GatewayConfig />} />
-          <Route path="/gateway-details/:id" element={<GatewayDetails />} />
+          <Route path="/dashboard" element={<RouteGuard><Dashboard /></RouteGuard>} />
+          <Route path="/add-gateway" element={<RouteGuard><AddGateway /></RouteGuard>} />
+          <Route path="/add-gateway/:id" element={<RouteGuard><GatewayConfig /></RouteGuard>} />
+          <Route path="/gateway-details/:id" element={<RouteGuard><GatewayDetails /></RouteGuard>} />
           <Route
             path="/gateway-details/:id/config-details"
-            element={<ConfigDetails />}
+            element={<RouteGuard><ConfigDetails /></RouteGuard>}
           />
           <Route
             path="/gateway-details/:id/:trxID"
-            element={<TransactionDetails />}
+            element={<RouteGuard><TransactionDetails /></RouteGuard>}
           />
           <Route
             path="/gateway-details/:id/:trxID/attempts"
-            element={<TransactionAttempt />}
+            element={<RouteGuard><TransactionAttempt /></RouteGuard>}
           />
-          <Route path="/gateway-details/:id/edit" element={<EditGateway />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/gateway-details/:id/edit" element={<RouteGuard><EditGateway /></RouteGuard>} />
+          <Route path="/profile" element={<RouteGuard><Profile /></RouteGuard>} />
+          <Route path="/profile/edit" element={<RouteGuard><EditProfile /></RouteGuard>} />
           <Route path="/onboarding/signup" element={<Signup />} />
           <Route path="/onboarding/login" element={<Login />} />
           <Route

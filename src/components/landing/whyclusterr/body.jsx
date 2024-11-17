@@ -3,32 +3,32 @@ import MaxContainer from "../../common/maxcontainer";
 const Body = () => {
     const content = [
         {
-            image: '/landing/reliable.svg',
+            image: '/img/reliable.svg',
             header: 'Reliable & Secure Payment Processing',
             paragraph: 'Cluster is built with industry-leading encryption, and secure servers to ensure every transaction is safe from fraud or unauthorized access.',
         },
         {
-            image: '/landing/easy_integration.svg',
+            image: '/img/easy_integration.svg',
             header: 'Easy Integration with Your Business',
             paragraph: 'We support a wide variety of programming languages and frameworks, enabling a smooth, flexible integration.',
         },
         {
-            image: '/landing/optimized.svg',
+            image: '/img/optimized.svg',
             header: 'Optimized for Customer Experience',
             paragraph: 'Every transaction is optimized for speed, ensuring smooth checkout experiences that reduce cart abandonment and boost conversions.',
         },
         {
-            image: '/landing/advanced.svg',
+            image: '/img/advanced.svg',
             header: 'Advanced Analytics & Reporting',
             paragraph: 'Customizable dashboards offer real-time data, so you always have a clear picture of your business’s payment performance.',
         },
         {
-            image: '/landing/_expert.svg',
+            image: '/img/_expert.svg',
             header: '24/7 Expert Support',
             paragraph: 'Whether you have a technical question, need assistance with integration, our experienced team is available to assist you whenever you need it.',
         },
         {
-            image: '/landing/fraud.svg',
+            image: '/img/fraud.svg',
             header: 'Fraud Prevention & Risk Management',
             paragraph: 'Tailored risk management settings allow you to customize your protection based on your specific business needs.',
         },

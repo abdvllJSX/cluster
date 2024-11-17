@@ -3,8 +3,27 @@ import { Link } from "react-router-dom";
 
 import MaxContainer from "../common/maxcontainer";
 import { Button } from "../ui/button";
+import { apiGetPaymentGateways } from "../../api/gateway";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const Overview = () => {
+
+  /* const { data, error, mutate } = useMutation({
+     mutationFn: () => apiGetPaymentGateways(),
+     onSuccess: ({ data }) => {
+       console.log('success')
+     },
+     onError: ({ error }) => {
+       console.log('error:', error)
+     }
+   })
+ 
+   useEffect(() => {
+     mutate()
+   }, [])
+ */
+
   const Cards = [
     {
       title: "All payment gateway",

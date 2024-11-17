@@ -4,7 +4,7 @@ const FeedBack = () => {
     const cards = [
         {
             content: "\"Our checkout completion grew by 30% after integrating with Cluster. Customers love the flexibility to choose their preferred payment option.\"",
-            image: '/landing/tunde_bolaji.png',
+            image: '/img/tunde_bolaji.png',
             name: 'Tunde Bolaji, CEO',
             nameStyle: 'text-[#230E2A]',
             cardStyle: 'bg-[#FDF6FF]',
@@ -13,7 +13,7 @@ const FeedBack = () => {
         },
         {
             content: "\"Since adding Cluster, our transactions have increased, with customers enjoying the choice of payment options.\"",
-            image: '/landing/tunde_bolaji.png',
+            image: '/img/tunde_bolaji.png',
             name: 'Bola Idris, CMO',
             nameStyle: 'text-[#FFFFFF]',
             cardStyle: 'bg-card_gradient',
@@ -22,7 +22,7 @@ const FeedBack = () => {
         },
         {
             content: "\"Cluster integration boosted our checkout rate by 42%. Customers now have more control over how they pay.\"",
-            image: '/landing/tunde_bolaji.png',
+            image: '/img/tunde_bolaji.png',
             name: 'Edem Ekeme, CEO',
             nameStyle: 'text-[#230E2A]',
             cardStyle: 'bg-[#FDF6FF]',

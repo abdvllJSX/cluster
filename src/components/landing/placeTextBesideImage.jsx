@@ -24,7 +24,7 @@ const PlaceTextBesideImage = ({ header, paragraph, content, image, id }) => {
 const Content = ({ text }) => {
     return (
         <div className="flex gap-[1.5rem] items-center">
-            <img src="/landing/checkout.svg" alt="checkout icon" className="w-[1.8rem] sm:w-[2rem] sm:h-[2rem] h-[1.8rem]" />
+            <img src="/img/checkout.svg" alt="checkout icon" className="w-[1.8rem] sm:w-[2rem] sm:h-[2rem] h-[1.8rem]" />
             <p className="text-[#000000]">{text}</p>
         </div>
     )
