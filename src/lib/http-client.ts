@@ -3,7 +3,7 @@ import axios from "axios";
 import { ReasonPhrases } from "http-status-codes";
 
 const httpClient = axios.create({
-  baseURL: "http://localhost:1010",
+  baseURL: window.location.origin,
 });
 
 const handleErrorResponse = (error: iAPIError) => {
