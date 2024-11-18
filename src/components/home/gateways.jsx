@@ -42,7 +42,7 @@ const Gateways = ({ error, gateways, isError, loading }) => {
             {!loading && gateways && (
               <>
                 {gateways.length > 0 &&
-                  gateways.map((gateway, index) => (
+                  formatGatewayList(gateways).map((gateway, index) => (
                     <GatewayCard gateway={gateway} key={index} />
                   ))}
                 {gateways.length === 0 && (
@@ -185,5 +185,28 @@ const Status = ({ status }) => {
     </div>
   );
 };
+
+const formatGatewayList = (gateways) =>
+  gateways.map((row) => ({
+    name: row.payment_gateway.label,
+    image: row.payment_gateway.logo_url,
+    link: row.payment_gateway.home_page_url,
+    status: [
+      row.is_enabled && {
+        name: "Active",
+        style: "bg-[#ECFDF3] text-[#027A48]",
+      },
+      row.is_configured && {
+        name: "Configured",
+        style: "bg-[#EFDAF6] text-[#AF47D2]",
+      },
+    ],
+    apiUpTime: "99.999",
+    apiResponseTime: "278",
+    numberOfClicksOnTheGateway: "32849",
+    TotalTransactions: "18599",
+    numberOfFailedTransactions: "200",
+    numberOfSuccessfulTransactions: "1599",
+  }));
 
 export default Gateways;
