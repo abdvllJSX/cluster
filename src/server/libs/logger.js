@@ -14,6 +14,8 @@ const defaultOptions = {
       "emailAddress",
       "*.email",
       "email",
+      "*.username",
+      "username",
       "*.password",
       "password",
       "*.authToken",

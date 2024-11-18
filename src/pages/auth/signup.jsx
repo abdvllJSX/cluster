@@ -66,7 +66,7 @@ const Signup = () => {
             style={{ height: "min(100vh, 70rem)" }}
             className="pl-[5rem] sm:h-[100vh] sm:pl-[0] h-[100%] sm:w-full flex flex-col flex-1 pt-[3rem]"
           >
-            <Link to={'/'}>
+            <Link to={"/"}>
               <img
                 src="/img/cluster_logo.svg"
                 alt="cluster"

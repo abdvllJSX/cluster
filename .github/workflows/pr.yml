@@ -1,0 +1,54 @@
+name: PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set NodeJS v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.5.1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run ci:lint
+
+  style:
+    name: Style
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set NodeJS v20
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.5.1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run style
+      - name: Store local diff
+        id: check-diff
+        run: echo "::set-output name=diff::$(git diff)";
+      - name: Ensure there is no diff result
+        if: ${{ steps.check-diff.outputs.diff != '' }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('The code style is not compliant. Run `yarn style` to ensure code style guidelines are met.')
+
+  title-check:
+    name: Title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: thehanimo/pr-title-checker@v1.4.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          pass_on_octokit_error: false
+          configuration_path: .github/pr-title-checker-config.json

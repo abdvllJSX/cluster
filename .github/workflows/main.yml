@@ -1,0 +1,98 @@
+name: CI
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  deploy-sandbox:
+    name: Staging Deployment
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy.key
+          sudo chmod 600 ~/.ssh/deploy.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo DEPLOY_ENV=staging >> .env
+          echo SERVER_USER="$SSH_USER" >> .env
+          echo SERVER_HOST="$SSH_HOST" >> .env
+        shell: bash
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+
+      - name: Install PM2
+        run: npm i pm2 -g
+
+      - name: Deploy
+        run: env $(cat .env | grep -v \"#\" | xargs) pm2 deploy ecosystem.config.cjs sandbox
+
+  approve-production:
+    name: Wait for approval to go live
+    runs-on: ubuntu-latest
+    environment: approve-production
+    needs: deploy-sandbox
+    steps:
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: RichardBoyewa
+          minimum-approvals: 1
+          issue-title: "Deploying to production from sandbox"
+          issue-body: "Please approve or deny the deployment to production"
+          exclude-workflow-initiator-as-approver: false
+          additional-approved-words: ""
+          additional-denied-words: ""
+
+  deploy-production:
+    name: Production Deployment
+    runs-on: ubuntu-latest
+    environment: production
+    needs: approve-production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy.key
+          sudo chmod 600 ~/.ssh/deploy.key
+          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo DEPLOY_ENV=production >> .env
+          echo SERVER_USER="$SSH_USER" >> .env
+          echo SERVER_HOST="$SSH_HOST" >> .env
+        shell: bash
+        env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+
+      - name: Install Yarn
+        run: npm i yarn -g
+
+      - name: Install PM2
+        run: npm i pm2 -g
+
+      - name: Deploy
+        run: env $(cat .env | grep -v \"#\" | xargs) pm2 deploy ecosystem.config.cjs production

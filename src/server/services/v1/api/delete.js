@@ -12,7 +12,7 @@ export default async ({ endpoint, id, query, token }) => {
 
   if (token) {
     log.info({ headers, token }, "Attaching auth token header to headers");
-    headers["Authorization"] = `Bearer ${token}`;
+    headers["HTTP_DSQUID_SESSION_TOKEN"] = token;
   }
 
   const url = [SERVICE.BASE_URL, `/extensions/cluster/api`, endpoint].join("");

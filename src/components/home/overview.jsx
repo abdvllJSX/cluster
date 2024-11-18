@@ -3,57 +3,38 @@ import { Link } from "react-router-dom";
 
 import MaxContainer from "../common/maxcontainer";
 import { Button } from "../ui/button";
-import { apiGetPaymentGateways } from "../../api/gateway";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 const Overview = () => {
-
-  /* const { data, error, mutate } = useMutation({
-     mutationFn: () => apiGetPaymentGateways(),
-     onSuccess: ({ data }) => {
-       console.log('success')
-     },
-     onError: ({ error }) => {
-       console.log('error:', error)
-     }
-   })
- 
-   useEffect(() => {
-     mutate()
-   }, [])
- */
-
   const Cards = [
     {
       title: "All payment gateway",
       value: "9",
-      increament: true,
+      increment: true,
     },
     {
       title: "Total clicks on payment gateway",
       value: "1250",
-      increament: false,
+      increment: false,
     },
     {
       title: "Total number of transactions",
       value: "432520",
-      increament: true,
+      increment: true,
     },
     {
       title: "Total number of pending transactions",
       value: "86",
-      increament: true,
+      increment: true,
     },
     {
       title: "Total number of failed transactions",
       value: "10",
-      increament: false,
+      increment: false,
     },
     {
       title: "Total number of successful transactions",
       value: "309783",
-      increament: true,
+      increment: true,
     },
   ];
   return (
@@ -88,7 +69,7 @@ const Overview = () => {
   );
 };
 
-const Card = ({ title, value, increament }) => {
+const Card = ({ title, value, increment }) => {
   return (
     <div className="bg-[#fff] border-[#E9EAEB] border rounded-[1rem] p-[2rem] shadow-[0px_1px_2px_0px_#0A0D120D]">
       <h2 className="text-[#181D27] text-[1.65rem] mb-[2rem] font-[600]">
@@ -98,7 +79,7 @@ const Card = ({ title, value, increament }) => {
         <p className="text-[#181D27] text-[3.3rem] font-[600]">
           {Number(value).toLocaleString()}
         </p>
-        {increament ? (
+        {increment ? (
           <img
             src={"/img/increase.svg"}
             className="w-[10rem] h-auto"
