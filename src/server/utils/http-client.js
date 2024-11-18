@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ReasonPhrases } from "http-status-codes";
 
 import { CLUSTER_TOKEN } from "../utils/config.js";
@@ -26,8 +25,12 @@ const handleErrorResponse = (error) => {
   };
 };
 
-const handleOkResponse = (response) => {
-  const payload = JSON.parse(!!response?.data ? response.data : "{}");
+const handleOkResponse = async (response) => {
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
+  }
+
+  const payload = await response.json();
   if (payload.data) {
     const { message, status, data } = payload;
     return {
@@ -49,91 +52,113 @@ const HEADERS = {
 };
 
 const OPTIONS = {
-  responseType: "JSON",
-  withCredentials: true,
+  credentials: "include",
 };
 
-export const apiGet = (url, params, headers = {}) =>
-  axios({
-    ...OPTIONS,
-    headers: {
-      ...HEADERS,
-      ...headers,
-    },
-    method: "GET",
-    params,
-    url,
-  })
-    .then(handleOkResponse)
-    .catch(handleErrorResponse);
+export const apiGet = async (url, params, headers = {}) => {
+  try {
+    let urlParams = "";
+    if (Object.keys(params).length > 0) {
+      const stringParams = new URLSearchParams(params);
+      urlParams = `?${stringParams}`;
+    }
 
-export const apiDelete = (url, params, headers = {}) =>
-  axios({
-    ...OPTIONS,
-    headers: {
-      ...HEADERS,
-      ...headers,
-    },
-    method: "DELETE",
-    params,
-    url,
-  })
-    .then(handleOkResponse)
-    .catch(handleErrorResponse);
+    const response = await fetch(`${url}${urlParams}`, {
+      ...OPTIONS,
+      headers: {
+        ...HEADERS,
+        ...headers,
+      },
+      method: "GET",
+    });
+    return handleOkResponse(response);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
 
-export const apiPost = (url, data, headers = {}) =>
-  axios({
-    ...OPTIONS,
-    data,
-    headers: {
-      ...HEADERS,
-      ...headers,
-    },
-    method: "POST",
-    url,
-  })
-    .then(handleOkResponse)
-    .catch(handleErrorResponse);
+export const apiDelete = async (url, params, headers = {}) => {
+  try {
+    let urlParams = "";
+    if (Object.keys(params).length > 0) {
+      const stringParams = new URLSearchParams(params);
+      urlParams = `?${stringParams}`;
+    }
 
-export const apiPatch = (url, data, headers = {}) =>
-  axios({
-    ...OPTIONS,
-    data,
-    headers: {
-      ...HEADERS,
-      ...headers,
-    },
-    method: "PATCH",
-    url,
-  })
-    .then(handleOkResponse)
-    .catch(handleErrorResponse);
+    const response = await fetch(`${url}${urlParams}`, {
+      ...OPTIONS,
+      headers: {
+        ...HEADERS,
+        ...headers,
+      },
+      method: "DELETE",
+    });
+    return handleOkResponse(response);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
 
-export const apiPut = (url, data, headers = {}) =>
-  axios({
-    ...OPTIONS,
-    data,
-    headers: {
-      ...HEADERS,
-      ...headers,
-    },
-    method: "PUT",
-    url,
-  })
-    .then(handleOkResponse)
-    .catch(handleErrorResponse);
+export const apiPost = async (url, data, headers = {}) => {
+  try {
+    const response = await fetch(url, {
+      ...OPTIONS,
+      body: JSON.stringify(data),
+      headers: {
+        ...HEADERS,
+        ...headers,
+      },
+      method: "POST",
+    });
+    return handleOkResponse(response);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
+
+export const apiPatch = async (url, data, headers = {}) => {
+  try {
+    const response = await fetch(url, {
+      ...OPTIONS,
+      body: JSON.stringify(data),
+      headers: {
+        ...HEADERS,
+        ...headers,
+      },
+      method: "PATCH",
+    });
+    return handleOkResponse(response);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
+
+export const apiPut = async (url, data, headers = {}) => {
+  try {
+    const response = await fetch(url, {
+      ...OPTIONS,
+      body: JSON.stringify(data),
+      headers: {
+        ...HEADERS,
+        ...headers,
+      },
+      method: "PUT",
+    });
+    return handleOkResponse(response);
+  } catch (error) {
+    return handleErrorResponse(error);
+  }
+};
 
 export const apiUpload = (url, data, headers = {}) =>
-  axios({
-    data,
+  fetch(url, {
+    body: JSON.stringify(data),
     headers: {
       ...HEADERS,
       ...headers,
       contentType: "multipart/form-data",
     },
     method: "POST",
-    responseType: "JSON",
-    url,
   })
     .then(handleOkResponse)
     .catch(handleErrorResponse);

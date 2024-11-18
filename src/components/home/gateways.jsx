@@ -1,3 +1,8 @@
+import {
+  ArrowPathIcon,
+  ExclamationTriangleIcon,
+  InboxIcon,
+} from "@heroicons/react/24/outline/index.js";
 import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -6,95 +11,7 @@ import MaxContainer from "../common/maxcontainer";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-const Gateways = () => {
-  const paymentGateways = [
-    {
-      name: "Paystack",
-      image: "/img/paystack.svg",
-      link: "https://paystack.com",
-      status: [
-        {
-          name: "Active",
-          style: "bg-[#ECFDF3] text-[#027A48]",
-        },
-        {
-          name: "Configured",
-          style: "bg-[#EFDAF6] text-[#AF47D2]",
-        },
-      ],
-      apiUpTime: "99.999",
-      apiResponseTime: "278",
-      numberOfClicksOnTheGateway: "32849",
-      TotalTransactions: "18599",
-      numberOfFailedTransactions: "200",
-      numberOfSuccessfulTransactions: "1599",
-    },
-    {
-      name: "flutterwave",
-      image: "/img/flutter_wave.svg",
-      link: "https://flutterwave.com",
-      status: [
-        {
-          name: "Inactive",
-          style: "bg-[#E7EAED] text-[#525964]",
-        },
-        {
-          name: "Configured",
-          style: "bg-[#EFDAF6] text-[#AF47D2]",
-        },
-      ],
-      apiUpTime: "99.999",
-      apiResponseTime: "278",
-      numberOfClicksOnTheGateway: "32849",
-      TotalTransactions: "18599",
-      numberOfFailedTransactions: "200",
-      numberOfSuccessfulTransactions: "1599",
-      withoutText: true,
-      imagestyle: "w-[20rem]",
-    },
-    {
-      name: "ALAT",
-      image: "/img/alat.svg",
-      link: "https://online.alat.ng",
-      status: [
-        {
-          name: "Active",
-          style: "bg-[#ECFDF3] text-[#027A48]",
-        },
-        {
-          name: "Configured",
-          style: "bg-[#EFDAF6] text-[#AF47D2]",
-        },
-      ],
-      apiUpTime: "99.999",
-      apiResponseTime: "278",
-      numberOfClicksOnTheGateway: "32849",
-      TotalTransactions: "18599",
-      numberOfFailedTransactions: "200",
-      numberOfSuccessfulTransactions: "1599",
-    },
-    {
-      name: "GTBank",
-      image: "/img/gt.png",
-      link: "https://gtbank.com",
-      status: [
-        {
-          name: "Active",
-          style: "bg-[#ECFDF3] text-[#027A48]",
-        },
-        {
-          name: "Configured",
-          style: "bg-[#EFDAF6] text-[#AF47D2]",
-        },
-      ],
-      apiUpTime: "99.999",
-      apiResponseTime: "278",
-      numberOfClicksOnTheGateway: "32849",
-      TotalTransactions: "18599",
-      numberOfFailedTransactions: "200",
-      numberOfSuccessfulTransactions: "1599",
-    },
-  ];
+const Gateways = ({ error, gateways, isError, loading }) => {
   return (
     <section className="mt-[3rem]">
       <MaxContainer>
@@ -122,9 +39,34 @@ const Gateways = () => {
             </div>
           </div>
           <div className="flex flex-col mt-[2rem] gap-[2rem]">
-            {paymentGateways.map((gateway, index) => (
-              <GatewayCard gateway={gateway} key={index} />
-            ))}
+            {!loading && gateways && (
+              <>
+                {gateways.length > 0 &&
+                  gateways.map((gateway, index) => (
+                    <GatewayCard gateway={gateway} key={index} />
+                  ))}
+                {gateways.length === 0 && (
+                  <div className="flex flex-col self-center items-center text-2xl p-4">
+                    <InboxIcon className="w-[2.3rem] h-[2.3rem]" />
+                    No gateways found...
+                  </div>
+                )}
+              </>
+            )}
+
+            {loading && (
+              <div className="flex flex-col self-center items-center text-2xl p-4">
+                <ArrowPathIcon className="animate-spin w-[2.3rem] h-[2.3rem]" />
+                Loading gateways...
+              </div>
+            )}
+
+            {!loading && isError && (
+              <div className="flex flex-col self-center items-center text-2xl p-4">
+                <ExclamationTriangleIcon className="w-[2.3rem] h-[2.3rem]" />
+                {error.message}
+              </div>
+            )}
           </div>
         </div>
       </MaxContainer>

@@ -8,6 +8,7 @@
     "build:dev": "tsc -b && vite build --watch",
     "dev": "vite",
     "lint": "eslint .",
+    "ci:lint": "eslint --quiet .",
     "preview": "vite preview",
     "serve": "node index",
     "serve:dev": "nodemon index",

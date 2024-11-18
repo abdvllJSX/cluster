@@ -1,6 +1,6 @@
 // src/components/RouteGuard.jsx
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 const RouteGuard = ({ children }) => {
   const isAuthenticated = !!localStorage.getItem("ctx");

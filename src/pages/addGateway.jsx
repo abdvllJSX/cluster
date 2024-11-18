@@ -1,3 +1,10 @@
+import { apiListAllGateway } from "@/api/gateway.ts";
+import {
+  ArrowPathIcon,
+  ExclamationTriangleIcon,
+  InboxIcon,
+} from "@heroicons/react/24/outline/index.js";
+import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -6,30 +13,18 @@ import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
 
 const AddGateway = () => {
-  const gatewayList = [
-    {
-      name: "Paystack",
-      image: "/img/paystack.svg",
-      link: "https://paystack.com",
-    },
-    {
-      name: "Flutterwave",
-      image: "/img/flutter_wave.svg",
-      imageSize: "w-[15rem] h-auto",
-      link: "https://flutterwave.com",
-      withtext: true,
-    },
-    {
-      name: "Alat",
-      image: "/img/alat.svg",
-      link: "https://alat.com",
-    },
-    {
-      name: "GtBank",
-      image: "/img/gt.png",
-      link: "https://gt.com",
-    },
-  ];
+  const {
+    isPending: gatewaysLoading,
+    isError,
+    data: response,
+    error: gatewayLoadingError,
+  } = useQuery({
+    queryKey: ["allGateways"],
+    queryFn: apiListAllGateway,
+    retry: false,
+  });
+
+  const { data: gatewayList = [] } = response ?? {};
 
   const breadcrumbItems = [
     { path: "/", label: "Overview" },
@@ -55,9 +50,34 @@ const AddGateway = () => {
               />
             </div>
             <div className="grid grid-cols-1 mt-[4.5rem] sm:mt-[3rem] gap-[5rem]">
-              {gatewayList.map((gateway, index) => (
-                <GatewayCard key={index} {...gateway} index={index} />
-              ))}
+              {!gatewaysLoading && response && (
+                <>
+                  {gatewayList.length > 0 &&
+                    formatGatewayList(gatewayList).map((gateway, index) => (
+                      <GatewayCard key={index} {...gateway} index={index} />
+                    ))}
+                  {gatewayList.length === 0 && (
+                    <div className="flex flex-col self-center items-center text-2xl p-4">
+                      <InboxIcon className="w-[2.3rem] h-[2.3rem]" />
+                      No gateways found...
+                    </div>
+                  )}
+                </>
+              )}
+
+              {gatewaysLoading && (
+                <div className="flex flex-col self-center items-center text-2xl p-4">
+                  <ArrowPathIcon className="animate-spin w-[2.3rem] h-[2.3rem]" />
+                  Loading all gateways...
+                </div>
+              )}
+
+              {!gatewaysLoading && isError && (
+                <div className="flex flex-col self-center items-center text-2xl p-4">
+                  <ExclamationTriangleIcon className="w-[2.3rem] h-[2.3rem]" />
+                  {gatewayLoadingError.message}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -66,17 +86,26 @@ const AddGateway = () => {
   );
 };
 
-const GatewayCard = ({ name, image, link, withtext, imageSize, index }) => {
+const formatGatewayList = (gateways) =>
+  gateways.map((row) => ({
+    id: row.name,
+    name: row.label,
+    image: row.logo_url,
+    link: row.home_page_url,
+    description: row.description,
+  }));
+
+const GatewayCard = ({ id, name, image, link, withText, imageSize }) => {
   return (
     <div className="pb-[2rem] border-b border-gray-300">
-      <Link to={`/add-gateway/${index}`}>
+      <Link to={`/add-gateway/${id}`}>
         <div className="flex gap-[1rem] mb-[1.2rem] items-center">
           <img
             src={image}
             className={`${imageSize ?? "w-[3rem]"}`}
             alt={name}
           />
-          {!withtext && (
+          {!withText && (
             <p className="text-[#000000] text-[2rem] font-[600]">{name}</p>
           )}
         </div>

@@ -1,0 +1,16 @@
+{
+  "LABEL": {
+    "name": "Title needs formatting",
+    "color": "EEEEEE"
+  },
+  "CHECKS": {
+    "regexp": "^(fix|feat):\\s[A-Za-z0-9\\_\\-\\@\\/\\s]{11,}\\s\\[([A-Z]+\\-[0-9]+)(\\,\\s[A-Z]+\\-[0-9]+)?\\]$.*$",
+    "regexpFlags": "g",
+    "alwaysPassCI": false
+  },
+  "MESSAGES": {
+    "success": "All OK",
+    "failure": "Failing CI test",
+    "notice": ""
+  }
+}
