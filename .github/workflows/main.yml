@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-sandbox:
+  deploy-staging:
     name: Staging Deployment
     runs-on: ubuntu-latest
     environment: staging
@@ -39,20 +39,20 @@ jobs:
         run: npm i pm2 -g
 
       - name: Deploy
-        run: env $(cat .env | grep -v \"#\" | xargs) pm2 deploy ecosystem.config.cjs sandbox
+        run: env $(cat .env | grep -v \"#\" | xargs) pm2 deploy ecosystem.config.cjs staging
 
   approve-production:
     name: Wait for approval to go live
     runs-on: ubuntu-latest
     environment: approve-production
-    needs: deploy-sandbox
+    needs: deploy-staging
     steps:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
           approvers: RichardBoyewa
           minimum-approvals: 1
-          issue-title: "Deploying to production from sandbox"
+          issue-title: "Deploying to production from staging"
           issue-body: "Please approve or deny the deployment to production"
           exclude-workflow-initiator-as-approver: false
           additional-approved-words: ""
