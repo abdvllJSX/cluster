@@ -10,6 +10,7 @@ module.exports = {
         NODE_ENV: "staging",
       },
       instances: 1,
+      interpreter: "node@20.18.0",
       max_memory_restart: "1G",
       max_restarts: 50,
       name: "cluster-fe",
