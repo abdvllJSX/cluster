@@ -27,7 +27,7 @@ const Dashboard = () => {
         isSuccess={isSuccess}
         error={gatewayLoadingError}
         loading={gatewaysLoading}
-        gateways={gateways}
+        gateways={gateways?.data}
       />
     </>
   );
