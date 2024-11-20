@@ -16,7 +16,7 @@ const TransactionAttempt = () => {
   const breadcrumbItems = [
     {
       label: "Overview",
-      path: `/`,
+      path: `/dashboard`,
     },
     {
       label: `${id}`,

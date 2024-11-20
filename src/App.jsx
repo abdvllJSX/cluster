@@ -16,9 +16,9 @@ import GatewayConfig from "./pages/gatewayconfig";
 import Home from "./pages/landing/home";
 import Partners from "./pages/landing/partners";
 import WhyCluster from "./pages/landing/whyCluster";
-import Profile from "./pages/profile";
 import TransactionAttempt from "./pages/transactionAttempt";
 import TransactionDetails from "./pages/transactionDetails";
+import Settings from "./pages/profile";
 
 const queryClient = new QueryClient();
 function App() {
@@ -98,7 +98,7 @@ function App() {
             path="/profile"
             element={
               <RouteGuard>
-                <Profile />
+                <Settings />
               </RouteGuard>
             }
           />

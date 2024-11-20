@@ -64,7 +64,7 @@ const GatewayConfig = () => {
   };
 
   const breadcrumbItems = [
-    { label: "Overview", path: "/" },
+    { label: "Overview", path: "/dashboard" },
     { label: "Add Payment Gateway", path: "/add-gateway" },
     { label: "Configure payment gateway", path: `/add-gateway/${id}` },
   ];

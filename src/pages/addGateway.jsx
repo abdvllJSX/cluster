@@ -27,7 +27,7 @@ const AddGateway = () => {
   const { data: gatewayList = [] } = response ?? {};
 
   const breadcrumbItems = [
-    { path: "/", label: "Overview" },
+    { path: "/dashboard", label: "Overview" },
     { path: "/add-gateway", label: "Add Payment Gateway" },
   ];
 

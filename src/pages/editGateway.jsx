@@ -40,7 +40,7 @@ const EditGateway = () => {
   const breadcrumbItems = [
     {
       label: "Overview",
-      path: `/`,
+      path: `/dashboard`,
     },
     {
       label: `${id}`,

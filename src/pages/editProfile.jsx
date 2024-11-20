@@ -11,7 +11,7 @@ import { Label } from "../components/ui/label";
 const EditProfile = () => {
   const breadcrumbItems = [
     {
-      path: `/`,
+      path: `/dashboard`,
       label: "Overview",
     },
     {

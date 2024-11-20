@@ -13,7 +13,7 @@ const TransactionDetails = () => {
   const breadcrumbItems = [
     {
       label: "Overview",
-      path: `/`,
+      path: `/dashboard`,
     },
     {
       label: `${id}`,

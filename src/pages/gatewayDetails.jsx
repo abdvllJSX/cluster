@@ -151,7 +151,7 @@ const GatewayDetails = () => {
   ];
 
   const breadcrumbItems = [
-    { label: "Overview", path: "/" },
+    { label: "Overview", path: "/dashboard" },
     { label: id, path: `/gateway-details/${id}`, active: true },
   ];
 
