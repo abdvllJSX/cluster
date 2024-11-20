@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 const RouteGuard = ({ children }) => {
   // const isAuthenticated = !!localStorage.getItem("ctx");
-  const isAuthenticated = true
+  const isAuthenticated = true;
   return isAuthenticated ? children : <Navigate to="/onboarding/login" />;
 };
 

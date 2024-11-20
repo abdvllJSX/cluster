@@ -13,6 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Bundle
+        run: npm run build
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -65,6 +71,12 @@ jobs:
     needs: approve-production
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Bundle
+        run: npm run build
 
       - name: Set up SSH
         run: |

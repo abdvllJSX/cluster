@@ -46,14 +46,17 @@ const handleOkResponse = (response: { data: iAPIResponse }) => {
   };
 };
 
-export const apiDelete = async (url: string, filter: object) =>
+export const apiDelete = async (url: string, params: object) =>
   httpClient
-    .delete(url, filter)
+    .delete(url, { params })
     .then(handleOkResponse)
     .catch(handleErrorResponse);
 
-export const apiGet = async (url: string, filter: object) =>
-  httpClient.get(url, filter).then(handleOkResponse).catch(handleErrorResponse);
+export const apiGet = async (url: string, params: object) =>
+  httpClient
+    .get(url, { params })
+    .then(handleOkResponse)
+    .catch(handleErrorResponse);
 
 export const apiPatch = async (url: string, body: object) =>
   httpClient.patch(url, body).then(handleOkResponse).catch(handleErrorResponse);
