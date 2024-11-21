@@ -1,14 +1,14 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Label } from "@radix-ui/react-label";
 import { ChevronLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Label } from "@radix-ui/react-label";
+
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
 import { Button } from "../components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "../components/ui/textarea";
-
 
 const Settings = () => {
   const { id, trxID } = useParams();
@@ -53,11 +53,25 @@ const Settings = () => {
             </h1>
             <Tabs defaultValue="Profile" className="w-[100%] mt-[3rem] sm:mt-[0rem]">
               <TabsList className="bg-transparent border-b border-b-[#E9EAEB] pb-[.07rem] h-[5rem] w-[100%] justify-start">
-                <TabsTrigger value="Profile" className="text-[1.3rem] font-[600] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] text-[#717680] w-[20rem] data-[state=active]:shadow-none data-[state=active]:bg-transparent">API secret and keys</TabsTrigger>
-                <TabsTrigger value="keys" className="text-[1.3rem] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] font-[600] w-[20rem] text-[#717680] data-[state=active]:shadow-none data-[state=active]:bg-transparent">API secret and keys</TabsTrigger>
+                <TabsTrigger
+                  value="Profile"
+                  className="text-[1.3rem] font-[600] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] text-[#717680] w-[20rem] data-[state=active]:shadow-none data-[state=active]:bg-transparent"
+                >
+                  API secret and keys
+                </TabsTrigger>
+                <TabsTrigger
+                  value="keys"
+                  className="text-[1.3rem] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] font-[600] w-[20rem] text-[#717680] data-[state=active]:shadow-none data-[state=active]:bg-transparent"
+                >
+                  API secret and keys
+                </TabsTrigger>
               </TabsList>
-              <TabsContent value="Profile"><Profile /></TabsContent>
-              <TabsContent value="keys"><Keys /></TabsContent>
+              <TabsContent value="Profile">
+                <Profile />
+              </TabsContent>
+              <TabsContent value="keys">
+                <Keys />
+              </TabsContent>
             </Tabs>
           </div>
         </div>
@@ -67,7 +81,6 @@ const Settings = () => {
 };
 
 export default Settings;
-
 
 const Profile = () => {
   return (
@@ -80,12 +93,8 @@ const Profile = () => {
             className="w-[8rem] sm:w-[6rem] h-auto"
           />
           <div className="">
-            <h3 className="text-[2rem] font-[600] text-[#000000]">
-              DataSquid
-            </h3>
-            <p className="font-[400] text-[#535862]">
-              dataquid@gmail.com
-            </p>
+            <h3 className="text-[2rem] font-[600] text-[#000000]">DataSquid</h3>
+            <p className="font-[400] text-[#535862]">dataquid@gmail.com</p>
           </div>
         </div>
         <Button
@@ -97,18 +106,14 @@ const Profile = () => {
         </Button>
       </div>
       <div className="mt-[3rem]">
-        <p className="text-[1.8rem] font-[500] text-[#535862]">
-          Business info
-        </p>
+        <p className="text-[1.8rem] font-[500] text-[#535862]">Business info</p>
         <div className="mt-[2.5rem] border-b py-[2rem] border-[#9B9B9B] border-t">
           <div className="flex mb-[3rem] items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">Business name</p>
             <p className="text-[#000000] font-[600]">DataSquid</p>
           </div>
           <div className="flex items-center gap-[1rem]">
-            <p className="text-[#535862] w-[28rem]">
-              Business phone number
-            </p>
+            <p className="text-[#535862] w-[28rem]">Business phone number</p>
             <p className="text-[#000000] font-[600]">+2349020349843</p>
           </div>
 
@@ -141,26 +146,29 @@ const Profile = () => {
         </Button>
       </div>
     </div>
-  )
-}
-
+  );
+};
 
 const Keys = () => {
   return (
     <div className="flex mt-[2rem] flex-col gap-[3rem] sm:gap-[2rem]">
       <KeyItem label={'API Key'} />
       <div className="">
-        <KeyItem label={'Api Secret'} />
-        <Link to={''} className="text-[1.2rem]">Generate new secret key</Link>
+        <KeyItem label={"Api Secret"} />
+        <Link to={""} className="text-[1.2rem]">
+          Generate new secret key
+        </Link>
       </div>
-      <KeyItem label={'Success Callback URL'} />
-      <KeyItem label={'Failure Callback URL'} />
-      <KeyItem label={'Webhook URL'} />
+      <KeyItem label={"Success Callback URL"} />
+      <KeyItem label={"Failure Callback URL"} />
+      <KeyItem label={"Webhook URL"} />
 
-      <Button className="bg-[#FF9100] mt-[.5rem] px-[2.3rem] self-start text-[1.3rem] py-[1.8rem] rounded-[.5rem] shadow-sm hover:bg-[#FF9100]">Update changes</Button>
+      <Button className="bg-[#FF9100] mt-[.5rem] px-[2.3rem] self-start text-[1.3rem] py-[1.8rem] rounded-[.5rem] shadow-sm hover:bg-[#FF9100]">
+        Update changes
+      </Button>
     </div>
-  )
-}
+  );
+};
 
 const KeyItem = ({ label }) => {
   return (
@@ -173,11 +181,11 @@ const KeyItem = ({ label }) => {
       </Label>
       <Textarea
         id=""
-        value={''}
-        onChange={''}
+        value={""}
+        onChange={""}
         className="placeholder:text-[#717680] shadow-sm placeholder:font-[400] rounded-[.7rem] h-[7rem] resize-none text-[1.4rem]"
         placeholder={label}
       />
     </div>
-  )
-}
+  );
+};
