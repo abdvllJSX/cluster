@@ -120,7 +120,7 @@ const GatewayConfig = () => {
   const breadcrumbItems = [
     { label: "Overview", path: "/dashboard" },
     { label: "Add Payment Gateway", path: "/add-gateway" },
-    { label: "Configure payment gateway", path: `/add-gateway/${id}` },
+    { label: "Configure payment gateway", path: `/add-gateway/${id}`, active: true },
   ];
 
   return (
@@ -247,7 +247,7 @@ const GatewayConfig = () => {
                     <div className="mt-[3rem] sm:w-full sm:flex-col gap-[2rem] flex items-center">
                       <Button
                         disabled={isPending}
-                        className="w-fit px-[3.8rem] py-[2rem] sm:w-full rounded-[.7rem] bg-[#FF9100] text-[1.6rem] font-[600]"
+                        className="w-fit px-[3.8rem] py-[2rem] sm:w-full rounded-[.7rem] hover:bg-[#CC7400]  bg-[#FF9100] text-[1.6rem] font-[600]"
                       >
                         {isPending && (
                           <ArrowPathIcon className="animate-spin w-[2.3rem] h-[2.3rem]" />
