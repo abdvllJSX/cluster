@@ -97,8 +97,8 @@ const formatGatewayList = (gateways) =>
 
 const GatewayCard = ({ id, name, image, link, withText, imageSize }) => {
   return (
-    <Link to={`/add-gateway/${id}`} className="pb-[2rem] hover:bg-[#FBF0FF] border-b border-gray-300">
-      <Link to={`/add-gateway/${id}`} className="hover:bg-[#FBF0FF]">
+    <div className="p-[2rem] rounded-[.8rem] hover:bg-[#FBF0FF] overflow-hidden border-b border-gray-300">
+      <Link to={`/add-gateway/${id}`} className="hover:bg-[]">
         <div className="flex gap-[1rem] mb-[1.2rem] items-center">
           <img
             src={image}
@@ -113,7 +113,7 @@ const GatewayCard = ({ id, name, image, link, withText, imageSize }) => {
       <Link to={link} className="text-[#2A3362] text-[1.65rem] font-[400]">
         {link}
       </Link>
-    </Link>
+    </div>
   );
 };
 
