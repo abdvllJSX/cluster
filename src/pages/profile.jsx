@@ -35,23 +35,23 @@ const Settings = () => {
             asChild
             className="p-[0] hidden w-fit sm:flex mb-[3.5rem] text-[#000000]"
           >
-            <Link to={"/"}>
+            <Link to={"/dashboard"}>
               <ChevronLeft size={20} className="text-[1.8rem]" />
               <p className="text-[1.8rem]">Profile</p>
             </Link>
           </Button>
 
           <h1 className="text-[2.5rem] hidden sm:block font-[600]">Profile</h1>
-          <div className="mt-[2rem] sm:mt-[1rem] flex justify-between items-center">
+          <div className="mt-[2rem] sm:hidden sm:mt-[1rem] flex justify-between items-center">
             <div className="sm:hidden">
               <Breadcrumbs items={breadcrumbItems} />
             </div>
           </div>
-          <div className="my-[4rem]">
+          <div className="my-[4rem] sm:mt-[.7rem]">
             <h1 className="text-[3rem] sm:hidden font-[600] text-[#000000]">
               Settings
             </h1>
-            <Tabs defaultValue="Profile" className="w-[100%] mt-[3rem]">
+            <Tabs defaultValue="Profile" className="w-[100%] mt-[3rem] sm:mt-[0rem]">
               <TabsList className="bg-transparent border-b border-b-[#E9EAEB] pb-[.07rem] h-[5rem] w-[100%] justify-start">
                 <TabsTrigger value="Profile" className="text-[1.3rem] font-[600] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] text-[#717680] w-[20rem] data-[state=active]:shadow-none data-[state=active]:bg-transparent">API secret and keys</TabsTrigger>
                 <TabsTrigger value="keys" className="text-[1.3rem] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] font-[600] w-[20rem] text-[#717680] data-[state=active]:shadow-none data-[state=active]:bg-transparent">API secret and keys</TabsTrigger>
@@ -72,8 +72,8 @@ export default Settings;
 const Profile = () => {
   return (
     <div className="mt-[2rem]">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-[1rem] sm:gap-[2rem]">
+      <div className="flex sm:flex-col-reverse sm:gap-[3rem] items-center justify-between">
+        <div className="flex items-center  sm:self-start gap-[1rem] sm:gap-[2rem]">
           <img
             src="/img/quotient.svg"
             alt="profile"
@@ -147,7 +147,7 @@ const Profile = () => {
 
 const Keys = () => {
   return (
-    <div className="flex mt-[2rem] flex-col gap-[3rem]">
+    <div className="flex mt-[2rem] flex-col gap-[3rem] sm:gap-[2rem]">
       <KeyItem label={'API Key'} />
       <div className="">
         <KeyItem label={'Api Secret'} />

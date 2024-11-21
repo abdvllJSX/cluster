@@ -51,7 +51,7 @@ const Overview = () => {
 
             <Button
               asChild
-              className="bg-[#FF9100] sm:self-center  sm:w-full px-[2rem] py-[2rem] rounded-[1rem] text-[1.4rem] font-[600] text-white"
+              className="bg-[#FF9100] hover:bg-[#CC7400] hover:text-white transition-all duration-200 sm:self-center  sm:w-full px-[2rem] py-[2rem] rounded-[1rem] text-[1.4rem] font-[600] text-white"
             >
               <Link to={"/add-gateway"}>
                 <Plus className="w-[2rem]" /> Add payment gateway
