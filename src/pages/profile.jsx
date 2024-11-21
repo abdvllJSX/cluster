@@ -72,7 +72,7 @@ const Settings = () => {
                   value="Profile"
                   className="text-[1.3rem] font-[600] h-[100%] data-[state=active]:text-[#AF47D2] data-[state=active]:border-b-[#AF47D2] data-[state=active]:border-b-[2px] text-[#717680] w-[20rem] data-[state=active]:shadow-none data-[state=active]:bg-transparent"
                 >
-                  API secret and keys
+                  Profile
                 </TabsTrigger>
                 <TabsTrigger
                   value="keys"
