@@ -76,7 +76,7 @@ const Gateways = ({ error, gateways, isError, loading }) => {
 
 const GatewayCard = ({ gateway }) => {
   return (
-    <Link to={`/gateway-details/${gateway.name}`} className=" rounded-[1rem]">
+    <Link to={`/gateway-details/${gateway.id}`} className=" rounded-[1rem]">
       <div className="bg-white rounded-[1rem] hover:bg-[#EFDAF6] transition-all duration-300 p-[2rem] border overflow-hidden border-[#EFDAF6]">
         <div className="flex sm:flex-col items-center justify-between">
           <div className="sm:self-start sm:mb-[1rem]">
@@ -188,6 +188,7 @@ const Status = ({ status }) => {
 
 const formatGatewayList = (gateways) =>
   gateways.map((row) => ({
+    id: row.payment_gateway.name,
     name: row.payment_gateway.label,
     image: row.payment_gateway.logo_url,
     link: row.payment_gateway.home_page_url,
