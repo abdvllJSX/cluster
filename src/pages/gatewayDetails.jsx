@@ -1,3 +1,7 @@
+import { apiGetGateway } from "@/api/gateway.ts";
+import { apiListGatewayTransactions } from "@/api/transaction.ts";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useQuery } from "@tanstack/react-query";
 import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
@@ -7,8 +11,8 @@ import { Link } from "react-router-dom";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
-import { columns } from "../components/gettwayDetails/table/column";
-import DataTable from "../components/gettwayDetails/table/data-table";
+import { columns } from "../components/gatewayDetails/table/column";
+import DataTable from "../components/gatewayDetails/table/data-table";
 import { Button } from "../components/ui/button";
 import {
   Dialog,
@@ -22,137 +26,73 @@ import {
 import { Input } from "../components/ui/input";
 
 const GatewayDetails = () => {
-  const data = [
-    {
-      trxID: "TRXPLN5MHVDVI7YUYR8",
-      customer: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        image: "/img/Avatar.png",
-      },
-      gatewayRef: "#ngisgd78hhdjb867",
-      paymentTarget: "Wallet",
-      totalAmount: "5000.00",
-      paidAmount: "0",
-      status: "Confirmed",
-    },
-    {
-      trxID: "TRXPLN5MHVDVI7YUYR8",
-      customer: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        image: "/img/Avatar.png",
-      },
-      gatewayRef: "#ngisgd78hhdjb867",
-      paymentTarget: "Wallet",
-      totalAmount: "5000.00",
-      paidAmount: "0",
-      status: "Confirmed",
-    },
-    {
-      trxID: "TRXPLN5MHVDVI7YUYR8",
-      customer: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        image: "/img/Avatar.png",
-      },
-      gatewayRef: "#ngisgd78hhdjb867",
-      paymentTarget: "Wallet",
-      totalAmount: "5000.00",
-      paidAmount: "0",
-      status: "Cancelled",
-    },
-    {
-      trxID: "TRXPLN5MHVDVI7YUYR8",
-      customer: {
-        name: "Oluwatobi Akanni",
-        email: "oluwatobi@example.com",
-        image: "/img/Avatar.png",
-      },
-      gatewayRef: "#ngisgd78hhdjb867",
-      paymentTarget: "Wallet",
-      totalAmount: "5000.00",
-      paidAmount: "0",
-      status: "Confirmed",
-    },
-    {
-      trxID: "TRXPLN5MHVDVI7YUYR8",
-      customer: {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        image: "/img/Avatar.png",
-      },
-      gatewayRef: "#ngisgd78hhdjb867",
-      paymentTarget: "Wallet",
-      totalAmount: "5000.00",
-      paidAmount: "0",
-      status: "Confirmed",
-    },
-  ];
   const { id } = useParams();
 
-  const findGateway = () => {
-    return gatewayList.find(
-      (gateway) => gateway.name.toLocaleLowerCase() === id.toLocaleLowerCase(),
-    );
-  };
+  const {
+    isPending: gatewayLoading,
+    isError: gatewayError,
+    isSuccess: gatewaySuccess,
+    data: response,
+    error: gatewayLoadingError,
+  } = useQuery({
+    queryKey: ["gateway"],
+    queryFn: () => apiGetGateway(id),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
 
-  const gatewayList = [
-    {
-      name: "Paystack",
-      image: "/img/paystack.svg",
-      link: "https://paystack.com",
-    },
-    {
-      name: "Flutterwave",
-      image: "/img/flutter_wave.svg",
-      imageSize: "w-[15rem] h-auto",
-      link: "https://flutterwave.com",
-      withtext: true,
-    },
-    {
-      name: "Alat",
-      image: "/img/alat.svg",
-      link: "https://alat.com",
-    },
-    {
-      name: "GtBank",
-      image: "/img/gt.png",
-      link: "https://gt.com",
-    },
-  ];
+  const {
+    isPending: gatewayTransactionsLoading,
+    isError: gatewayTransactionsError,
+    isSuccess: gatewayTransactionsSuccess,
+    data: gatewayTransactionsData,
+    error: gatewayTransactionsLoadingError,
+  } = useQuery({
+    queryKey: ["gatewayTransactions"],
+    queryFn: () => apiListGatewayTransactions(id),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const { data: gateway } = response ?? {};
+  const { data: gatewayTransactions = [] } = gatewayTransactionsData ?? [];
 
   const Cards = [
     {
       title: "Total clicks on payment gateway",
       value: "1250",
-      increament: false,
+      increment: false,
     },
     {
       title: "Total number of transactions",
       value: "432520",
-      increament: true,
+      increment: true,
     },
     {
       title: "Total number of pending transactions",
       value: "86",
-      increament: true,
+      increment: true,
     },
     {
       title: "Total number of failed transactions",
       value: "10",
-      increament: false,
+      increment: false,
     },
     {
       title: "Total number of successful transactions",
       value: "309783",
-      increament: true,
+      increment: true,
     },
   ];
 
   const breadcrumbItems = [
     { label: "Overview", path: "/dashboard" },
-    { label: id, path: `/gateway-details/${id}`, active: true },
+    {
+      loading: gatewayLoading,
+      label: gateway?.label,
+      path: `/gateway-details/${id}`,
+      active: true,
+    },
   ];
 
   return (
@@ -167,19 +107,23 @@ const GatewayDetails = () => {
           >
             <Link to={"/"}>
               <ChevronLeft size={20} className="text-[1.8rem]" />
-              <p className="text-[1.5rem]">{findGateway()?.name}</p>
+              <p className="text-[1.5rem]">{gateway?.label}</p>
             </Link>
           </Button>
           <div className="sm:flex hidden gap-[2rem] sm:gap-[1rem] items-center">
-            <img
-              src={findGateway()?.image}
-              alt={findGateway()?.name}
-              className={findGateway()?.imageSize}
-            />
-            {!findGateway()?.withtext && (
-              <p className="text-[2rem] font-[600] text-[#414651]">
-                {findGateway()?.name}
-              </p>
+            {gatewayLoading ? (
+              <Skeleton className={`w-[8rem] h-[2rem] rounded-[2rem]`} />
+            ) : (
+              <>
+                <img
+                  src={gateway?.logo_url}
+                  alt={gateway?.label}
+                  className="w-[3rem] h-auto"
+                />
+                <p className="text-[2rem] font-[600] text-[#414651]">
+                  {gateway?.label}
+                </p>
+              </>
             )}
           </div>
           <Dialog>
@@ -236,15 +180,22 @@ const GatewayDetails = () => {
             </DialogContent>
           </Dialog>
           <div className="flex sm:hidden gap-[2rem] items-center">
-            <img
-              src={findGateway()?.image}
-              alt={findGateway()?.name}
-              className={findGateway()?.imageSize}
-            />
-            {!findGateway()?.withtext && (
-              <p className="text-[2rem] font-[600] text-[#414651]">
-                {findGateway()?.name}
-              </p>
+            {gatewayLoading ? (
+              <>
+                <Skeleton className={`w-[3rem] h-[3rem] rounded`} />
+                <Skeleton className={`w-[16rem] h-[1.5rem] rounded-[2rem]`} />
+              </>
+            ) : (
+              <>
+                <img
+                  src={gateway?.logo_url}
+                  alt={gateway?.label}
+                  className="w-[3rem] h-auto"
+                />
+                <p className="text-[2rem] font-[600] text-[#414651]">
+                  {gateway?.label}
+                </p>
+              </>
             )}
           </div>
           <div className="grid grid-cols-5 sm:grid-cols-1 mt-[3rem] gap-[1.5rem] justify-between">
@@ -310,19 +261,27 @@ const GatewayDetails = () => {
               </div>
             </div>
             <div className="sm:hidden">
-              <DataTable data={data} columns={columns} />
+              <DataTable
+                loading={gatewayTransactionsLoading}
+                data={transformTransactions(gatewayTransactions)}
+                columns={columns}
+              />
             </div>
           </div>
         </div>
         <div className="sm:block hidden sm:pb-[5rem]">
-          <DataTable data={data} columns={columns} />
+          <DataTable
+            loading={gatewayTransactionsLoading}
+            data={transformTransactions(gatewayTransactions)}
+            columns={columns}
+          />
         </div>
       </MaxContainer>
     </section>
   );
 };
 
-const Card = ({ title, value, increament }) => {
+const Card = ({ title, value, increment }) => {
   return (
     <div className="bg-[#fff] border-[#E9EAEB] border rounded-[1rem] p-[2rem] shadow-[0px_1px_2px_0px_#0A0D120D]">
       <h2 className="text-[#181D27] text-[1.65rem] mb-[2rem] font-[600]">
@@ -332,7 +291,7 @@ const Card = ({ title, value, increament }) => {
         <p className="text-[#181D27] text-[3.3rem] font-[600]">
           {Number(value).toLocaleString()}
         </p>
-        {increament ? (
+        {increment ? (
           <img
             src={"/img/increase.svg"}
             className="w-[10rem] h-auto"
@@ -348,6 +307,25 @@ const Card = ({ title, value, increament }) => {
       </div>
     </div>
   );
+};
+
+const transformTransactions = (transactions) => {
+  return transactions.map((transaction) => {
+    const { customer } = transaction;
+    return {
+      trxID: transaction.trans_reference,
+      customer: {
+        name: customer.fullname,
+        email: customer.contact_email,
+        image: "/img/Avatar.png",
+      },
+      gatewayRef: transaction.gateway_reference,
+      paymentTarget: transaction.entity_target_type,
+      totalAmount: transaction.amount,
+      paidAmount: transaction.total_paid,
+      status: transaction.payment_status,
+    };
+  });
 };
 
 export default GatewayDetails;

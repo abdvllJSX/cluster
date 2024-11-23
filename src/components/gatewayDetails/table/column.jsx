@@ -35,7 +35,7 @@ export const columns = [
     accessorKey: "trxID",
     header: "Transaction Ref",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`#${row.original.trxID}`}</p>
+      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`${row.original.trxID.toUpperCase()}`}</p>
     ),
   },
   {
@@ -63,7 +63,7 @@ export const columns = [
     accessorKey: "gatewayRef",
     header: "Gateway Ref",
     cell: ({ row }) => (
-      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`#${row.original.gatewayRef}`}</p>
+      <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`${row.original.gatewayRef.toUpperCase()}`}</p>
     ),
   },
   {
@@ -71,7 +71,7 @@ export const columns = [
     header: "Payment Target",
     cell: ({ row }) => (
       <p className="text-[1.7rem] text-[#181D27] sm:w-[12rem] font-[400]">
-        {row.original.paymentTarget}
+        {row.original.paymentTarget.toUpperCase()}
       </p>
     ),
   },

@@ -3,13 +3,18 @@ import { Check, CornerUpRight, X } from "lucide-react";
 export const StatusIndicator = ({ status }) => {
   const positiveStatuses = [
     "Confirmed",
+    "confirmed",
     "Success",
+    "success",
     "Approved",
+    "approved",
     "Complete",
+    "complete",
     "Successful",
+    "successful",
   ];
   const isPositive = positiveStatuses.includes(status);
-  const isAbandoned = status === "Abandoned";
+  const isAbandoned = ["Abandoned", "abandoned"].includes(status);
 
   return (
     <div
@@ -36,7 +41,7 @@ export const StatusIndicator = ({ status }) => {
       ) : (
         <X size={16} className="w-[1.5rem] h-[1.5rem] text-[#F04438]" />
       )}
-      <p className="text-[1.5rem] font-[400]">{status}</p>
+      <p className="text-[1.5rem] font-[400] capitalize">{status}</p>
     </div>
   );
 };

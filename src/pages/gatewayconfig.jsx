@@ -1,5 +1,5 @@
 import { apiCreateGateway, apiGetGatewayByName } from "@/api/gateway.ts";
-import ConfigForm from "@/components/gettwayDetails/config-form/index.jsx";
+import ConfigForm from "@/components/gatewayDetails/config-form/index.jsx";
 import { Alert } from "@/components/ui/alert.tsx";
 import { ALERT_STATES } from "@/lib/utils";
 import {
@@ -35,6 +35,7 @@ const GatewayConfig = () => {
     queryKey: ["getGatewayByName"],
     queryFn: () => apiGetGatewayByName(id),
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   const { data: gatewayDetail } = response ?? {};
@@ -120,7 +121,11 @@ const GatewayConfig = () => {
   const breadcrumbItems = [
     { label: "Overview", path: "/dashboard" },
     { label: "Add Payment Gateway", path: "/add-gateway" },
-    { label: "Configure payment gateway", path: `/add-gateway/${id}`, active: true },
+    {
+      label: "Configure payment gateway",
+      path: `/add-gateway/${id}`,
+      active: true,
+    },
   ];
 
   return (
