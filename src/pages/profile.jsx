@@ -289,7 +289,7 @@ const Keys = ({
   generatingSecretKey,
   generateNewSecretKey }) => {
   // Check if any field in formData is empty
-  const isFormEmpty = Object.values(formData).some(value => value.trim() === "");
+  const isFormEmpty = Object.values(formData).some(value => value?.trim() === "");
 
   return (
     <div className="flex mt-[2rem] flex-col gap-[3rem] sm:gap-[2rem]">
