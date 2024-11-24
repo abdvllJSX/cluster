@@ -32,8 +32,7 @@ const Settings = () => {
   } = useMutation({
     mutationFn: (payload) => apiSetSecretKey(payload),
     onSuccess: () => {
-      console.log('i have updated sucessfully')
-      navigate("/dashboard")
+      toast.success("updated successfully")
     },
     onError: () => {
       console.log('Error uploading secret key');
@@ -94,6 +93,7 @@ const Settings = () => {
   })
 
   useEffect(() => {
+    console.log(secretkeys)
     if (!getSecretKeyLoading) {
       setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
     }
