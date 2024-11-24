@@ -95,17 +95,17 @@ const Settings = () => {
 
   useEffect(() => {
     if (!getSecretKeyLoading) {
-      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret }))
+      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
     }
   }, [getSecretKeyLoading])
 
   useEffect(() => {
     if (!generatingSecretKey) {
-      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret }))
+      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
     }
   }, [generatingSecretKey])
 
-
+  console.log(newSecretKey)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -297,6 +297,7 @@ const Keys = ({
         handleInputChange={handleInputChange}
         formData={formData}
         id={'apiKey'}
+        readOnly={true}
         label={'API Key'} />
       <div className="">
         <KeyItem
