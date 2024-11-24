@@ -94,3 +94,32 @@ p {
 .gateway_card_p_value {
   @apply text-[2rem] text-[#000000] font-[600];
 }
+
+.Toastify__toast-container {
+  z-index: 100 !important;
+  width: 25vw !important;
+}
+
+@media (max-width: 768px) {
+  .Toastify__toast-container {
+      width: 60vw !important;
+      left: auto !important;
+      margin-top: 1rem !important;
+      margin-left: 1rem !important;
+  }
+}
+
+.Toastify__toast {
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  font-weight: 400 !important;
+  font-family: inherit !important;
+  color: #181D27 !important;
+}
+
+@media (max-width: 768px) {
+  .Toastify__toast {
+      font-size: 1.2rem;
+  }
+}
+

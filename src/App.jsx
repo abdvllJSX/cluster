@@ -19,6 +19,9 @@ import WhyCluster from "./pages/landing/whyCluster";
 import Settings from "./pages/profile";
 import TransactionAttempt from "./pages/transactionAttempt";
 import TransactionDetails from "./pages/transactionDetails";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const queryClient = new QueryClient();
 function App() {
@@ -122,6 +125,9 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        position="top-center"
+      />
     </QueryClientProvider>
   );
 }

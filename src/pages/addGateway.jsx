@@ -7,12 +7,15 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import BreadcrumbNav from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
 
 const AddGateway = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const {
     isPending: gatewaysLoading,
     isError,
@@ -31,6 +34,9 @@ const AddGateway = () => {
     { path: "/add-gateway", label: "Add Payment Gateway", active: true },
   ];
 
+  const filteredGatewayList = gatewayList.filter(gateway =>
+    gateway.label.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
     <section className="">
       <Navbar />
@@ -47,16 +53,18 @@ const AddGateway = () => {
                 type="text"
                 placeholder="Search payment gateway"
                 className="max-w-[40rem] sm:w-full w-[40rem] text-[1.5rem] placeholder:text-[#717680] placeholder:font-[400] pl-12 pr-4 py-[1rem] rounded-[1rem] border border-gray-300 focus:outline-none focus:ring-none focus:border-blue-500 shadow-[0px_1px_2px_0px_#0A0D120D]"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
             <div className="grid grid-cols-1 mt-[4.5rem] sm:mt-[3rem] gap-[5rem]">
               {!gatewaysLoading && response && (
                 <>
-                  {gatewayList.length > 0 &&
-                    formatGatewayList(gatewayList).map((gateway, index) => (
+                  {filteredGatewayList.length > 0 &&
+                    formatGatewayList(filteredGatewayList).map((gateway, index) => (
                       <GatewayCard key={index} {...gateway} index={index} />
                     ))}
-                  {gatewayList.length === 0 && (
+                  {filteredGatewayList.length === 0 && (
                     <div className="flex flex-col self-center items-center text-2xl p-4">
                       <InboxIcon className="w-[2.3rem] h-[2.3rem]" />
                       No gateways found...
