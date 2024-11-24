@@ -95,17 +95,16 @@ const Settings = () => {
 
   useEffect(() => {
     if (!getSecretKeyLoading) {
-      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
+      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret ?? "Loading..", apiKey: secretkeys?.data?.api_key ?? "Loading.." }))
     }
   }, [getSecretKeyLoading])
 
   useEffect(() => {
     if (!generatingSecretKey) {
-      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
+      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret ?? "Loading..", apiKey: secretkeys?.data?.api_key ?? "Loading.." }))
     }
   }, [generatingSecretKey])
 
-  console.log(newSecretKey)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -290,7 +289,9 @@ const Keys = ({
   generateNewSecretKey }) => {
   // Check if any field in formData is empty
   const isFormEmpty = Object.values(formData).some(value => value?.trim() === "");
-
+  useEffect(() => {
+    console.log(formData)
+  }, [])
   return (
     <div className="flex mt-[2rem] flex-col gap-[3rem] sm:gap-[2rem]">
       <KeyItem
