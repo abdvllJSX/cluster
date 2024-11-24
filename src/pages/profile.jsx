@@ -1,5 +1,8 @@
+import { apiGetMe } from "@/api/profile.ts";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@radix-ui/react-label";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import {
   ArrowPathIcon,
@@ -12,129 +15,25 @@ import { useNavigate } from "react-router-dom";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
 import { Button } from "../components/ui/button";
-import { useQuery } from "@tanstack/react-query";
 import { Textarea } from "../components/ui/textarea";
-import { apiGetMe, apiSetSecretKey, apiGetSecretKey } from "@/api/profile.ts"
+import { apiGetMe } from "@/api/profile.ts"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useState, useEffect } from "react";
-import { LoaderCircle } from "lucide-react";
-import { toast } from "react-toastify";
 
 
 const Settings = () => {
   const { id, trxID } = useParams();
-  const navigate = useNavigate()
-  const {
-    isPending: updatingSecretKey,
-    data: response,
-    error,
-    mutate: createSecretKeyMutation
-  } = useMutation({
-    mutationFn: (payload) => apiSetSecretKey(payload),
-    onSuccess: () => {
-      console.log('i have updated sucessfully')
-      navigate("/dashboard")
-    },
-    onError: () => {
-      console.log('i have not updated'
-
-      )
-    }
-  })
-
-  const {
-    isPending: getSecretKeyLoading,
-    data: secretkeys,
-    error: getSecretKeyLoadingError
-  } = useQuery({
-    queryKey: ["getSecretKey"],
-    queryFn: apiGetSecretKey,
-    retry: false,
-    onError: () => {
-      console.log('Error fetching secret key');
-      toast.error(`${getSecretKeyLoadingError}`)
-    }
-  })
-
   const {
     isPending: getMeLoading,
+    isError,
+    isSuccess,
     data: profile,
     error: getMeLoadingError
   } = useQuery({
     queryKey: ["getMe"],
     queryFn: apiGetMe,
-    retry: false,
-    onError: () => {
-      console.log('Error fetching profile data');
-      toast.error(`${getMeLoadingError}`)
-    }
+    retry: false
   })
-
-  const [formData, setFormData] = useState({
-    apiKey: "",
-    apiSecret: "",
-    webhookURL: "",
-    successCallbackURL: "",
-    failureCallbackURL: ""
-  })
-
-  const {
-    isPending: generatingSecretKey,
-    data: newSecretKey,
-    mutate: generateSecretKeyMutation,
-    error: errorGeneratingSecretKey
-  } = useMutation({
-    mutationFn: (payload) => apiSetSecretKey(payload),
-    onSuccess: () => {
-      toast.success("Secret Key Generated Successfully!")
-    },
-    onError: () => {
-      console.log('Error generating secret key');
-      toast.error(`${errorGeneratingSecretKey}`)
-    }
-  })
-
-  useEffect(() => {
-    if (!getSecretKeyLoading) {
-      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret }))
-    }
-  }, [getSecretKeyLoading])
-
-  useEffect(() => {
-    if (!generatingSecretKey) {
-      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret }))
-    }
-  }, [generatingSecretKey])
-
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    await createSecretKeyMutation({
-      ...formData
-    })
-  }
-
-  const generateNewSecretKey = async (e) => {
-    console.log("generating")
-    e.preventDefault()
-    await generateSecretKeyMutation({
-      apiSecret: 1,
-      apiKey: "",
-      webhookURL: "",
-      successCallbackURL: "",
-      failureCallbackURL: ""
-    })
-  }
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value
-    }))
-  }
-
+  console.log(profile)
   const breadcrumbItems = [
     {
       label: "Overview",
@@ -173,7 +72,10 @@ const Settings = () => {
             <h1 className="text-[3rem] sm:hidden font-[600] text-[#000000]">
               Settings
             </h1>
-            <Tabs defaultValue="Profile" className="w-[100%] mt-[3rem] sm:mt-[0rem]">
+            <Tabs
+              defaultValue="Profile"
+              className="w-[100%] mt-[3rem] sm:mt-[0rem]"
+            >
               <TabsList className="bg-transparent border-b border-b-[#E9EAEB] pb-[.07rem] h-[5rem] w-[100%] justify-start">
                 <TabsTrigger
                   value="Profile"
@@ -213,9 +115,9 @@ const Settings = () => {
 export default Settings;
 
 const Profile = ({ profile, loading }) => {
-  const profileInfo = profile?.data
-  const firstName = profileInfo?.personal_information?.fullname.split(" ")[0]
-  const lastName = profileInfo?.personal_information?.fullname.split(" ")[1]
+  const profileInfo = profile?.data;
+  const firstName = profileInfo?.personal_information?.fullname.split(" ")[0];
+  const lastName = profileInfo?.personal_information?.fullname.split(" ")[1];
   return (
     <div className="mt-[2rem]">
       <div className="flex sm:flex-col-reverse sm:gap-[3rem] items-center justify-between">
@@ -225,7 +127,7 @@ const Profile = ({ profile, loading }) => {
             alt="profile"
             className="w-[8rem] sm:w-[6rem] h-auto"
           />
-          <div className={`flex flex-col ${loading ? "gap-[1rem]" : "gap-[0]"}`}>
+          <div className={`flex flex-col ${loading ? "gap-[1rem]": "gap-[0]"}`}>
             {loading ? <TextSkeleton width={"w-[16rem]"} /> : <h3 className="text-[2rem] font-[600] text-[#000000]">{profileInfo?.business_information?.name}</h3>}
             {loading ? <TextSkeleton width={"w-[18rem]"} /> : <p className="font-[400] text-[#535862]"> {profileInfo?.personal_information?.email}</p>}
           </div>
@@ -243,11 +145,23 @@ const Profile = ({ profile, loading }) => {
         <div className="mt-[2.5rem] border-b py-[2rem] border-[#9B9B9B] border-t">
           <div className="flex mb-[3rem] items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">Business name</p>
-            {loading ? <TextSkeleton width={"w-[15rem]"} /> : <p className="text-[#000000] sm:text-nowrap font-[600]">{profileInfo?.business_information?.name}</p>}
+            {loading ? (
+              <TextSkeleton width={"w-[15rem]"} />
+            ) : (
+              <p className="text-[#000000] sm:text-nowrap font-[600]">
+                {profileInfo?.business_information?.name}
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">Business phone number</p>
-            {loading ? <TextSkeleton width={"w-[15rem]"} /> : <p className="text-[#000000] font-[600]">{profileInfo?.personal_information?.phone}</p>}
+            {loading ? (
+              <TextSkeleton width={"w-[15rem]"} />
+            ) : (
+              <p className="text-[#000000] font-[600]">
+                {profileInfo?.personal_information?.phone}
+              </p>
+            )}
           </div>
 
           <p className="font-[400] text-[#535862] text-[1.8rem] mt-[5rem]">
@@ -257,17 +171,29 @@ const Profile = ({ profile, loading }) => {
         <div className="flex flex-col w-[50%] sm:w-full gap-[3rem] mt-[1rem]">
           <div className="flex w-[100%] items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">First name</p>
-            {loading ? <TextSkeleton width={"w-[12rem]"} /> : <p className="text-[#000000] font-[600]">{firstName}</p>}
+            {loading ? (
+              <TextSkeleton width={"w-[12rem]"} />
+            ) : (
+              <p className="text-[#000000] font-[600]">{firstName}</p>
+            )}
           </div>
           <div className="flex items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">Last name</p>
-            {loading ? <TextSkeleton width={"w-[12rem]"} /> : <p className="text-[#000000] font-[600]">{lastName}</p>}
+            {loading ? (
+              <TextSkeleton width={"w-[12rem]"} />
+            ) : (
+              <p className="text-[#000000] font-[600]">{lastName}</p>
+            )}
           </div>
           <div className="flex items-center gap-[1rem]">
             <p className="text-[#535862] w-[28rem]">Email address</p>
-            {loading ? <TextSkeleton width={"w-[17rem]"} /> : <p className="text-[#000000] font-[600]">
-              {profileInfo?.personal_information?.email}
-            </p>}
+            {loading ? (
+              <TextSkeleton width={"w-[17rem]"} />
+            ) : (
+              <p className="text-[#000000] font-[600]">
+                {profileInfo?.personal_information?.email}
+              </p>
+            )}
           </div>
         </div>
 
@@ -294,11 +220,7 @@ const Keys = ({
 
   return (
     <div className="flex mt-[2rem] flex-col gap-[3rem] sm:gap-[2rem]">
-      <KeyItem
-        handleInputChange={handleInputChange}
-        formData={formData}
-        id={'apiKey'}
-        label={'API Key'} />
+      <KeyItem label={'API Key'} />
       <div className="">
         <KeyItem
           handleInputChange={handleInputChange}
@@ -363,9 +285,6 @@ const KeyItem = ({ label, handleInputChange, id, formData, readOnly = false }) =
   );
 };
 
-
 const TextSkeleton = ({ width }) => {
-  return (
-    <Skeleton className={`${width} h-[2.2rem] rounded-[2rem]`} />
-  )
-}
+  return <Skeleton className={`${width} h-[2.2rem] rounded-[2rem]`} />;
+};

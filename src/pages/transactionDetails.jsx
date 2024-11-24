@@ -1,3 +1,7 @@
+import { apiGetGateway } from "@/api/gateway.ts";
+import { apiGetTransactionDetails } from "@/api/transaction.ts";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -10,70 +14,100 @@ import { Button } from "../components/ui/button";
 
 const TransactionDetails = () => {
   const { id, trxID } = useParams();
+
+  const {
+    isPending: gatewayLoading,
+    isError: gatewayError,
+    isSuccess: gatewaySuccess,
+    data: response,
+    error: gatewayLoadingError,
+  } = useQuery({
+    queryKey: ["gateway"],
+    queryFn: () => apiGetGateway(id),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const {
+    isPending: transactionDetailsLoading,
+    isError: transactionDetailsError,
+    isSuccess: transactionDetailsSuccess,
+    data: transactionDetailsData,
+    error: transactionDetailsLoadingError,
+  } = useQuery({
+    queryKey: ["transactionDetails"],
+    queryFn: () => apiGetTransactionDetails(trxID),
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+
+  const { data: gateway } = response ?? {};
+  const { data: transactionDetails = {} } = transactionDetailsData ?? [];
+
   const breadcrumbItems = [
     {
       label: "Overview",
       path: `/dashboard`,
     },
     {
-      label: `${id}`,
+      label: gateway?.label,
       path: `/gateway-details/${id}`,
     },
     {
       label: "See full details",
-      path: `/gateway-details/${id}/${trxID}`,
+      path: `/gateway-details/${id}/transactions/${trxID}`,
       active: true,
     },
   ];
 
   const content = [
     {
-      title: "Transaction ref",
-      value: "TRXPLN5MHVDVI7YUYR8",
+      title: "Transaction Ref",
+      value: transactionDetails?.trans_reference?.toUpperCase(),
     },
     {
-      title: "Customer name",
-      value: "Oluwatobi Akanni",
+      title: "Customer Name",
+      value: transactionDetails?.customer?.fullname,
     },
     {
       title: "Customer Email",
-      value: "oluwatobiakanni@gmail.com",
+      value: transactionDetails?.customer?.contact_email,
     },
     {
-      title: "Gateway ref",
-      value: "ngisgd78hhdjb867",
+      title: "Gateway Ref",
+      value: transactionDetails?.gateway_reference?.toUpperCase(),
     },
     {
-      title: "Payment target",
-      value: "Wallet",
+      title: "Payment Target",
+      value: transactionDetails?.entity_target_type?.toUpperCase(),
     },
     {
-      title: "Total amount",
-      value: "100,000",
+      title: "Total Amount",
+      value: transactionDetails?.amount,
     },
     {
-      title: "Paid amount",
-      value: "100,000",
+      title: "Paid Amount",
+      value: transactionDetails?.total_paid,
     },
     {
-      title: "Created at",
-      value: "2024 - 10/11 - 05:50:32",
+      title: "Created At",
+      value: transactionDetails?.created_at,
     },
     {
-      title: "Payment status",
-      value: "Success",
+      title: "Payment Status",
+      value: transactionDetails?.payment_status,
     },
     {
-      title: "Transaction time",
+      title: "Transaction Time",
       value: "00.04",
     },
     {
-      title: "Device type",
-      value: "Phone",
+      title: "Device Type",
+      value: "NA",
     },
     {
       title: "Attempts",
-      value: "30 attempts",
+      value: "NA",
     },
     {
       title: "Errors",
@@ -102,7 +136,9 @@ const TransactionDetails = () => {
               asChild
               className="px-[2rem] py-[1.7rem] rounded-[0.5rem] text-[#AF47D2] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white font-[600] text-[1.6rem]"
             >
-              <Link to={`/gateway-details/${id}/${trxID}/attempts`}>
+              <Link
+                to={`/gateway-details/${id}/transactions/${trxID}/attempts`}
+              >
                 View all attempts
               </Link>
             </Button>
@@ -111,25 +147,35 @@ const TransactionDetails = () => {
             <h1 className="text-[2.8rem] sm:text-[2rem] font-[600] text-[#000000]">
               Transaction Details
             </h1>
-            <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
+            {/*<Breadcrumbs items={breadcrumbItems} className="sm:hidden" />*/}
             <Button
               variant={"outline"}
               asChild
               className="px-[2rem] sm:w-full hidden sm:flex my-[2rem] py-[1.7rem] rounded-[0.5rem] text-[#AF47D2] border-[#AF47D2] hover:bg-[#AF47D2] hover:text-white font-[600] text-[1.6rem]"
             >
-              <Link to={`/gateway-details/${id}/${trxID}/attempts`}>
+              <Link
+                to={`/gateway-details/${id}/transactions/${trxID}/attempts`}
+              >
                 View all attempts
               </Link>
             </Button>
             <div className="grid w-[90%] mt-[4rem] sm:mt-[2rem] grid-cols-2 sm:grid-cols-1 gap-[2rem]">
               <div className="flex flex-col sm:gap-[2.5rem] gap-[3rem]">
                 {content.slice(0, 9).map((item, index) => (
-                  <Content content={item} key={index} />
+                  <Content
+                    content={item}
+                    key={index}
+                    loading={transactionDetailsLoading}
+                  />
                 ))}
               </div>
               <div className="flex flex-col sm:gap-[2.5rem] gap-[2rem]">
                 {content.slice(9).map((item, index) => (
-                  <Content content={item} key={index} />
+                  <Content
+                    content={item}
+                    key={index}
+                    loading={transactionDetailsLoading}
+                  />
                 ))}
               </div>
             </div>
@@ -140,18 +186,23 @@ const TransactionDetails = () => {
   );
 };
 
-const Content = ({ content }) => {
+const Content = ({ content, loading }) => {
   return (
     <div className="flex flex-col gap-[1rem]">
       <p className="text-[1.4rem] font-[400] text-[#535862]">{content.title}</p>
-      {content.title === "Payment status" ? (
-        <StatusIndicator status={content.value} />
-      ) : (
-        <p
-          className={`text-[1.6rem] font-[500] ${["Attempts", "Errors"].includes(content.title) ? "text-[#FF0000]" : "text-[#000000]"}`}
-        >
-          {content.value}
-        </p>
+      {loading && <Skeleton className={`w-[8rem] h-[2rem] rounded-[2rem]`} />}
+      {!loading && (
+        <>
+          {content.title === "Payment Status" ? (
+            <StatusIndicator status={content.value} />
+          ) : (
+            <p
+              className={`text-[1.6rem] font-[500] ${["Attempts", "Errors"].includes(content.title) ? "text-[#FF0000]" : "text-[#000000]"}`}
+            >
+              {content.value}
+            </p>
+          )}
+        </>
       )}
     </div>
   );

@@ -74,7 +74,7 @@ function App() {
             }
           />
           <Route
-            path="/gateway-details/:id/:trxID"
+            path="/gateway-details/:id/transactions/:trxID"
             element={
               <RouteGuard>
                 <TransactionDetails />
@@ -82,7 +82,7 @@ function App() {
             }
           />
           <Route
-            path="/gateway-details/:id/:trxID/attempts"
+            path="/gateway-details/:id/transactions/:trxID/attempts"
             element={
               <RouteGuard>
                 <TransactionAttempt />

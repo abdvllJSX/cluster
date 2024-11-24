@@ -25,6 +25,7 @@ const AddGateway = () => {
     queryKey: ["allGateways"],
     queryFn: apiListAllGateway,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   const { data: gatewayList = [] } = response ?? {};

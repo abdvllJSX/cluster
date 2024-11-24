@@ -4,6 +4,9 @@ import { apiGet, apiPost } from "../lib/http-client";
 
 export const apiListGateway = () => apiGet("/v1/api/get_gateways", {});
 
+export const apiGetGateway = (name: string) =>
+  apiGet("/v1/api/get_gateways", { name });
+
 export const apiListAllGateway = () => apiGet("/v1/api/get_all_gateways", {});
 
 export const apiGetGatewayByName = (name: string) =>

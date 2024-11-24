@@ -16,6 +16,7 @@ const Dashboard = () => {
     queryKey: ["gateways"],
     queryFn: apiListGateway,
     retry: false,
+    refetchOnWindowFocus: false,
   });
 
   return (
