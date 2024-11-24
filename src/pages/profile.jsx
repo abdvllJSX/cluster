@@ -95,13 +95,13 @@ const Settings = () => {
 
   useEffect(() => {
     if (!getSecretKeyLoading) {
-      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret ?? "Loading..", apiKey: secretkeys?.data?.api_key ?? "Loading.." }))
+      setFormData((prev) => ({ ...prev, apiSecret: secretkeys?.data?.api_secret, apiKey: secretkeys?.data?.api_key }))
     }
   }, [getSecretKeyLoading])
 
   useEffect(() => {
     if (!generatingSecretKey) {
-      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret ?? "Loading..", apiKey: secretkeys?.data?.api_key ?? "Loading.." }))
+      setFormData(prev => ({ ...prev, apiSecret: newSecretKey?.data?.api_secret ?? secretkeys?.data?.api_secret, apiKey: secretkeys?.data?.api_key  }))
     }
   }, [generatingSecretKey])
 
