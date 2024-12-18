@@ -46,7 +46,7 @@ const ConfigDetails = () => {
     },
   ];
   const breadcrumbItems = [
-    { label: "Overview", path: "/" },
+    { label: "Overview", path: "/dashboard" },
     { label: id, path: `/gateway-details/${id}` },
     {
       label: "See full details",

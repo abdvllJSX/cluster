@@ -14,8 +14,8 @@ import Navbar from "../components/common/navbar";
 import { Button } from "../components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { Textarea } from "../components/ui/textarea";
-import { apiGetMe, apiSetSecretKey, apiGetSecretKey } from "@/api/profile.ts"
-import { Skeleton } from "@/components/ui/skeleton"
+import { apiGetMe, apiSetSecretKey, apiGetSecretKey } from "@/api/profile.ts";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useState, useEffect } from "react";
 import { LoaderCircle } from "lucide-react";
 import { toast } from "react-toastify";
@@ -26,7 +26,6 @@ const Settings = () => {
   const navigate = useNavigate()
   const {
     isPending: updatingSecretKey,
-    data: response,
     error: errorUpdatingSecretKey,
     mutate: createSecretKeyMutation
   } = useMutation({
@@ -34,9 +33,8 @@ const Settings = () => {
     onSuccess: () => {
       toast.success("updated successfully")
     },
-    onError: () => {
-      console.log('Error uploading secret key');
-      toast.error(`${getSecretKeyLoadingError}`)
+    onError: (error) => {
+      toast.error(`${error.message}`)
     }
   })
 
@@ -49,8 +47,7 @@ const Settings = () => {
     queryFn: apiGetSecretKey,
     retry: false,
     onError: () => {
-      console.log('Error fetching secret key');
-      toast.error(`${getSecretKeyLoadingError}`)
+      toast.error(`${getSecretKeyLoadingError.message}`)
     }
   })
 
@@ -63,8 +60,7 @@ const Settings = () => {
     queryFn: apiGetMe,
     retry: false,
     onError: () => {
-      console.log('Error fetching profile data');
-      toast.error(`${getMeLoadingError}`)
+      toast.error(`${getMeLoadingError.message}`)
     }
   })
 
@@ -87,8 +83,7 @@ const Settings = () => {
       toast.success("Secret Key Generated Successfully!")
     },
     onError: () => {
-      console.log('Error generating secret key');
-      toast.error(`${errorGeneratingSecretKey}`)
+      toast.error(`${errorGeneratingSecretKey.message}`)
     }
   })
 
