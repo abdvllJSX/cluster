@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { addDays } from "date-fns";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
@@ -24,16 +24,19 @@ import {
   DialogTrigger,
 } from "../components/ui/dialog";
 import { Input } from "../components/ui/input";
+import { useState } from "react";
+import CustomCalendar from "../components/common/calender";
 
 const GatewayDetails = () => {
+  console.log(new Date())
   const { id } = useParams();
-
+  const [date, setDate] = useState({
+    from: new Date(2022, 0, 20),
+    to: addDays(new Date(2022, 0, 20), 20)
+  })
   const {
     isPending: gatewayLoading,
-    isError: gatewayError,
-    isSuccess: gatewaySuccess,
     data: response,
-    error: gatewayLoadingError,
   } = useQuery({
     queryKey: ["gateway"],
     queryFn: () => apiGetGateway(id),
@@ -43,10 +46,7 @@ const GatewayDetails = () => {
 
   const {
     isPending: gatewayTransactionsLoading,
-    isError: gatewayTransactionsError,
-    isSuccess: gatewayTransactionsSuccess,
     data: gatewayTransactionsData,
-    error: gatewayTransactionsLoadingError,
   } = useQuery({
     queryKey: ["gatewayTransactions"],
     queryFn: () => apiListGatewayTransactions(id),
@@ -244,13 +244,6 @@ const GatewayDetails = () => {
             </p>
 
             <div className="flex items-center mt-[3rem] mb-[4rem] sm:mb-[2rem] sm:justify-between sm:w-full gap-[1rem] sm:gap-[.5rem]">
-              <Button
-                variant="ghost"
-                className="bg-white text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[0.5rem] py-[1.8rem] border-[#D5D7DA]"
-              >
-                <ListFilter size={20} className="w-[1.8rem] mr-[.5rem]" />
-                Filter
-              </Button>
               <div className="relative">
                 <Search className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-gray-500 w-[1.9rem]" />
                 <Input
@@ -259,6 +252,18 @@ const GatewayDetails = () => {
                   className="pl-[3.5rem] placeholder:font-[400] rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
                 />
               </div>
+
+              <Button
+                variant="ghost"
+                className="bg-white text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[0.5rem] py-[1.8rem] border-[#D5D7DA]"
+              >
+                <ListFilter size={20} className="w-[1.8rem] mr-[.5rem]" />
+                Filter
+              </Button>
+              <CustomCalendar
+                date={date}
+                setDate={setDate}
+              />
             </div>
             <div className="sm:hidden">
               <DataTable

@@ -36,7 +36,7 @@ const DataTable = ({ data, columns, loading }) => {
               key={headerGroup.id}
             >
               {headerGroup.headers.map((header) => (
-                <TableHead className="py-[1.5rem]" key={header.id}>
+                <TableHead className="py-[1.5rem] text-nowrap sm:pr-[1.5rem]" key={header.id}>
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext(),

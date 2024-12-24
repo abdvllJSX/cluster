@@ -92,7 +92,6 @@ const ConfigDetails = () => {
     <section>
       <Navbar />
       <MaxContainer>
-        \
         <div className="container py-[10rem] sm:pt-[7rem]">
           <Button
             variant={"ghost"}
@@ -104,7 +103,7 @@ const ConfigDetails = () => {
               <p className="text-[1.5rem]">{id}</p>
             </Link>
           </Button>
-          <div className="flex sm:mb-[2rem] gap-[2rem] sm:gap-[1rem] items-center">
+          {/* <div className="flex sm:mb-[2rem] gap-[2rem] sm:gap-[1rem] items-center">
             <img
               src={findGateway()?.image}
               alt={findGateway()?.name}
@@ -115,7 +114,7 @@ const ConfigDetails = () => {
                 {findGateway()?.name}
               </p>
             )}
-          </div>
+          </div> */}
           <Dialog>
             <div className="flex  items-center justify-between mt-[2rem] mb-[4rem]">
               <Breadcrumbs items={breadcrumbItems} className="sm:hidden" />
