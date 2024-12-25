@@ -37,6 +37,7 @@ export const columns = [
     cell: ({ row }) => (
       <p className="text-[1.7rem] sm:text-[1.3rem] sm:w-[18rem] text-[#181D27] font-[400]">{`${row.original.trxID.toUpperCase()}`}</p>
     ),
+    filterFn: "includesString",
   },
   {
     accessorKey: "customer",

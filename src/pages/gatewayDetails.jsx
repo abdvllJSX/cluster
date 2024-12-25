@@ -2,7 +2,6 @@ import { apiGetGateway } from "@/api/gateway.ts";
 import { apiListGatewayTransactions } from "@/api/transaction.ts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
-import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
@@ -14,6 +13,8 @@ import Navbar from "../components/common/navbar";
 import { columns } from "../components/gatewayDetails/table/column";
 import DataTable from "../components/gatewayDetails/table/data-table";
 import { Button } from "../components/ui/button";
+import { convertDateRange } from "../utilis/formatdate";
+
 import {
   Dialog,
   DialogClose,
@@ -24,16 +25,16 @@ import {
   DialogTrigger,
 } from "../components/ui/dialog";
 import { Input } from "../components/ui/input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomCalendar from "../components/common/calender";
 
 const GatewayDetails = () => {
-  console.log(new Date())
   const { id } = useParams();
   const [date, setDate] = useState({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20)
+    from: "",
+    to: ""
   })
+
   const {
     isPending: gatewayLoading,
     data: response,
@@ -47,12 +48,14 @@ const GatewayDetails = () => {
   const {
     isPending: gatewayTransactionsLoading,
     data: gatewayTransactionsData,
+    refetch: refetchGatewayTransactions,
   } = useQuery({
     queryKey: ["gatewayTransactions"],
-    queryFn: () => apiListGatewayTransactions(id),
+    queryFn: () => apiListGatewayTransactions(id, (date.from?.length !== 0 || date.to?.length !== 0) && { created_at: convertDateRange(date) }),
     retry: false,
     refetchOnWindowFocus: false,
   });
+
 
   const { data: gateway } = response ?? {};
   const { data: gatewayTransactions = [] } = gatewayTransactionsData ?? [];
@@ -242,34 +245,15 @@ const GatewayDetails = () => {
                 degradation
               </span>
             </p>
-
-            <div className="flex items-center mt-[3rem] mb-[4rem] sm:mb-[2rem] sm:justify-between sm:w-full gap-[1rem] sm:gap-[.5rem]">
-              <div className="relative">
-                <Search className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-gray-500 w-[1.9rem]" />
-                <Input
-                  type="text"
-                  placeholder="Search"
-                  className="pl-[3.5rem] placeholder:font-[400] rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
-                />
-              </div>
-
-              <Button
-                variant="ghost"
-                className="bg-white text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[0.5rem] py-[1.8rem] border-[#D5D7DA]"
-              >
-                <ListFilter size={20} className="w-[1.8rem] mr-[.5rem]" />
-                Filter
-              </Button>
-              <CustomCalendar
-                date={date}
-                setDate={setDate}
-              />
-            </div>
             <div className="sm:hidden">
               <DataTable
                 loading={gatewayTransactionsLoading}
                 data={transformTransactions(gatewayTransactions)}
+                queryFN={apiListGatewayTransactions}
+                refetchFN={refetchGatewayTransactions}
                 columns={columns}
+                date={date}
+                setDate={setDate}
               />
             </div>
           </div>
@@ -278,7 +262,11 @@ const GatewayDetails = () => {
           <DataTable
             loading={gatewayTransactionsLoading}
             data={transformTransactions(gatewayTransactions)}
+            queryFN={apiListGatewayTransactions}
+            refetchFN={refetchGatewayTransactions}
             columns={columns}
+            date={date}
+            setDate={setDate}
           />
         </div>
       </MaxContainer>
