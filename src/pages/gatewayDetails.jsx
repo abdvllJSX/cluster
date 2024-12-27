@@ -38,7 +38,6 @@ const GatewayDetails = () => {
   const {
     isPending: gatewayLoading,
     data: response,
-    isLoading: isGatewayLoading,
   } = useQuery({
     queryKey: ["gateway"],
     queryFn: () => apiGetGateway(id),
