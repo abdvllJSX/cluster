@@ -1,3 +1,6 @@
+import { useState } from "react";
+import CustomCalendar from "../components/common/calender";
+import { Input } from "../components/ui/input";
 import { apiGetGateway } from "@/api/gateway.ts";
 import { apiListGatewayTransactions } from "@/api/transaction.ts";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -6,7 +9,6 @@ import { Search } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { addDays } from "date-fns";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";
@@ -14,7 +16,6 @@ import { columns } from "../components/gatewayDetails/table/column";
 import DataTable from "../components/gatewayDetails/table/data-table";
 import { Button } from "../components/ui/button";
 import { convertDateRange } from "../utilis/formatdate";
-
 import {
   Dialog,
   DialogClose,
@@ -24,12 +25,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../components/ui/dialog";
-import { Input } from "../components/ui/input";
-import { useState, useEffect } from "react";
-import CustomCalendar from "../components/common/calender";
+import { toast } from "react-toastify";
 
 const GatewayDetails = () => {
   const { id } = useParams();
+  const [search, setSearch] = useState("");
   const [date, setDate] = useState({
     from: "",
     to: ""
@@ -38,24 +38,37 @@ const GatewayDetails = () => {
   const {
     isPending: gatewayLoading,
     data: response,
+    isLoading: isGatewayLoading,
   } = useQuery({
     queryKey: ["gateway"],
     queryFn: () => apiGetGateway(id),
     retry: false,
     refetchOnWindowFocus: false,
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
 
   const {
     isPending: gatewayTransactionsLoading,
     data: gatewayTransactionsData,
     refetch: refetchGatewayTransactions,
+    isRefetching: isGatewayTransactionsRefetching,
   } = useQuery({
     queryKey: ["gatewayTransactions"],
-    queryFn: () => apiListGatewayTransactions(id, (date.from?.length !== 0 || date.to?.length !== 0) && { created_at: convertDateRange(date) }),
+    queryFn: () => apiListGatewayTransactions(
+      id,
+      {
+        ...(search && { trans_reference: search }),
+        ...((date.from?.length !== 0 || date.to?.length !== 0) && { created_at: convertDateRange(date) })
+      }
+    ),
     retry: false,
     refetchOnWindowFocus: false,
+    onError: (error) => {
+      toast.error(error.message);
+    },
   });
-
 
   const { data: gateway } = response ?? {};
   const { data: gatewayTransactions = [] } = gatewayTransactionsData ?? [];
@@ -97,6 +110,15 @@ const GatewayDetails = () => {
       active: true,
     },
   ];
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    if (e.target.value.length === 21 || e.target.value.length === 0) {
+      setTimeout(() => {
+        refetchGatewayTransactions();
+      }, 500);
+    }
+  };
 
   return (
     <section>
@@ -246,27 +268,42 @@ const GatewayDetails = () => {
               </span>
             </p>
             <div className="sm:hidden">
+              <div className="flex items-center mt-[3rem] mb-[4rem] sm:mb-[2rem] sm:justify-between sm:w-full gap-[1rem] sm:gap-[.5rem]">
+                <div className="relative">
+                  <Search className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-gray-500 w-[1.9rem]" />
+                  <Input
+                    type="text"
+                    placeholder="Search"
+                    onChange={handleSearch}
+                    value={search}
+                    className="pl-[3.5rem] placeholder:font-[400] rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
+                  />
+                </div>
+                <CustomCalendar
+                  date={date}
+                  setDate={setDate}
+                  refetchFN={refetchGatewayTransactions}
+                />
+              </div>
+
               <DataTable
                 loading={gatewayTransactionsLoading}
+                refetchLoading={isGatewayTransactionsRefetching}
                 data={transformTransactions(gatewayTransactions)}
-                queryFN={apiListGatewayTransactions}
                 refetchFN={refetchGatewayTransactions}
                 columns={columns}
-                date={date}
-                setDate={setDate}
               />
             </div>
           </div>
         </div>
+
         <div className="sm:block hidden sm:pb-[5rem]">
           <DataTable
             loading={gatewayTransactionsLoading}
+            refetchLoading={isGatewayTransactionsRefetching}
             data={transformTransactions(gatewayTransactions)}
-            queryFN={apiListGatewayTransactions}
             refetchFN={refetchGatewayTransactions}
             columns={columns}
-            date={date}
-            setDate={setDate}
           />
         </div>
       </MaxContainer>

@@ -17,12 +17,9 @@ import {
   TableHeader,
   TableRow,
 } from "../../../components/ui/table";
-import CustomCalendar from "../../common/calender";
-import { Search } from "lucide-react";
-import { Input } from "../../ui/input";
 import { useState } from "react";
 
-const DataTable = ({ data, columns, loading, refetchFN, date, setDate }) => {
+const DataTable = ({ data, columns, loading, refetchLoading  }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [filterValue, setFilterValue] = useState("");
@@ -40,20 +37,6 @@ const DataTable = ({ data, columns, loading, refetchFN, date, setDate }) => {
 
   return (
     <>
-      <div className="flex items-center mt-[3rem] mb-[4rem] sm:mb-[2rem] sm:justify-between sm:w-full gap-[1rem] sm:gap-[.5rem]">
-        <div className="relative">
-          <Search className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-gray-500 w-[1.9rem]" />
-          <Input
-            type="text"
-            placeholder="Search"
-            value={filterValue}
-            onChange={(event) => setFilterValue(event.target.value)} // Update filter value
-            className="pl-[3.5rem] placeholder:font-[400] rounded-[0.5rem] max-w-[35rem] sm:w-[100%] w-[350px] py-[1.8rem] text-[1.5rem]"
-          />
-        </div>
-
-        <CustomCalendar date={date} setDate={setDate} refetchFN={refetchFN} />
-      </div>
       <div className="border border-[#E0E0E0] rounded-[1rem]">
         <Table>
           <TableHeader>
@@ -71,7 +54,7 @@ const DataTable = ({ data, columns, loading, refetchFN, date, setDate }) => {
             ))}
           </TableHeader>
           <TableBody>
-            {loading && (
+            {(loading || refetchLoading) && (
               <TableRow>
                 <TableCell colSpan={columns.length}>
                   <div className="flex flex-col self-center items-center text-2xl p-4">
@@ -81,7 +64,7 @@ const DataTable = ({ data, columns, loading, refetchFN, date, setDate }) => {
                 </TableCell>
               </TableRow>
             )}
-            {!loading && table.getRowModel().rows.length === 0 && (
+            {(!loading) && !refetchLoading && data.length === 0 && (
               <TableRow>
                 <TableCell colSpan={columns.length}>
                   <div className="flex flex-col self-center items-center text-2xl p-4">
@@ -91,7 +74,7 @@ const DataTable = ({ data, columns, loading, refetchFN, date, setDate }) => {
                 </TableCell>
               </TableRow>
             )}
-            {!loading &&
+            {(!loading && !refetchLoading) &&
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
