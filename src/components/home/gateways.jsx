@@ -21,13 +21,6 @@ const Gateways = ({ error, gateways, isError, loading }) => {
               Manage Payment Gateways
             </h1>
             <div className="flex items-center sm:justify-between sm:w-full gap-[1rem]">
-              <Button
-                variant="ghost"
-                className="bg-white text-[1.5rem] font-[600] text-[#414651] px-[1.3rem] rounded-[0.5rem] py-[1.8rem] border-[#D5D7DA]"
-              >
-                <ListFilter size={20} className="w-[1.8rem] mr-[.5rem]" />
-                Filter
-              </Button>
               <div className="relative">
                 <Search className="absolute left-[1rem] top-1/2 transform -translate-y-1/2 text-gray-500 w-[1.9rem]" />
                 <Input

@@ -24,7 +24,7 @@ const TransactionAttempt = () => {
     },
     {
       label: "See full details",
-      path: `/gateway-details/${id}/${trxID}`,
+      path: `/gateway-details/${id}/transactions/${trxID}`,
     },
     {
       label: "Attempts",
