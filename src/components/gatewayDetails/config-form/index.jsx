@@ -39,7 +39,7 @@
 //         ]
 //     }
 // ]
-import { Select } from "@/components/ui/select.tsx";
+import { Select } from "@/components/ui/select2.tsx";
 import { Textarea } from "@/components/ui/textarea.tsx";
 import { Label } from "@radix-ui/react-label";
 

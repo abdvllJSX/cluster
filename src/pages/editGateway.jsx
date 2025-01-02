@@ -1,26 +1,55 @@
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+import { useQuery } from "@tanstack/react-query";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import NavBar from "../components/common/navbar";
 import { Button } from "../components/ui/button";
+import { Loader2 } from "lucide-react"
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Label } from "../components/ui/label";
 import { Switch } from "../components/ui/switch";
 import { Textarea } from "../components/ui/textarea";
+import { apiGetGatewayByName, apiCreateGateway } from "@/api/gateway.ts";
 
 const EditGateway = () => {
-  const { id, trxID } = useParams();
+  const { id } = useParams();
 
-  const [formData, setFormData] = useState({
-    liveSecretKey: "",
-    liveCallbackUrl: "",
-    liveWebhookUrl: "",
-    testSecretKey: "",
-    testPublicKey: "",
-    isGatewayEnabled: false,
+  const {
+    isPending: gatewayLoading,
+    isError: gatewayLoadingIsError,
+    data: response,
+    error: gatewayLoadingError,
+  } = useQuery({
+    queryKey: ["getGatewayByName"],
+    queryFn: () => apiGetGatewayByName(id),
+    retry: false,
+    refetchOnWindowFocus: false,
   });
+
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (!gatewayLoadingError) {
+      setFormData(prev => ({
+        ...prev,
+        ...response?.data?.config_options?.configKeys.reduce((obj, row) => ({ ...obj, [row.key]: "" }), {})
+      }))
+    }
+  }, [gatewayLoading])
+  
+  const { data: gatewayDetail } = response ?? {};
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -30,11 +59,29 @@ const EditGateway = () => {
     }));
   };
 
-  const handleSwitchChange = (checked) => {
-    setFormData((prev) => ({
-      ...prev,
-      isGatewayEnabled: checked,
-    }));
+  const {
+    isPending,
+    isError,
+    isSuccess,
+    data,
+    error,
+    mutate: createGatewayMutation,
+  } = useMutation({
+    mutationFn: (payload) => apiCreateGateway(payload),
+    onSuccess: () => {
+      toast.success("Payment gateway updated successfully");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await createGatewayMutation({
+      paymentGatewayId: gatewayDetail.id,
+      gatewayConfig: formData,
+    });
   };
 
   const breadcrumbItems = [
@@ -75,7 +122,7 @@ const EditGateway = () => {
             </h1>
 
             <div className="mt-[3rem] sm:mt-[2rem]">
-              <div className="">
+              {/* <div className="">
                 <h4 className="text-[1.7rem] font-[500]">Payment live keys</h4>
 
                 <div className="mt-[2rem] ml-[4rem] sm:ml-[0] flex flex-col gap-[2rem]">
@@ -160,24 +207,72 @@ const EditGateway = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
+              {
+                gatewayLoading ? (
+                  <>
+                    <Loader2 className="animate-spin mx-auto w-[2.3rem] h-[2.3rem]" />
+                  </>
+                ) : (
+                  <form onSubmit={handleSubmit} action="" className="flex flex-col gap-[2rem]">
+                    {
+                      response?.data?.config_options?.configKeys?.map((item, index) => (
+                        <div key={index} className="flex flex-col gap-[1rem]">
+                          <label
+                            htmlFor={item.key}
+                            className="text-[1.6rem] font-[500] text-[#535862]">{item.label}</label>
+                          {
+                            item?.options ? (
+                              <Select
+                                value={formData[item.key]}
+                                defaultValue={item?.options[0]}
+                                required
+                                onValueChange={(value) => {
+                                  setFormData(prevFormData => ({ ...prevFormData, [item.key]: value }));
+                                }}>
+                                <SelectTrigger className="w-[30rem] max-w-[100%] rounded-[.7rem] h-[4rem] text-[1.4rem] font-[400] capitalize text-[#535862] px-[1.5rem] py-[.5rem]">
+                                  <SelectValue placeholder={"select"} />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectGroup>
+                                    {
+                                      item?.options.map((option, idx) => (
+                                        <SelectItem
+                                          className="text-[1.4rem] font-[400] capitalize text-[#535862]"
+                                          id={option}
+                                          key={idx}
+                                          value={option}>{option}</SelectItem>
+                                      ))
+                                    }
+                                  </SelectGroup>
+                                </SelectContent>
+                              </Select>
+                            ) : (<Textarea
+                              key={index}
+                              id={item.key}
+                              required
+                              value={formData[item.key]}
+                              onChange={handleInputChange}
+                              className="placeholder:text-[#717680] placeholder:text-[400] rounded-[.7rem] h-[7rem] resize-none text-[1.4rem]"
+                              placeholder={item.label}
+                            />)
+                          }
 
-              <div className="my-[3rem] flex items-center gap-[2rem]">
-                <Switch
-                  checked={formData.isGatewayEnabled}
-                  onCheckedChange={handleSwitchChange}
-                  className="scale-[1.8] data-[state=checked]:bg-[#FF9100]"
-                />
-                <p className="text-[1.6rem] font-[500]">
-                  Turn On/Off Payment gateway
-                </p>
-              </div>
+                        </div>
+                      ))
+                    }
 
-              <div className="mt-[3rem]">
-                <Button className="w-fit sm:w-full px-[3.8rem] py-[2rem] rounded-[.7rem] bg-[#FF9100] text-[1.6rem] font-[600]">
-                  Update settings
-                </Button>
-              </div>
+                    <div className="mt-[3rem]">
+                      <Button
+                        type="submit"
+                        className="w-fit sm:w-full px-[3.8rem] py-[2rem] rounded-[.7rem] bg-[#FF9100] text-[1.6rem] font-[600]">
+                        {isPending && (<Loader2 className="animate-spin w-[2.3rem] h-[2.3rem]" />)}
+                        Update settings
+                      </Button>
+                    </div>
+                  </form>
+                )
+              }
             </div>
           </div>
         </div>

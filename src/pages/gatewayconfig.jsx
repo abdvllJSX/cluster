@@ -11,7 +11,6 @@ import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import MaxContainer from "../components/common/maxcontainer";
 import Navbar from "../components/common/navbar";

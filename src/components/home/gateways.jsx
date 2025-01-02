@@ -3,10 +3,8 @@ import {
   ExclamationTriangleIcon,
   InboxIcon,
 } from "@heroicons/react/24/outline/index.js";
-import { ListFilter } from "lucide-react";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import MaxContainer from "../common/maxcontainer";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
